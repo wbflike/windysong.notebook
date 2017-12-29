@@ -1,0 +1,11 @@
+E:\cloud\Code\windysong.notebook\windysong.notebook\bin\Debug\netcoreapp2.0\windysong.notebook.deps.json
+E:\cloud\Code\windysong.notebook\windysong.notebook\bin\Debug\netcoreapp2.0\windysong.notebook.runtimeconfig.json
+E:\cloud\Code\windysong.notebook\windysong.notebook\bin\Debug\netcoreapp2.0\windysong.notebook.runtimeconfig.dev.json
+E:\cloud\Code\windysong.notebook\windysong.notebook\bin\Debug\netcoreapp2.0\windysong.notebook.dll
+E:\cloud\Code\windysong.notebook\windysong.notebook\obj\Debug\netcoreapp2.0\windysong.notebook.csprojResolveAssemblyReference.cache
+E:\cloud\Code\windysong.notebook\windysong.notebook\obj\Debug\netcoreapp2.0\windysong.notebook.csproj.CoreCompileInputs.cache
+E:\cloud\Code\windysong.notebook\windysong.notebook\obj\Debug\netcoreapp2.0\windysong.notebook.AssemblyInfoInputs.cache
+E:\cloud\Code\windysong.notebook\windysong.notebook\obj\Debug\netcoreapp2.0\windysong.notebook.AssemblyInfo.cs
+E:\cloud\Code\windysong.notebook\windysong.notebook\bin\Debug\netcoreapp2.0\windysong.notebook.pdb
+E:\cloud\Code\windysong.notebook\windysong.notebook\obj\Debug\netcoreapp2.0\windysong.notebook.dll
+E:\cloud\Code\windysong.notebook\windysong.notebook\obj\Debug\netcoreapp2.0\windysong.notebook.pdb

@@ -1,0 +1,8 @@
+E:\cloud\Code\windysong.notebook\windysong.notebook.entity\bin\Debug\netstandard2.0\WindySong.NoteBook.Entity.deps.json
+E:\cloud\Code\windysong.notebook\windysong.notebook.entity\bin\Debug\netstandard2.0\WindySong.NoteBook.Entity.dll
+E:\cloud\Code\windysong.notebook\windysong.notebook.entity\bin\Debug\netstandard2.0\WindySong.NoteBook.Entity.pdb
+E:\cloud\Code\windysong.notebook\windysong.notebook.entity\obj\Debug\netstandard2.0\WindySong.NoteBook.Entity.csproj.CoreCompileInputs.cache
+E:\cloud\Code\windysong.notebook\windysong.notebook.entity\obj\Debug\netstandard2.0\WindySong.NoteBook.Entity.AssemblyInfoInputs.cache
+E:\cloud\Code\windysong.notebook\windysong.notebook.entity\obj\Debug\netstandard2.0\WindySong.NoteBook.Entity.AssemblyInfo.cs
+E:\cloud\Code\windysong.notebook\windysong.notebook.entity\obj\Debug\netstandard2.0\WindySong.NoteBook.Entity.dll
+E:\cloud\Code\windysong.notebook\windysong.notebook.entity\obj\Debug\netstandard2.0\WindySong.NoteBook.Entity.pdb
