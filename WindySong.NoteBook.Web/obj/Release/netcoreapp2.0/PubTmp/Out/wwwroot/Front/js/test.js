@@ -1,0 +1,2 @@
+
+document.creatElementNS(ns,svg)

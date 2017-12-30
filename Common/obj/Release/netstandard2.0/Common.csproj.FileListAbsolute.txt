@@ -1,0 +1,9 @@
+E:\git\windysong.notebook\Common\bin\Release\netstandard2.0\Common.deps.json
+E:\git\windysong.notebook\Common\bin\Release\netstandard2.0\Common.dll
+E:\git\windysong.notebook\Common\bin\Release\netstandard2.0\Common.pdb
+E:\git\windysong.notebook\Common\obj\Release\netstandard2.0\Common.csprojResolveAssemblyReference.cache
+E:\git\windysong.notebook\Common\obj\Release\netstandard2.0\Common.csproj.CoreCompileInputs.cache
+E:\git\windysong.notebook\Common\obj\Release\netstandard2.0\Common.AssemblyInfoInputs.cache
+E:\git\windysong.notebook\Common\obj\Release\netstandard2.0\Common.AssemblyInfo.cs
+E:\git\windysong.notebook\Common\obj\Release\netstandard2.0\Common.dll
+E:\git\windysong.notebook\Common\obj\Release\netstandard2.0\Common.pdb

@@ -1,0 +1,6 @@
+E:\git\windysong.notebook\WindySong.NoteBook.Web
+--output-path=obj\Release\netcoreapp2.0\
+--application-name=WindySong.NoteBook.Web
+--content-root=E:\git\windysong.notebook\WindySong.NoteBook.Web
+--file=E:\git\windysong.notebook\WindySong.NoteBook.Web\Views\Home\Index.cshtml
+--file=E:\git\windysong.notebook\WindySong.NoteBook.Web\Views\Login\Index.cshtml

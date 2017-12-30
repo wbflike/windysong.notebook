@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="db\" />
     <Folder Include="ViewModels\Front\" />
   </ItemGroup>
 

@@ -39,8 +39,12 @@
                 <!--使用了asp-controller asp-action 标签 前端就会自动生成Token-->
                 <form id="loginForm" method="post" asp-controller="Login" asp-action="Index">
                     <h4 class="no-margins">登录：</h4>
-                    <input type="text" class="form-control uname" placeholder="用户名" asp-for="name" />
-                    <input type="password" class="form-control pword m-b" placeholder="密码" asp-for="password" />
+                    <div class="form-group"><!--使用form-group包裹表单，才能正确的显示前端验证提示信息-->
+                        <input type="text" class="form-control uname" placeholder="用户名" asp-for="name" />
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control pword m-b" placeholder="密码" asp-for="password" />
+                    </div>
                     <button class="btn btn-success btn-block" type="submit">登录</button>
                     <br />
                     <song class="text-warning">@Html.Raw(ViewData["formError"]) </song>
