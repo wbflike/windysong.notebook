@@ -10,9 +10,10 @@ E:\cloud\Code\windysong.notebook\Common\obj\Debug\netstandard2.0\Common.csprojRe
 E:\git\windysong.notebook\Common\bin\Debug\netstandard2.0\Common.deps.json
 E:\git\windysong.notebook\Common\bin\Debug\netstandard2.0\Common.dll
 E:\git\windysong.notebook\Common\bin\Debug\netstandard2.0\Common.pdb
-E:\git\windysong.notebook\Common\obj\Debug\netstandard2.0\Common.csprojResolveAssemblyReference.cache
 E:\git\windysong.notebook\Common\obj\Debug\netstandard2.0\Common.csproj.CoreCompileInputs.cache
 E:\git\windysong.notebook\Common\obj\Debug\netstandard2.0\Common.AssemblyInfoInputs.cache
 E:\git\windysong.notebook\Common\obj\Debug\netstandard2.0\Common.AssemblyInfo.cs
 E:\git\windysong.notebook\Common\obj\Debug\netstandard2.0\Common.dll
 E:\git\windysong.notebook\Common\obj\Debug\netstandard2.0\Common.pdb
+E:\Git\windysong.notebook\Common\bin\Debug\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll
+E:\Git\windysong.notebook\Common\bin\Debug\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.xml

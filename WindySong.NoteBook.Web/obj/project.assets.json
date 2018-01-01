@@ -2,6 +2,67 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.0": {
+      "Chloe/2.22.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Chloe.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Chloe.dll": {}
+        }
+      },
+      "Chloe.Extension/1.9.0": {
+        "type": "package",
+        "dependencies": {
+          "Chloe": "2.22.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Chloe.Extension.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Chloe.Extension.dll": {}
+        }
+      },
+      "Chloe.MySql/2.22.0": {
+        "type": "package",
+        "dependencies": {
+          "Chloe": "2.22.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Chloe.MySql.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Chloe.MySql.dll": {}
+        }
+      },
+      "Chloe.SQLite/2.22.0": {
+        "type": "package",
+        "dependencies": {
+          "Chloe": "2.22.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Chloe.SQLite.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Chloe.SQLite.dll": {}
+        }
+      },
+      "Chloe.SqlServer/2.22.1": {
+        "type": "package",
+        "dependencies": {
+          "Chloe": "2.22.0",
+          "System.Data.SqlClient": "4.4.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Chloe.SqlServer.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Chloe.SqlServer.dll": {}
+        }
+      },
       "Libuv/1.10.0": {
         "type": "package",
         "dependencies": {
@@ -2806,6 +2867,24 @@
           }
         }
       },
+      "MySqlConnector/0.33.2": {
+        "type": "package",
+        "dependencies": {
+          "System.Buffers": "4.3.0",
+          "System.Data.Common": "4.3.0",
+          "System.Diagnostics.Process": "4.3.0",
+          "System.Net.NameResolution": "4.3.0",
+          "System.Net.Security": "4.3.0",
+          "System.Security.Cryptography.Algorithms": "4.3.0",
+          "System.Threading.Tasks.Extensions": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/MySqlConnector.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/MySqlConnector.dll": {}
+        }
+      },
       "NETStandard.Library/2.0.0": {
         "type": "package",
         "dependencies": {
@@ -3539,6 +3618,25 @@
           "ref/netstandard1.3/System.Console.dll": {}
         }
       },
+      "System.Data.Common/4.3.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.IO": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Text.RegularExpressions": "4.3.0",
+          "System.Threading.Tasks": "4.3.0"
+        },
+        "compile": {
+          "ref/netstandard1.2/System.Data.Common.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.2/System.Data.Common.dll": {}
+        }
+      },
       "System.Data.SqlClient/4.4.0": {
         "type": "package",
         "dependencies": {
@@ -3618,6 +3716,49 @@
             "rid": "unix"
           },
           "runtimes/win/lib/netstandard1.3/System.Diagnostics.FileVersionInfo.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      },
+      "System.Diagnostics.Process/4.3.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "1.1.0",
+          "Microsoft.Win32.Primitives": "4.3.0",
+          "Microsoft.Win32.Registry": "4.3.0",
+          "System.Collections": "4.3.0",
+          "System.Diagnostics.Debug": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.IO": "4.3.0",
+          "System.IO.FileSystem": "4.3.0",
+          "System.IO.FileSystem.Primitives": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Runtime.Handles": "4.3.0",
+          "System.Runtime.InteropServices": "4.3.0",
+          "System.Text.Encoding": "4.3.0",
+          "System.Text.Encoding.Extensions": "4.3.0",
+          "System.Threading": "4.3.0",
+          "System.Threading.Tasks": "4.3.0",
+          "System.Threading.Thread": "4.3.0",
+          "System.Threading.ThreadPool": "4.3.0",
+          "runtime.native.System": "4.3.0"
+        },
+        "compile": {
+          "ref/netstandard1.4/System.Diagnostics.Process.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/linux/lib/netstandard1.4/System.Diagnostics.Process.dll": {
+            "assetType": "runtime",
+            "rid": "linux"
+          },
+          "runtimes/osx/lib/netstandard1.4/System.Diagnostics.Process.dll": {
+            "assetType": "runtime",
+            "rid": "osx"
+          },
+          "runtimes/win/lib/netstandard1.4/System.Diagnostics.Process.dll": {
             "assetType": "runtime",
             "rid": "win"
           }
@@ -5044,7 +5185,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Common": "1.0.0"
+          "Common": "1.0.0",
+          "WindySong.NoteBook.Data": "1.0.0"
         },
         "compile": {
           "bin/placeholder/WindySong.NoteBook.App.dll": {}
@@ -5052,10 +5194,95 @@
         "runtime": {
           "bin/placeholder/WindySong.NoteBook.App.dll": {}
         }
+      },
+      "WindySong.NoteBook.Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "Chloe": "2.22.0",
+          "Chloe.Extension": "1.9.0",
+          "Chloe.MySql": "2.22.0",
+          "Chloe.SQLite": "2.22.0",
+          "Chloe.SqlServer": "2.22.1",
+          "Common": "1.0.0",
+          "Microsoft.Data.SQLite": "2.0.0",
+          "MySqlConnector": "0.33.2"
+        },
+        "compile": {
+          "bin/placeholder/WindySong.NoteBook.Data.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/WindySong.NoteBook.Data.dll": {}
+        }
       }
     }
   },
   "libraries": {
+    "Chloe/2.22.0": {
+      "sha512": "V+/GoKeAWsvRL9qfSy71SSe53nWT/Ew0zkydQIdyffseOOSPUhthOtIFoiT3lKR/hBb64LlPUDM5TWWfVsOQ+A==",
+      "type": "package",
+      "path": "chloe/2.22.0",
+      "files": [
+        "chloe.2.22.0.nupkg.sha512",
+        "chloe.nuspec",
+        "lib/net40/Chloe.XML",
+        "lib/net40/Chloe.dll",
+        "lib/netstandard2.0/Chloe.dll",
+        "lib/netstandard2.0/Chloe.xml"
+      ]
+    },
+    "Chloe.Extension/1.9.0": {
+      "sha512": "QGvF7RyqtY/212h79VRKmdijyVRclx7+vpOwt7bXc2TEGd2T5UvYYdhYqWCTxfvr+0qIETXyvlgR8/Dnlf1fnQ==",
+      "type": "package",
+      "path": "chloe.extension/1.9.0",
+      "files": [
+        "chloe.extension.1.9.0.nupkg.sha512",
+        "chloe.extension.nuspec",
+        "lib/net40/Chloe.Extension.XML",
+        "lib/net40/Chloe.Extension.dll",
+        "lib/netstandard2.0/Chloe.Extension.dll",
+        "lib/netstandard2.0/Chloe.Extension.xml"
+      ]
+    },
+    "Chloe.MySql/2.22.0": {
+      "sha512": "f0c60m2Pa4QxXKGAd6uHqHoY6dx3yJ9fUbnd/9TMkn5+JYO2BaxFSJLRPAfH3Xu2ZUNz42wpl/6OBgsgCl+ykg==",
+      "type": "package",
+      "path": "chloe.mysql/2.22.0",
+      "files": [
+        "chloe.mysql.2.22.0.nupkg.sha512",
+        "chloe.mysql.nuspec",
+        "lib/net40/Chloe.MySql.XML",
+        "lib/net40/Chloe.MySql.dll",
+        "lib/netstandard2.0/Chloe.MySql.dll",
+        "lib/netstandard2.0/Chloe.MySql.xml"
+      ]
+    },
+    "Chloe.SQLite/2.22.0": {
+      "sha512": "RoOcXyMoyr9Logoh/bMg9EcnPne9AB6zbfJJBr4vkIWX8GpgUXAaZYi4DAFJ5v+Lgrpa4ZMb8UZR+M7ovd/Q/A==",
+      "type": "package",
+      "path": "chloe.sqlite/2.22.0",
+      "files": [
+        "chloe.sqlite.2.22.0.nupkg.sha512",
+        "chloe.sqlite.nuspec",
+        "lib/net40/Chloe.SQLite.XML",
+        "lib/net40/Chloe.SQLite.dll",
+        "lib/netstandard2.0/Chloe.SQLite.dll",
+        "lib/netstandard2.0/Chloe.SQLite.xml"
+      ]
+    },
+    "Chloe.SqlServer/2.22.1": {
+      "sha512": "/8lDDhG5RFnhqxgp1qPGUhAF8k7uP2H9QqyRhKd1KGZwFECWMXv1KwCr7T/vzDGGzjLBfenuy8rq9LnogEv7hA==",
+      "type": "package",
+      "path": "chloe.sqlserver/2.22.1",
+      "files": [
+        "chloe.sqlserver.2.22.1.nupkg.sha512",
+        "chloe.sqlserver.nuspec",
+        "lib/net40/Chloe.SqlServer.XML",
+        "lib/net40/Chloe.SqlServer.dll",
+        "lib/netstandard2.0/Chloe.SqlServer.dll",
+        "lib/netstandard2.0/Chloe.SqlServer.xml"
+      ]
+    },
     "Libuv/1.10.0": {
       "sha512": "GsCf4q+eyaI49rCPlgYxdxa1SQCysXFFdSJWdstrwxytg4+VPYLYrXD4AT2rjHVJ+UF7SSWX9CapWEYaU4ejVQ==",
       "type": "package",
@@ -7850,6 +8077,19 @@
         "version.txt"
       ]
     },
+    "MySqlConnector/0.33.2": {
+      "sha512": "/T555TmSsOu8Oylq3nOOJYhl5B/TQ6JzLWTr61FlvbLbxeiENGiLRVvu6vpaJhQpsMFX9UwjbANn+R7mQAPBCA==",
+      "type": "package",
+      "path": "mysqlconnector/0.33.2",
+      "files": [
+        "lib/net45/MySqlConnector.dll",
+        "lib/net46/MySqlConnector.dll",
+        "lib/netstandard1.3/MySqlConnector.dll",
+        "lib/netstandard2.0/MySqlConnector.dll",
+        "mysqlconnector.0.33.2.nupkg.sha512",
+        "mysqlconnector.nuspec"
+      ]
+    },
     "NETStandard.Library/2.0.0": {
       "sha512": "7jnbRU+L08FXKMxqUflxEXtVymWvNOrS8yHgu9s6EM8Anr6T/wIX4nZ08j/u3Asz+tCufp3YVwFSEvFTPYmBPA==",
       "type": "package",
@@ -9091,6 +9331,55 @@
         "system.console.nuspec"
       ]
     },
+    "System.Data.Common/4.3.0": {
+      "sha512": "lm6E3T5u7BOuEH0u18JpbJHxBfOJPuCyl4Kg1RH10ktYLp5uEEE1xKrHW56/We4SnZpGAuCc9N0MJpSDhTHZGQ==",
+      "type": "package",
+      "path": "system.data.common/4.3.0",
+      "files": [
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net451/System.Data.Common.dll",
+        "lib/netstandard1.2/System.Data.Common.dll",
+        "lib/portable-net451+win8+wp8+wpa81/System.Data.Common.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net451/System.Data.Common.dll",
+        "ref/netstandard1.2/System.Data.Common.dll",
+        "ref/netstandard1.2/System.Data.Common.xml",
+        "ref/netstandard1.2/de/System.Data.Common.xml",
+        "ref/netstandard1.2/es/System.Data.Common.xml",
+        "ref/netstandard1.2/fr/System.Data.Common.xml",
+        "ref/netstandard1.2/it/System.Data.Common.xml",
+        "ref/netstandard1.2/ja/System.Data.Common.xml",
+        "ref/netstandard1.2/ko/System.Data.Common.xml",
+        "ref/netstandard1.2/ru/System.Data.Common.xml",
+        "ref/netstandard1.2/zh-hans/System.Data.Common.xml",
+        "ref/netstandard1.2/zh-hant/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/System.Data.Common.dll",
+        "ref/portable-net451+win8+wp8+wpa81/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/de/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/es/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/fr/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/it/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/ja/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/ko/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/ru/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/zh-hans/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/zh-hant/System.Data.Common.xml",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.data.common.4.3.0.nupkg.sha512",
+        "system.data.common.nuspec"
+      ]
+    },
     "System.Data.SqlClient/4.4.0": {
       "sha512": "fxb9ghn1k1Ua7FFdlvtiBOD4/PsQvD/fk2KnhS+FK7VC6OggEx6P+lP1P0+KMb5V2dqS1+FbR7HCenoqzJMNIA==",
       "type": "package",
@@ -9344,6 +9633,61 @@
         "runtimes/win/lib/netstandard1.3/System.Diagnostics.FileVersionInfo.dll",
         "system.diagnostics.fileversioninfo.4.3.0.nupkg.sha512",
         "system.diagnostics.fileversioninfo.nuspec"
+      ]
+    },
+    "System.Diagnostics.Process/4.3.0": {
+      "sha512": "J0wOX07+QASQblsfxmIMFc9Iq7KTXYL3zs2G/Xc704Ylv3NpuVdo6gij6V3PGiptTxqsK0K7CdXenRvKUnkA2g==",
+      "type": "package",
+      "path": "system.diagnostics.process/4.3.0",
+      "files": [
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net46/System.Diagnostics.Process.dll",
+        "lib/net461/System.Diagnostics.Process.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net46/System.Diagnostics.Process.dll",
+        "ref/net461/System.Diagnostics.Process.dll",
+        "ref/netstandard1.3/System.Diagnostics.Process.dll",
+        "ref/netstandard1.3/System.Diagnostics.Process.xml",
+        "ref/netstandard1.3/de/System.Diagnostics.Process.xml",
+        "ref/netstandard1.3/es/System.Diagnostics.Process.xml",
+        "ref/netstandard1.3/fr/System.Diagnostics.Process.xml",
+        "ref/netstandard1.3/it/System.Diagnostics.Process.xml",
+        "ref/netstandard1.3/ja/System.Diagnostics.Process.xml",
+        "ref/netstandard1.3/ko/System.Diagnostics.Process.xml",
+        "ref/netstandard1.3/ru/System.Diagnostics.Process.xml",
+        "ref/netstandard1.3/zh-hans/System.Diagnostics.Process.xml",
+        "ref/netstandard1.3/zh-hant/System.Diagnostics.Process.xml",
+        "ref/netstandard1.4/System.Diagnostics.Process.dll",
+        "ref/netstandard1.4/System.Diagnostics.Process.xml",
+        "ref/netstandard1.4/de/System.Diagnostics.Process.xml",
+        "ref/netstandard1.4/es/System.Diagnostics.Process.xml",
+        "ref/netstandard1.4/fr/System.Diagnostics.Process.xml",
+        "ref/netstandard1.4/it/System.Diagnostics.Process.xml",
+        "ref/netstandard1.4/ja/System.Diagnostics.Process.xml",
+        "ref/netstandard1.4/ko/System.Diagnostics.Process.xml",
+        "ref/netstandard1.4/ru/System.Diagnostics.Process.xml",
+        "ref/netstandard1.4/zh-hans/System.Diagnostics.Process.xml",
+        "ref/netstandard1.4/zh-hant/System.Diagnostics.Process.xml",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "runtimes/linux/lib/netstandard1.4/System.Diagnostics.Process.dll",
+        "runtimes/osx/lib/netstandard1.4/System.Diagnostics.Process.dll",
+        "runtimes/win/lib/net46/System.Diagnostics.Process.dll",
+        "runtimes/win/lib/net461/System.Diagnostics.Process.dll",
+        "runtimes/win/lib/netstandard1.4/System.Diagnostics.Process.dll",
+        "runtimes/win7/lib/netcore50/_._",
+        "system.diagnostics.process.4.3.0.nupkg.sha512",
+        "system.diagnostics.process.nuspec"
       ]
     },
     "System.Diagnostics.StackTrace/4.3.0": {
@@ -13138,10 +13482,16 @@
       "type": "project",
       "path": "../WindySong.NoteBook.App/WindySong.NoteBook.App.csproj",
       "msbuildProject": "../WindySong.NoteBook.App/WindySong.NoteBook.App.csproj"
+    },
+    "WindySong.NoteBook.Data/1.0.0": {
+      "type": "project",
+      "path": "../WindySong.NoteBook.Data/WindySong.NoteBook.Data.csproj",
+      "msbuildProject": "../WindySong.NoteBook.Data/WindySong.NoteBook.Data.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
+      "Common >= 1.0.0",
       "Microsoft.AspNetCore.All >= 2.0.0",
       "Microsoft.NETCore.App >= 2.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.0",
@@ -13149,7 +13499,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\WBF\\.nuget\\packages\\": {},
+    "C:\\Users\\WBF-Home\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -13158,17 +13508,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "E:\\git\\windysong.notebook\\WindySong.NoteBook.Web\\WindySong.NoteBook.Web.csproj",
+      "projectUniqueName": "E:\\Git\\windysong.notebook\\WindySong.NoteBook.Web\\WindySong.NoteBook.Web.csproj",
       "projectName": "WindySong.NoteBook.Web",
-      "projectPath": "E:\\git\\windysong.notebook\\WindySong.NoteBook.Web\\WindySong.NoteBook.Web.csproj",
-      "packagesPath": "C:\\Users\\WBF\\.nuget\\packages\\",
-      "outputPath": "E:\\git\\windysong.notebook\\WindySong.NoteBook.Web\\obj\\",
+      "projectPath": "E:\\Git\\windysong.notebook\\WindySong.NoteBook.Web\\WindySong.NoteBook.Web.csproj",
+      "packagesPath": "C:\\Users\\WBF-Home\\.nuget\\packages\\",
+      "outputPath": "E:\\Git\\windysong.notebook\\WindySong.NoteBook.Web\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\WBF\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\WBF-Home\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -13181,8 +13531,11 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "E:\\git\\windysong.notebook\\WindySong.NoteBook.App\\WindySong.NoteBook.App.csproj": {
-              "projectPath": "E:\\git\\windysong.notebook\\WindySong.NoteBook.App\\WindySong.NoteBook.App.csproj"
+            "E:\\Git\\windysong.notebook\\Common\\Common.csproj": {
+              "projectPath": "E:\\Git\\windysong.notebook\\Common\\Common.csproj"
+            },
+            "E:\\Git\\windysong.notebook\\WindySong.NoteBook.App\\WindySong.NoteBook.App.csproj": {
+              "projectPath": "E:\\Git\\windysong.notebook\\WindySong.NoteBook.App\\WindySong.NoteBook.App.csproj"
             }
           }
         }

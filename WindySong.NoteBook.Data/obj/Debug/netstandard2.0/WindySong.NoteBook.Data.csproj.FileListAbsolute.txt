@@ -7,3 +7,16 @@ E:\cloud\Code\windysong.notebook\WindySong.NoteBook.Data\obj\Debug\netstandard2.
 E:\cloud\Code\windysong.notebook\WindySong.NoteBook.Data\obj\Debug\netstandard2.0\WindySong.NoteBook.Data.AssemblyInfo.cs
 E:\cloud\Code\windysong.notebook\WindySong.NoteBook.Data\obj\Debug\netstandard2.0\WindySong.NoteBook.Data.dll
 E:\cloud\Code\windysong.notebook\WindySong.NoteBook.Data\obj\Debug\netstandard2.0\WindySong.NoteBook.Data.pdb
+E:\Git\windysong.notebook\WindySong.NoteBook.Data\bin\Debug\netstandard2.0\WindySong.NoteBook.Data.deps.json
+E:\Git\windysong.notebook\WindySong.NoteBook.Data\bin\Debug\netstandard2.0\WindySong.NoteBook.Data.dll
+E:\Git\windysong.notebook\WindySong.NoteBook.Data\bin\Debug\netstandard2.0\WindySong.NoteBook.Data.pdb
+E:\Git\windysong.notebook\WindySong.NoteBook.Data\obj\Debug\netstandard2.0\WindySong.NoteBook.Data.csprojResolveAssemblyReference.cache
+E:\Git\windysong.notebook\WindySong.NoteBook.Data\obj\Debug\netstandard2.0\WindySong.NoteBook.Data.csproj.CoreCompileInputs.cache
+E:\Git\windysong.notebook\WindySong.NoteBook.Data\obj\Debug\netstandard2.0\WindySong.NoteBook.Data.AssemblyInfoInputs.cache
+E:\Git\windysong.notebook\WindySong.NoteBook.Data\obj\Debug\netstandard2.0\WindySong.NoteBook.Data.AssemblyInfo.cs
+E:\Git\windysong.notebook\WindySong.NoteBook.Data\obj\Debug\netstandard2.0\WindySong.NoteBook.Data.dll
+E:\Git\windysong.notebook\WindySong.NoteBook.Data\obj\Debug\netstandard2.0\WindySong.NoteBook.Data.pdb
+E:\Git\windysong.notebook\WindySong.NoteBook.Data\bin\Debug\netstandard2.0\Common.dll
+E:\Git\windysong.notebook\WindySong.NoteBook.Data\bin\Debug\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll
+E:\Git\windysong.notebook\WindySong.NoteBook.Data\bin\Debug\netstandard2.0\Common.pdb
+E:\Git\windysong.notebook\WindySong.NoteBook.Data\bin\Debug\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.xml

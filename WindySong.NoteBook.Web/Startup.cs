@@ -6,17 +6,45 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using Common;
+using System.IO;
+using WindySong.NoteBook.App.Interfaces;
+using WindySong.NoteBook.App.Implements;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace WindySong.NoteBook.Web
 {
     public class Startup
     {
+        public Startup(IConfiguration configuration)
+        {
+            //初始化Globals的配置文件读取
+            Globals.Configuration = configuration;
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             //安装mvc服务
             services.AddMvc();
+
+            //作用域（Scoped）生命周期服务在每次请求被创建一次
+            //注入接口和实现类
+            services.AddScoped<ILoginAppService, LoginAppService>();
+
+            //安装Cookies服务
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;//方案名称
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            }).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,//cookie名称
+                o =>
+                {
+                    o.Cookie.HttpOnly = true;//禁止客户端JS读取cookie
+                    o.LoginPath = new PathString("/Login/Index");//登录页面
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -32,6 +60,8 @@ namespace WindySong.NoteBook.Web
             {
                 app.UseExceptionHandler("/Error");
             }
+            //添加 app.UseAuthentication()，使用授权中间件：
+            app.UseAuthentication();
 
             //启用默认静态文件中间件 默认wwwroot底下的静态文件
             app.UseStaticFiles();

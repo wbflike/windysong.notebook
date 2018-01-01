@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WindySong.NoteBook.App;
+using WindySong.NoteBook.App.Entity;
 
 namespace WindySong.NoteBook.Web.Common
 {
@@ -11,6 +15,12 @@ namespace WindySong.NoteBook.Web.Common
     /// </summary>
     public class BaseController : Controller
     {
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public BaseController()
+        {           
+        }
         /// <summary>
         /// 变量model错误信息
         /// </summary>
@@ -30,6 +40,19 @@ namespace WindySong.NoteBook.Web.Common
 
             }
             ViewData["formError"] = error;
+        }
+
+        /// <summary>
+        /// 获取网站配置信息
+        /// </summary>
+        public void GetSysConfig()
+        {
+            //获取网站配置信息
+            AppService app = new AppService();
+            SysConfig sysConfig = app.GetSysConfig();
+            ViewData["siteName"] = sysConfig.siteName;
+            ViewData["siteKeyWords"] = sysConfig.siteKeyWords;
+            ViewData["siteDescription"] = sysConfig.siteDescription;
         }
     }
 }

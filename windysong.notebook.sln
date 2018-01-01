@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2008
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{A4A7E904-3CB2-439D-A0DD-957E8B84E4FB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindySong.NoteBook.Data", "WindySong.NoteBook.Data\WindySong.NoteBook.Data.csproj", "{FF2A8B69-125A-4AD9-BC07-DAF8E3F7A996}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindySong.NoteBook.App", "WindySong.NoteBook.App\WindySong.NoteBook.App.csproj", "{C3DFB367-2E9F-48B3-8DCB-550F1DE7C2EC}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindySong.NoteBook.Entity", "WindySong.NoteBook.Entity\WindySong.NoteBook.Entity.csproj", "{60F9B40D-6215-40A5-AF26-DCD73E847CC1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindySong.NoteBook.Web", "WindySong.NoteBook.Web\WindySong.NoteBook.Web.csproj", "{DACE927B-F3C5-4D26-9015-7975938D0942}"
 EndProject
@@ -31,10 +29,6 @@ Global
 		{C3DFB367-2E9F-48B3-8DCB-550F1DE7C2EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3DFB367-2E9F-48B3-8DCB-550F1DE7C2EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3DFB367-2E9F-48B3-8DCB-550F1DE7C2EC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{60F9B40D-6215-40A5-AF26-DCD73E847CC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{60F9B40D-6215-40A5-AF26-DCD73E847CC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{60F9B40D-6215-40A5-AF26-DCD73E847CC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{60F9B40D-6215-40A5-AF26-DCD73E847CC1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DACE927B-F3C5-4D26-9015-7975938D0942}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DACE927B-F3C5-4D26-9015-7975938D0942}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DACE927B-F3C5-4D26-9015-7975938D0942}.Release|Any CPU.ActiveCfg = Release|Any CPU
