@@ -42,17 +42,5 @@ namespace WindySong.NoteBook.Web.Common
             ViewData["formError"] = error;
         }
 
-        /// <summary>
-        /// 获取网站配置信息
-        /// </summary>
-        public void GetSysConfig()
-        {
-            //获取网站配置信息
-            AppService app = new AppService();
-            SysConfig sysConfig = app.GetSysConfig();
-            ViewData["siteName"] = sysConfig.siteName;
-            ViewData["siteKeyWords"] = sysConfig.siteKeyWords;
-            ViewData["siteDescription"] = sysConfig.siteDescription;
-        }
     }
 }

@@ -12,6 +12,9 @@ using System.IO;
 using WindySong.NoteBook.App.Interfaces;
 using WindySong.NoteBook.App.Implements;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using WindySong.NoteBook.Web.Common;
+using WindySong.NoteBook.App;
+using WindySong.NoteBook.App.Entity;
 
 namespace WindySong.NoteBook.Web
 {
@@ -44,7 +47,11 @@ namespace WindySong.NoteBook.Web
                 {
                     o.Cookie.HttpOnly = true;//禁止客户端JS读取cookie
                     o.LoginPath = new PathString("/Login/Index");//登录页面
+                    o.Events = new MyCookieEvents();//注册自己的cookie事件
                 });
+
+            //获取网站配置信息
+            this.GetSysConfig();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,8 +80,20 @@ namespace WindySong.NoteBook.Web
                 routes.MapRoute("defatul", "{controller=Home}/{action=Index}");
             });
 
-            
-
         }
+
+        /// <summary>
+        /// 获取网站配置信息
+        /// </summary>
+        public void GetSysConfig()
+        {
+            //获取网站配置信息
+            AppService app = new AppService();
+            SysConfig sysConfig = app.GetSysConfig();
+            WebSiteSysConfig.siteName = sysConfig.siteName;
+            WebSiteSysConfig.siteKeyWords = sysConfig.siteKeyWords;
+            WebSiteSysConfig.siteDescription = sysConfig.siteDescription;
+        }
+
     }
 }

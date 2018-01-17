@@ -1,13 +1,14 @@
 ﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
 @model WindySong.NoteBook.App.ViewModels.Admin.LoginModel
+@using WindySong.NoteBook.Web.Common
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>@ViewData["siteName"] - 后台登录</title>
-    <meta name="keywords" content="@ViewData["siteKeyWords"]">
-    <meta name="description" content="@ViewData["siteDescription"]">
+    <title>@WebSiteSysConfig.siteName - 后台登录</title>
+    <meta name="keywords" content="@WebSiteSysConfig.siteKeyWords">
+    <meta name="description" content="@WebSiteSysConfig.siteDescription">
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
     <link href="/css/animate.css" rel="stylesheet">

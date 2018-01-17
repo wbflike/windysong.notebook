@@ -26,23 +26,11 @@ namespace WindySong.NoteBook.Web.Controllers
         //[Route("Login")] /*路由特性定义 这个路由特性表示 URL/Login 将访问到这个Action*/
         public IActionResult Index()
         {
-            this.GetSysConfig();
-            //当存在cookies
-            if (User.Identity.Name != null)
-            {
-                AppService app = new AppService();
-                bool bl = false;
-                bl = app.IfUser(User.Identity.Name);
-                //当存在的cookies用户名在数据库不存在则删除cookies
-                if (bl == false)
-                {
-                    HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-                }
-            }
             return View();
         }
 
-
+        //Token验证，防止CSRF XSS攻击
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public IActionResult Index(LoginModel loginModel)
         {
