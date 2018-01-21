@@ -309,4 +309,8 @@
     <ProjectReference Include="..\WindySong.NoteBook.App\WindySong.NoteBook.App.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\AdminUser\" />
+  </ItemGroup>
+
 </Project>
