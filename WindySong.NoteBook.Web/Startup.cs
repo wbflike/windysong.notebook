@@ -36,6 +36,7 @@ namespace WindySong.NoteBook.Web
             //作用域（Scoped）生命周期服务在每次请求被创建一次
             //注入接口和实现类
             services.AddScoped<ILoginAppService, LoginAppService>();
+            services.AddScoped<ISysConfigAppService, SysConfigAppService>();
 
             //安装Cookies服务
             services.AddAuthentication(options =>

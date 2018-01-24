@@ -38,7 +38,7 @@ namespace WindySong.NoteBook.Web.Controllers
             //验证模型的数据验证是否通过
             if (!ModelState.IsValid)
             {
-                this.IfModelState();
+                this.IfModelStateViewData();
                 return View();
             }
             //登录验证方法

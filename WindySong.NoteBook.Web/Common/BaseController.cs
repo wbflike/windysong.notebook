@@ -24,7 +24,7 @@ namespace WindySong.NoteBook.Web.Common
         /// <summary>
         /// 变量model错误信息
         /// </summary>
-        public void IfModelState()
+        public void IfModelStateViewData()
         {
             string error = "";
             //遍历model错误信息
@@ -40,6 +40,28 @@ namespace WindySong.NoteBook.Web.Common
 
             }
             ViewData["formError"] = error;
+        }
+
+        /// <summary>
+        /// 变量model错误信息
+        /// </summary>
+        public string IfModelStateString()
+        {
+            string error = "";
+            //遍历model错误信息
+            foreach (var item in ModelState.Keys)
+            {
+                //strItem属性名也就是表单名 
+                string strItem = item;
+                foreach (var p in ModelState[item].Errors)
+                {
+                    //错误信息
+                    error += p.ErrorMessage;
+                }
+
+            }
+            //清空br标签
+            return error;
         }
 
     }
