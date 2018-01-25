@@ -36,21 +36,28 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">网站名称</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" asp-for="siteName">
+                                    <div class="form-group">
+                                        <!--使用form-group包裹表单，才能正确的显示前端验证提示信息-->
+                                        <input type="text" class="form-control" asp-for="siteName">
+                                    </div>                                   
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Keywords</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" asp-for="siteKeyWords"> <span class="help-block m-b-none">网站关键字</span>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" asp-for="siteKeyWords"><span class="help-block m-b-none">网站关键字</span>
+                                    </div>                                    
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Description</label>
                                 <div class="col-sm-10">
-                                    <input type="text"  class="form-control" asp-for="siteDescription"><span class="help-block m-b-none">网站描述</span>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" asp-for="siteDescription"><span class="help-block m-b-none">网站描述</span>
+                                    </div>  
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
@@ -71,49 +78,113 @@
     <script src="~/js/bootstrap.min.js?v=3.3.6"></script>
     <!-- 自定义js -->
     <script src="~/js/content.js?v=1.0.0"></script>
+    <!-- jQuery Validation plugin javascript-->
+    <script src="~/js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="~/js/plugins/validate/messages_zh.min.js"></script>
     <!-- Sweet alert -->
     <script src="~/js/plugins/sweetalert/sweetalert.min.js"></script>
     <script>
         $(document).ready(function () {
             $("#submitForm").click(function () {
+                $('#myform').submit();  
+            });
+            
+        });
+
+        $.validator.setDefaults({
+            highlight: function (element) {
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            success: function (element) {
+                element.closest('.form-group').removeClass('has-error').addClass('has-success');
+            },
+            errorElement: "span",
+            errorPlacement: function (error, element) {
+                if (element.is(":radio") || element.is(":checkbox")) {
+                    error.appendTo(element.parent().parent().parent());
+                } else {
+                    error.appendTo(element.parent());
+                }
+            },
+            errorClass: "help-block m-b-none",
+            validClass: "help-block m-b-none"
+
+
+        });
+
+        // validate signup form on keyup and submit
+        var icon = "<i class='fa fa-times-circle'></i> ";
+        $("#myform").validate({
+            rules: {
+                siteName: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 30
+                },
+                siteKeyWords: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 50
+                },
+                siteDescription: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 50
+                }
+            },
+            messages: {
+                siteName: {
+                    required: icon + "请输入站点名称",
+                    minlength: icon + "站点名称必须3个字符以上",
+                    maxlength: icon + "站点名称必须30个字符以下"
+                },
+                siteKeyWords: {
+                    required: icon + "请输入站点关键字",
+                    minlength: icon + "站点关键字必须3个字符以上",
+                    maxlength: icon + "站点关键字必须50个字符以下"
+                }
+                ,
+                siteDescription: {
+                    required: icon + "请输入站点描述",
+                    minlength: icon + "站点描述必须3个字符以上",
+                    maxlength: icon + "站点描述必须50个字符以下"
+                }
+            },
+            onkeyup: false,
+            focusCleanup: true,
+            success: "valid",
+            submitHandler: function () {
                 $.ajax({
                     url: '/AdminSysConfig/Index',
                     type: 'post',
                     dataType: 'json',
                     data: $("#myform").serialize(),
-                    cache: false,                   
+                    cache: false,
                     error: erryFunction,  //错误执行方法    
                     success: succFunction//成功执行方法
                 });
-            });
-            function erryFunction() {
-                swal({
-                    title: "请求失败",
-                    text: "error",
-                    type: "error"
-                });
-            }
-            function succFunction(data) {
-                //获取返回的json数据
-                var state = data.state;
-                var str = data.str;
-                if (state == 1)
-                {
+                function erryFunction() {
+                    PopupDia("请求失败", "error", "error");
+                }
+                function succFunction(data) {
+                    //获取返回的json数据
+                    var state = data.state;
+                    var str = data.str;
+                    if (state == 1) {
+                        PopupDia("保存成功", str, "success");
+                    }
+                    if (state == 0) {
+                        PopupDia("保存失败", str, "error");
+                    }
+                }
+                function PopupDia(strTitle, strText, strType) {
                     swal({
-                        title: "保存成功",
-                        text: str,
-                        type: "success"
+                        title: strTitle,
+                        text: strText,
+                        type: strType
                     });
                 }
-                if (state == 0)
-                {
-                    swal({
-                        title: "保存失败",
-                        text: str,
-                        type: "error"
-                    });
-                }
-            }
+            }  
         });
     </script>
 </body>
