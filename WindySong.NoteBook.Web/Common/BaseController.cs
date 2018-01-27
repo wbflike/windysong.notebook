@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WindySong.NoteBook.App;
 using WindySong.NoteBook.App.Entity;
+using WindySong.NoteBook.App.ViewModels.Json;
 
 namespace WindySong.NoteBook.Web.Common
 {
@@ -64,5 +65,9 @@ namespace WindySong.NoteBook.Web.Common
             return error;
         }
 
+        public JsonResultsString GetSwalJson(int state,string title,string text,string type)
+        {
+            return new JsonResultsString() { state = state, title = title, text = text, type = type };
+        }
     }
 }

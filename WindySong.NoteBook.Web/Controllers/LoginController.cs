@@ -42,9 +42,9 @@ namespace WindySong.NoteBook.Web.Controllers
                 return View();
             }
             //登录验证方法
-            Users users = _loginApp.UserLogin(loginModel);
+            LoginModel _logigModel = _loginApp.UserLogin(loginModel);
             //登录失败
-            if(users == null)
+            if(_logigModel == null)
             {
                 ViewData["formError"] = "用户名密码失败!";
                 return View();
@@ -53,8 +53,8 @@ namespace WindySong.NoteBook.Web.Controllers
             {
                 //添加cookies
                 ClaimsIdentity identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
-                identity.AddClaim(new Claim(ClaimTypes.Name, users.userName));
-                identity.AddClaim(new Claim(ClaimTypes.Sid, users.id.ToString()));
+                identity.AddClaim(new Claim(ClaimTypes.Name, _logigModel.name));
+                identity.AddClaim(new Claim(ClaimTypes.Sid, _logigModel.id.ToString()));
                 //设置有效期
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity), new AuthenticationProperties
                 {

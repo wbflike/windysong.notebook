@@ -31,28 +31,22 @@ namespace WindySong.NoteBook.Web.Controllers
         [HttpPost]
         public IActionResult Index(SysConfigModel model)
         {
-            var jsonResults = new JsonResultsString();
             //判断数据是否合法
             if (!ModelState.IsValid)
             {
-                jsonResults.state = 0;
-                jsonResults.str = this.IfModelStateString();
-                return Json(jsonResults);
+                
+                return Json(this.GetSwalJson(0, "非法数据", this.IfModelStateString(), "error"));
             }
             if(_sysConfig.SetSysConfig(model))
             {
-                jsonResults.state = 1;
-                jsonResults.str = "success";
                 WebSiteSysConfig.siteName = model.siteName;
                 WebSiteSysConfig.siteKeyWords = model.siteKeyWords;
                 WebSiteSysConfig.siteDescription = model.siteDescription;
-                return Json(jsonResults);
+                return Json(this.GetSwalJson(1, "保存成功", "success", "success"));
             }
             else
             {
-                jsonResults.state = 0;
-                jsonResults.str = "error";
-                return Json(jsonResults);
+                return Json(this.GetSwalJson(0, "保存失败", "error", "error"));
             }
         }
     }

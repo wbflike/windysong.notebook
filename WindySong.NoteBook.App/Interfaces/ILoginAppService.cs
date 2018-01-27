@@ -16,6 +16,6 @@ namespace WindySong.NoteBook.App.Interfaces
         /// </summary>
         /// <param name="loginModel"></param>
         /// <returns></returns>
-        Users UserLogin(LoginModel loginModel);
+        LoginModel UserLogin(LoginModel loginModel);
     }
 }

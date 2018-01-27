@@ -20,7 +20,7 @@ namespace WindySong.NoteBook.App.Implements
         /// </summary>
         /// <param name="loginModel">用户数据模型</param>
         /// <returns>true登录成功 false登录失败</returns>
-        public Users UserLogin(LoginModel loginModel)
+        public LoginModel UserLogin(LoginModel loginModel)
         {
             IQuery<Users> q = this.DbContext.Query<Users>();
             //密码加密
@@ -36,7 +36,7 @@ namespace WindySong.NoteBook.App.Implements
                 //更新最后更新时间
                 string strDate = DateTime.Now.ToString();
                 this.DbContext.Update<Users>(a=>a.id == _users.id,a=>new Users() {lastTime= strDate });
-                return _users;
+                return new LoginModel() { id=_users.id,name=_users.userName,photo=_users.photo};
             }
             
         }

@@ -37,6 +37,7 @@ namespace WindySong.NoteBook.Web
             //注入接口和实现类
             services.AddScoped<ILoginAppService, LoginAppService>();
             services.AddScoped<ISysConfigAppService, SysConfigAppService>();
+            services.AddScoped<IUserAppService, UserAppService>();
 
             //安装Cookies服务
             services.AddAuthentication(options =>

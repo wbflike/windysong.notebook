@@ -11,8 +11,18 @@ namespace WindySong.NoteBook.App.ViewModels.Json
         /// </summary>
         public int state { get; set; }
         /// <summary>
-        /// 字符串
+        /// 标题
         /// </summary>
-        public string str { get; set; }
+        public string title { get; set; }
+
+        /// <summary>
+        /// 内容
+        /// </summary>
+        public string text { get; set; }
+
+        /// <summary>
+        /// 内容
+        /// </summary>
+        public string type { get; set; }
     }
 }
