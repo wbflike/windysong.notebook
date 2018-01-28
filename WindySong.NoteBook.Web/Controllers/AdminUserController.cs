@@ -41,16 +41,16 @@ namespace WindySong.NoteBook.Web.Controllers
             switch (i)
             {
                 case 1:
-                    jsonResults = this.GetSwalJson(1, "保存成功", "success", "success");
+                    jsonResults = this.GetSwalJson(1, "更新成功", "success", "success");
                     break;
                 case 0:
-                    jsonResults = this.GetSwalJson(1, "保存失败", "error", "error");
+                    jsonResults = this.GetSwalJson(1, "更新失败", "error", "error");
                     break;
                 case -1:
-                    jsonResults = this.GetSwalJson(-1, "保存失败,用户不存在", "error", "error");
+                    jsonResults = this.GetSwalJson(-1, "更新失败,用户不存在", "error", "error");
                     break;
                 case -2:
-                    jsonResults = this.GetSwalJson(-1, "保存失败,旧密码错误", "error", "error");
+                    jsonResults = this.GetSwalJson(-2, "更新失败,旧密码错误", "error", "error");
                     break;
             }
             return Json(jsonResults);
