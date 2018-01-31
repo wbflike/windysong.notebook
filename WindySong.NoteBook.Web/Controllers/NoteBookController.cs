@@ -16,5 +16,9 @@ namespace WindySong.NoteBook.Web.Controllers
         {
             return View();
         }
+        public IActionResult TabTwo()
+        {
+            return View();
+        }
     }
 }
