@@ -46,7 +46,7 @@
                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
             </button>
         </div>
-        <table id="tb_departments"></table>
+        <table id="tb_departments" data-reorderable-columns="true"></table>
     </div>
 
 
@@ -75,7 +75,7 @@
             //初始化Table
             oTableInit.Init = function () {
                 $('#tb_departments').bootstrapTable({
-                    //url: '/Home/GetDepartment',         //请求后台的URL（*）
+                    url: '../test.json',         //请求后台的URL（*）
                     method: 'get',                      //请求方式（*）
                     toolbar: '#toolbar',                //工具按钮用哪个容器
                     striped: true,                      //是否显示行间隔色
@@ -95,11 +95,14 @@
                     minimumCountColumns: 2,             //最少允许的列数
                     clickToSelect: true,                //是否启用点击选中行
                     height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
-                    uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+                    uniqueId: "id",                     //每一行的唯一标识，一般为主键列
                     showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
                     cardView: false,                    //是否显示详细视图
                     detailView: false,                   //是否显示父子表
                     columns: [
+                        {
+                            checkbox: true
+                        },
                         {
                             field: 'id',
                             title: 'ID'
@@ -121,42 +124,6 @@
                         {
                             field: 'lastTime',
                             title: '添加时间'
-                        }
-                    ],
-                    //data: {
-                    //    rows: [
-
-                    //        {
-                    //            id: 1,
-                    //            name: 'cpp',
-                    //            description: 'c++',
-                    //            rank: 1,
-                    //            lastTime: '2018年'
-                    //        },
-                    //        {
-                    //            id: 1,
-                    //            name: 'python',
-                    //            description: 'python',
-                    //            rank: 2,
-                    //            lastTime: '2018年'
-                    //        }
-                    //    ],
-                    //    total: 17
-                    //}
-                    data: [
-                        {
-                            id: 1,
-                            name: 'cpp',
-                            description: 'c++',
-                            rank: 1,
-                            lastTime: '2018年'
-                        },
-                        {
-                            id: 1,
-                            name: 'python',
-                            description: 'python',
-                            rank: 2,
-                            lastTime: '2018年'
                         }
                     ]
                 });
