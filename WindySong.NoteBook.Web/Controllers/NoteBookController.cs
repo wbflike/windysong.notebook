@@ -26,6 +26,11 @@ namespace WindySong.NoteBook.Web.Controllers
             return View();
         }
 
+        /// <summary>
+        /// cTab分页数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult TabJson(TabPostModel model)
         {

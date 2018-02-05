@@ -19,24 +19,75 @@
             <div class="panel-body">
                 <form id="myForm" class="form-horizontal" asp-controller="NoteBook" asp-action="TabJson">
                     <div class="form-group" style="margin-top:15px">
-                        <label class="control-label col-sm-1" for="txt_search_departmentname">部门名称</label>
+                        <label class="control-label col-sm-1" for="txt_search_departmentname">名称</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" id="txt_search_departmentname">
-                        </div>
-                        <label class="control-label col-sm-1" for="txt_search_statu">状态</label>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control" id="txt_search_statu">
+                            <input type="text" class="form-control" id="txt_search" name="txt_search">
                         </div>
                         <div class="col-sm-4" style="text-align:left;">
                             <button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询</button>
                         </div>
                     </div>
+
+                    <!-- 模态框（Modal）Bootstrap 模态框 -->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> <!--id="myModal" 通过在一个按钮上配置 data-toggle="modal" data-target="#myModal"联动  -->
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel">
+                                        添加选项卡
+                                    </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">名称</label>
+                                        <div class="col-sm-10">
+                                            <div class="form-group">
+                                                <!--使用form-group包裹表单，才能正确的显示前端验证提示信息-->
+                                                <input type="text" class="form-control" id="" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">描述</label>
+                                        <div class="col-sm-10">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">排序值</label>
+                                        <div class="col-sm-10">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                        关闭
+                                    </button>
+                                    <button type="button" class="btn btn-primary" id="btn_save">
+                                        保存
+                                    </button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div>
+                    </div>
+                    <!-- /.modal -->
+
                 </form>
             </div>
         </div>
 
         <div id="toolbar" class="btn-group">
-            <button id="btn_add" type="button" class="btn btn-default">
+            <button id="btn_add" type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
             </button>
             <button id="btn_edit" type="button" class="btn btn-default">
@@ -94,7 +145,7 @@
                     showRefresh: true,                  //是否显示刷新按钮
                     minimumCountColumns: 2,             //最少允许的列数
                     clickToSelect: true,                //是否启用点击选中行
-                    height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                    //height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
                     uniqueId: "id",                     //每一行的唯一标识，一般为主键列
                     showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
                     cardView: false,                    //是否显示详细视图
@@ -132,10 +183,10 @@
             //得到查询的参数
             oTableInit.queryParams = function (params) {
                 var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-                    __RequestVerificationToken: $("input[name='__RequestVerificationToken'] ").val(),
+                    //__RequestVerificationToken: $("input[name='__RequestVerificationToken'] ").val(),
                     limit: params.limit,   //页面大小
                     offset: params.offset,  //页码
-                    searchKey: $("#txt_search_departmentname").val()
+                    searchKey: $("input[name='txt_search'] ").val()
                     
                 };
                 return temp;
@@ -150,6 +201,109 @@
 
             oInit.Init = function () {
                 //初始化页面上面的按钮事件
+                //搜索查询按钮
+                $("#btn_query").click(function () {
+                    //1.初始化Table
+                    var oTable = new TableInit();
+                    oTable.Init();
+                });
+                //新增保存事件
+                $("#btn_save").click(function () {
+
+                    console.log("保存");
+                });
+
+                //$("#btn_add").click(function () {
+                //    $("#myModalLabel").text("新增");
+                //    $("#myModal").find(".form-control").val("");
+                //    $('#myModal').modal()
+
+                //    postdata.DEPARTMENT_ID = "";
+                //    console.log("添加");
+                //});
+
+                $("#btn_edit").click(function () {
+                    var arrselections = $("#tb_departments").bootstrapTable('getSelections');
+                    if (arrselections.length > 1) {
+                        toastr.warning('只能选择一行进行编辑');
+
+                        return;
+                    }
+                    if (arrselections.length <= 0) {
+                        toastr.warning('请选择有效数据');
+
+                        return;
+                    }
+                    $("#myModalLabel").text("编辑");
+                    $("#txt_departmentname").val(arrselections[0].DEPARTMENT_NAME);
+                    $("#txt_parentdepartment").val(arrselections[0].PARENT_ID);
+                    $("#txt_departmentlevel").val(arrselections[0].DEPARTMENT_LEVEL);
+                    $("#txt_statu").val(arrselections[0].STATUS);
+
+                    postdata.DEPARTMENT_ID = arrselections[0].DEPARTMENT_ID;
+                    $('#myModal').modal();
+                });
+
+                $("#btn_delete").click(function () {
+                    var arrselections = $("#tb_departments").bootstrapTable('getSelections');
+                    if (arrselections.length <= 0) {
+                        toastr.warning('请选择有效数据');
+                        return;
+                    }
+
+                    Ewin.confirm({ message: "确认要删除选择的数据吗？" }).on(function (e) {
+                        if (!e) {
+                            return;
+                        }
+                        $.ajax({
+                            type: "post",
+                            url: "/Home/Delete",
+                            data: { "": JSON.stringify(arrselections) },
+                            success: function (data, status) {
+                                if (status == "success") {
+                                    toastr.success('提交数据成功');
+                                    $("#tb_departments").bootstrapTable('refresh');
+                                }
+                            },
+                            error: function () {
+                                toastr.error('Error');
+                            },
+                            complete: function () {
+
+                            }
+
+                        });
+                    });
+                });
+
+                $("#btn_submit").click(function () {
+                    postdata.DEPARTMENT_NAME = $("#txt_departmentname").val();
+                    postdata.PARENT_ID = $("#txt_parentdepartment").val();
+                    postdata.DEPARTMENT_LEVEL = $("#txt_departmentlevel").val();
+                    postdata.STATUS = $("#txt_statu").val();
+                    $.ajax({
+                        type: "post",
+                        url: "/Home/GetEdit",
+                        data: { "": JSON.stringify(postdata) },
+                        success: function (data, status) {
+                            if (status == "success") {
+                                toastr.success('提交数据成功');
+                                $("#tb_departments").bootstrapTable('refresh');
+                            }
+                        },
+                        error: function () {
+                            toastr.error('Error');
+                        },
+                        complete: function () {
+
+                        }
+
+                    });
+                });
+
+                $("#btn_query").click(function () {
+                    $("#tb_departments").bootstrapTable('refresh');
+                });
             };
 
             return oInit;

@@ -27,7 +27,7 @@ namespace WindySong.NoteBook.App.Implements
             //数据库查询的tab数据
             List<CTab> list = new List<CTab>();
             IQuery<CTab> q = this.DbContext.Query<CTab>();
-            if(model.searchKey == null)
+            if(string.IsNullOrEmpty(model.searchKey))
             {
                 //获取数据行数
                 json.total = q.Count();
