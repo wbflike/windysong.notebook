@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using WindySong.NoteBook.Web.Common;
 using Microsoft.AspNetCore.Authorization;
 using WindySong.NoteBook.App.ViewModels.Admin;
+using WindySong.NoteBook.App.Interfaces;
+using WindySong.NoteBook.App.ViewModels.Json;
 
 namespace WindySong.NoteBook.Web.Controllers
 {
@@ -13,21 +15,33 @@ namespace WindySong.NoteBook.Web.Controllers
     [Authorize]
     public class NoteBookController : AdminController
     {
+        //笔记操作接口
+        private INoteBookAppService _noteBookApp;
+        public NoteBookController(INoteBookAppService noteBookApp)
+        {
+            this._noteBookApp = noteBookApp;
+        }
         public IActionResult Tab()
         {
             return View();
         }
-        public IActionResult TabTwo()
-        {
-            return View();
-        }
 
-        //Token验证，防止CSRF XSS攻击
-        [ValidateAntiForgeryToken]
         [HttpGet]
         public IActionResult TabJson(TabPostModel model)
         {
-            return View();
+            JsonPagTab jsonPagTab = new JsonPagTab();
+            //判断数据是否合法
+            if (!ModelState.IsValid)
+            {
+                jsonPagTab.total = 1;
+                List<JsonTab> list = new List<JsonTab>();
+                list.Add(new JsonTab() { id = 1, name = "参数非法", description = "参数非法", rank = 1, lastTime = "参数非法" });
+                jsonPagTab.rows = list;
+                return Json(jsonPagTab);
+            }
+            jsonPagTab = this._noteBookApp.GetPageTab(model);
+
+            return Json(jsonPagTab);
         }
     }
 }

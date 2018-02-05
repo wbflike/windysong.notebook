@@ -4,6 +4,9 @@ using System.Text;
 
 namespace WindySong.NoteBook.App.ViewModels.Json
 {
+    /// <summary>
+    /// Json返回客户端弹出窗口提示
+    /// </summary>
     public class JsonResultsString
     {
         /// <summary>

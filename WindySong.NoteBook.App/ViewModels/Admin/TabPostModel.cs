@@ -25,7 +25,7 @@ namespace WindySong.NoteBook.App.ViewModels.Admin
         /// <summary>
         /// 搜索关键字
         /// </summary>
-        [RegularExpression(@"^.{3,50}$", ErrorMessage = "站点描述必须为3到50位字符!")]
+        [RegularExpression(@"^.{1,50}$", ErrorMessage = "站点描述必须为1到50位字符!")]
         public string searchKey { get; set; }
     }
 }
