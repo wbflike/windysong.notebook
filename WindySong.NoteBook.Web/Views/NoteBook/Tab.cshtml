@@ -195,6 +195,7 @@
             return oTableInit;
         };
 
+        //获取选中行的index索引号
         function getIdSelections() {
             return $.map($("#tb_data").bootstrapTable('getSelections'), function (row) {
                 return row.id
@@ -255,7 +256,7 @@
                     console.log(arrselections[0].description);
 
                     var allTableData = $("#tb_data").bootstrapTable('getData');
-                    console.log(getIdSelections());
+                    console.log(getIdSelections()[0]);
                     //for (var i = 0; i < allTableData.length; i++) {
                     //    console.log(allTableData[i].ID);
                     //}
@@ -269,7 +270,7 @@
                     }
                         
                     //更新表格数据   
-                    $('#tb_data').bootstrapTable('updateRow', { index: 1, row: row });//index---->更新行的索引。row---->要更新的数据
+                    $('#tb_data').bootstrapTable('updateRow', { index: getIdSelections()[0]-1, row: row });//index---->更新行的索引。row---->要更新的数据
                     
                     //var arrselections = $("#tb_data").bootstrapTable('getSelections');
                     //if (arrselections.length > 1) {
