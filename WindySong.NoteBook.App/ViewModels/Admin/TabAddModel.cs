@@ -14,12 +14,14 @@ namespace WindySong.NoteBook.App.ViewModels.Admin
         /// 每页显示多少条数据
         /// </summary>
         [Required(ErrorMessage = "名称必填!")]
+        [RegularExpression(@"^.{2,6}$", ErrorMessage = "描述必须为2到6位字符!")]
         public string addName { get; set; }
 
         /// <summary>
         /// 描述
         /// </summary>
         [RegularExpression(@"^.{2,20}$", ErrorMessage = "描述必须为2到20位字符!")]
+        [Required(ErrorMessage = "名称必填!")]
         public string addDescription { get; set; }
 
         /// <summary>

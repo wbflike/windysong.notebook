@@ -11,6 +11,18 @@ namespace WindySong.NoteBook.App.Interfaces
     /// </summary>
     public interface INoteBookAppService
     {
+        /// <summary>
+        /// 获取TAB分页数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         JsonPagTab GetPageTab(TabPostModel model);
+
+        /// <summary>
+        /// 添加TABLE
+        /// </summary>
+        /// <param name="model">TabAddModel</param>
+        /// <returns></returns>
+        bool AddTab(TabAddModel model);
     }
 }

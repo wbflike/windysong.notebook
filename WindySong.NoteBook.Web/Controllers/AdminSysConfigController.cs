@@ -39,6 +39,7 @@ namespace WindySong.NoteBook.Web.Controllers
             }
             if(_sysConfig.SetSysConfig(model))
             {
+                //更新静态类数据
                 WebSiteSysConfig.siteName = model.siteName;
                 WebSiteSysConfig.siteKeyWords = model.siteKeyWords;
                 WebSiteSysConfig.siteDescription = model.siteDescription;

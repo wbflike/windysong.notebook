@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width" />
     <link href="~/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="~/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="~/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <title>Tab</title>
 </head>
 <body>
@@ -28,7 +29,7 @@
                         </div>
                     </div>                  
                 </form>
-                <form id="addTabForm" class="form-horizontal">
+                <form id="addTabForm" class="form-horizontal" asp-controller="NoteBook" asp-action="AddTab">
                     <!-- 模态框（Modal）Bootstrap 模态框 -->
                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <!--id="myModal" 通过在一个按钮上配置 data-toggle="modal" data-target="#myModal"联动  -->
@@ -67,6 +68,7 @@
                                         <div class="col-sm-10">
                                             <div class="form-group">
                                                 <input type="text" class="form-control" id="addRank" name="addRank">
+                                                <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 不填写排序值系统默认取当前最大排序值</span>
                                             </div>
                                         </div>
                                     </div>
@@ -75,7 +77,7 @@
                                     <button type="button" class="btn btn-default" data-dismiss="modal">
                                         关闭
                                     </button>
-                                    <button type="button" class="btn btn-primary" id="btn_save">
+                                    <button type="button" class="btn btn-primary" id="btn_save" name="btn_save">
                                         保存
                                     </button>
                                 </div>
@@ -111,6 +113,8 @@
     <!-- jQuery Validation plugin javascript-->
     <script src="~/js/plugins/validate/jquery.validate.min.js"></script>
     <script src="~/js/plugins/validate/messages_zh.min.js"></script>
+    <!-- Sweet alert -->
+    <script src="~/js/plugins/sweetalert/sweetalert.min.js"></script>
 
     <script>
         $(function () {
@@ -198,6 +202,15 @@
             };
             return oTableInit;
         };
+
+        //弹出提示窗
+        function PopupDia(strTitle, strText, strType) {
+            swal({
+                title: strTitle,
+                text: strText,
+                type: strType
+            });
+        }
 
         //获取选中行的index索引号
         function getIdSelections() {
@@ -351,7 +364,6 @@
         };
 
         //数据验证和提交
-
         $(document).ready(function () {
             //文档加载完成后添加保存按钮的单击事件
             $("#btn_save").click(function () {
@@ -383,49 +395,43 @@
         //表单验证
         // validate signup form on keyup and submit
         var icon = "<i class='fa fa-times-circle'></i> ";
-        $("#myform").validate({
+        $("#addTabForm").validate({
             rules: {
-                siteName: {
+                addName: {
                     required: true,
-                    minlength: 3,
-                    maxlength: 30
+                    minlength: 2,
+                    maxlength: 6
                 },
-                siteKeyWords: {
-                    required: true,
-                    minlength: 3,
-                    maxlength: 50
+                addDescription: {
+                    minlength: 2,
+                    maxlength: 20
                 },
-                siteDescription: {
-                    required: true,
-                    minlength: 3,
-                    maxlength: 50
+                addRank: {
+                    digits: true
                 }
             },
             messages: {
-                siteName: {
-                    required: icon + "请输入站点名称",
-                    minlength: icon + "站点名称必须3个字符以上",
-                    maxlength: icon + "站点名称必须30个字符以下"
+                addName: {
+                    required: icon + "请输入名称",
+                    minlength: icon + "站点名称必须2个字符以上",
+                    maxlength: icon + "站点名称必须6个字符以下"
                 },
-                siteKeyWords: {
-                    required: icon + "请输入站点关键字",
-                    minlength: icon + "站点关键字必须3个字符以上",
-                    maxlength: icon + "站点关键字必须50个字符以下"
+                addDescription: {
+                    minlength: icon + "描述必须2个字符以上",
+                    maxlength: icon + "描述必须20个字符以下"
                 }
                 ,
-                siteDescription: {
-                    required: icon + "请输入站点描述",
-                    minlength: icon + "站点描述必须3个字符以上",
-                    maxlength: icon + "站点描述必须50个字符以下"
+                addRank: {
+                    digits: icon + "排序字段必须为数字"
                 }
             },
             //表单验证成功执行方法
             submitHandler: function (form) {
                 $.ajax({
-                    url: '/AdminSysConfig/Index',
+                    url: '/NoteBook/AddTab',
                     type: 'post',
                     dataType: 'json',
-                    data: $("#myform").serialize(),
+                    data: $("#addTabForm").serialize(),
                     cache: false,
                     error: erryFunction,  //错误执行方法    
                     success: succFunction//成功执行方法
@@ -441,13 +447,6 @@
                     var type = data.type;
                     //console.log(data);
                     PopupDia(title, text, type);
-                }
-                function PopupDia(strTitle, strText, strType) {
-                    swal({
-                        title: strTitle,
-                        text: strText,
-                        type: strType
-                    });
                 }
             }
         });
