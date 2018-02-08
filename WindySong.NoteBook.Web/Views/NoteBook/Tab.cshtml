@@ -17,7 +17,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">查询条件</div>
             <div class="panel-body">
-                <form id="myForm" class="form-horizontal" asp-controller="NoteBook" asp-action="TabJson">
+                <form id="dataListForm" class="form-horizontal" asp-controller="NoteBook" asp-action="TabJson">
                     <div class="form-group" style="margin-top:15px">
                         <label class="control-label col-sm-1" for="txt_search_departmentname">名称</label>
                         <div class="col-sm-3">
@@ -26,10 +26,12 @@
                         <div class="col-sm-4" style="text-align:left;">
                             <button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询</button>
                         </div>
-                    </div>
-
+                    </div>                  
+                </form>
+                <form id="addTabForm" class="form-horizontal">
                     <!-- 模态框（Modal）Bootstrap 模态框 -->
-                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> <!--id="myModal" 通过在一个按钮上配置 data-toggle="modal" data-target="#myModal"联动  -->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <!--id="myModal" 通过在一个按钮上配置 data-toggle="modal" data-target="#myModal"联动  -->
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -46,7 +48,7 @@
                                         <div class="col-sm-10">
                                             <div class="form-group">
                                                 <!--使用form-group包裹表单，才能正确的显示前端验证提示信息-->
-                                                <input type="text" class="form-control" id="" >
+                                                <input type="text" class="form-control" id="addName" name="addName">
                                             </div>
                                         </div>
                                     </div>
@@ -55,7 +57,7 @@
                                         <label class="col-sm-2 control-label">描述</label>
                                         <div class="col-sm-10">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" >
+                                                <input type="text" class="form-control" id="addDescription" name="addDescription">
                                             </div>
                                         </div>
                                     </div>
@@ -64,7 +66,7 @@
                                         <label class="col-sm-2 control-label">排序值</label>
                                         <div class="col-sm-10">
                                             <div class="form-group">
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="addRank" name="addRank">
                                             </div>
                                         </div>
                                     </div>
@@ -81,7 +83,6 @@
                         </div>
                     </div>
                     <!-- /.modal -->
-
                 </form>
             </div>
         </div>
@@ -107,6 +108,9 @@
     <script src="~/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
     <script src="~/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
     <script src="~/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- jQuery Validation plugin javascript-->
+    <script src="~/js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="~/js/plugins/validate/messages_zh.min.js"></script>
 
     <script>
         $(function () {
@@ -217,11 +221,6 @@
                     $("#tb_data").bootstrapTable('refresh');
                 });
 
-                //模态框保存事件
-                $("#btn_save").click(function () {
-
-                    console.log("保存");
-                });
 
                 //数据列表新增事件
                 $("#btn_add").click(function () {
@@ -235,7 +234,6 @@
                     $('#myModal').modal({
                         keyboard: true
                     });
-                    console.log("添加");
                 });
 
                 //数据列表编辑事件
@@ -255,12 +253,6 @@
                     console.log(arrselections[0].name);
                     console.log(arrselections[0].description);
 
-                    var allTableData = $("#tb_data").bootstrapTable('getData');
-                    console.log(getIdSelections()[0]);
-                    //for (var i = 0; i < allTableData.length; i++) {
-                    //    console.log(allTableData[i].ID);
-                    //}
-                    //console.log(allTableData);
                     var row = {
                         
                         "name": "测试",
@@ -357,6 +349,109 @@
 
             return oInit;
         };
+
+        //数据验证和提交
+
+        $(document).ready(function () {
+            //文档加载完成后添加保存按钮的单击事件
+            $("#btn_save").click(function () {
+                $('#addTabForm').submit();
+            });
+
+        });
+
+        $.validator.setDefaults({
+            highlight: function (element) {
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            success: function (element) {
+                element.closest('.form-group').removeClass('has-error').addClass('has-success');
+            },
+            errorElement: "span",
+            errorPlacement: function (error, element) {
+                if (element.is(":radio") || element.is(":checkbox")) {
+                    error.appendTo(element.parent().parent().parent());
+                } else {
+                    error.appendTo(element.parent());
+                }
+            },
+            errorClass: "help-block m-b-none",
+            validClass: "help-block m-b-none"
+
+
+        });
+        //表单验证
+        // validate signup form on keyup and submit
+        var icon = "<i class='fa fa-times-circle'></i> ";
+        $("#myform").validate({
+            rules: {
+                siteName: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 30
+                },
+                siteKeyWords: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 50
+                },
+                siteDescription: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 50
+                }
+            },
+            messages: {
+                siteName: {
+                    required: icon + "请输入站点名称",
+                    minlength: icon + "站点名称必须3个字符以上",
+                    maxlength: icon + "站点名称必须30个字符以下"
+                },
+                siteKeyWords: {
+                    required: icon + "请输入站点关键字",
+                    minlength: icon + "站点关键字必须3个字符以上",
+                    maxlength: icon + "站点关键字必须50个字符以下"
+                }
+                ,
+                siteDescription: {
+                    required: icon + "请输入站点描述",
+                    minlength: icon + "站点描述必须3个字符以上",
+                    maxlength: icon + "站点描述必须50个字符以下"
+                }
+            },
+            //表单验证成功执行方法
+            submitHandler: function (form) {
+                $.ajax({
+                    url: '/AdminSysConfig/Index',
+                    type: 'post',
+                    dataType: 'json',
+                    data: $("#myform").serialize(),
+                    cache: false,
+                    error: erryFunction,  //错误执行方法    
+                    success: succFunction//成功执行方法
+                });
+                function erryFunction() {
+                    PopupDia("请求失败", "error", "error");
+                }
+                function succFunction(data) {
+                    //获取返回的json数据
+                    var state = data.state;
+                    var title = data.title;
+                    var text = data.text;
+                    var type = data.type;
+                    //console.log(data);
+                    PopupDia(title, text, type);
+                }
+                function PopupDia(strTitle, strText, strType) {
+                    swal({
+                        title: strTitle,
+                        text: strText,
+                        type: strType
+                    });
+                }
+            }
+        });
+
     </script>
 </body>
 </html>
