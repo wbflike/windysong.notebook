@@ -20,13 +20,14 @@ namespace WindySong.NoteBook.App.ViewModels.Admin
         /// <summary>
         /// 描述
         /// </summary>
+        //[Required(ErrorMessage = "描述必填!")]
         [RegularExpression(@"^.{2,20}$", ErrorMessage = "描述必须为2到20位字符!")]
-        [Required(ErrorMessage = "名称必填!")]
         public string addDescription { get; set; }
 
         /// <summary>
         /// 排序字段
         /// </summary>
+        //[Required(ErrorMessage = "排序必填!")]
         [RegularExpression(@"^[0-9]*$", ErrorMessage = "排序值必须为数字!")]
         public int addRank { get; set; }
     }

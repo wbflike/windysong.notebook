@@ -67,8 +67,8 @@
                                         <label class="col-sm-2 control-label">排序值</label>
                                         <div class="col-sm-10">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" id="addRank" name="addRank">
-                                                <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 不填写排序值系统默认取当前最大排序值</span>
+                                                <input type="text" class="form-control" id="addRank" name="addRank" >
+                                                <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 如果不填写则取当前最大排序值</span>
                                             </div>
                                         </div>
                                     </div>
@@ -408,6 +408,7 @@
                 },
                 addRank: {
                     digits: true
+                    
                 }
             },
             messages: {
@@ -426,7 +427,13 @@
                 }
             },
             //表单验证成功执行方法
-            submitHandler: function (form) {
+            submitHandler: function () {
+                var addRank = $(" input[ name='addRank' ] ").val();//如果表单不填写则赋值0，否则后端直接接收转换为0会出错
+                if (addRank == "")
+                {
+                    $("#addRank").val("0");
+                }
+                //开始ajax请求
                 $.ajax({
                     url: '/NoteBook/AddTab',
                     type: 'post',
