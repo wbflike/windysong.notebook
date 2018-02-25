@@ -74,6 +74,8 @@
     <None Include="wwwroot\js\jquery-ui.custom.min.js" />
     <None Include="wwwroot\js\jquery.min.js" />
     <None Include="wwwroot\js\jquery.min.map" />
+    <None Include="wwwroot\js\plugins\layer\layer.js" />
+    <None Include="wwwroot\js\plugins\layer\mobile\layer.js" />
     <None Include="wwwroot\js\plugins\.DS_Store" />
     <None Include="wwwroot\js\plugins\beautifyhtml\beautifyhtml.js" />
     <None Include="wwwroot\js\plugins\blueimp\jquery.blueimp-gallery.min.js" />
@@ -229,11 +231,6 @@
     <None Include="wwwroot\js\plugins\jsTree\jstree.min.js" />
     <None Include="wwwroot\js\plugins\jvectormap\jquery-jvectormap-1.2.2.min.js" />
     <None Include="wwwroot\js\plugins\jvectormap\jquery-jvectormap-world-mill-en.js" />
-    <None Include="wwwroot\js\plugins\layer\.DS_Store" />
-    <None Include="wwwroot\js\plugins\layer\extend\layer.ext.js" />
-    <None Include="wwwroot\js\plugins\layer\laydate\laydate.js" />
-    <None Include="wwwroot\js\plugins\layer\layer.min.js" />
-    <None Include="wwwroot\js\plugins\layer\layim\layim.js" />
     <None Include="wwwroot\js\plugins\markdown\bootstrap-markdown.js" />
     <None Include="wwwroot\js\plugins\markdown\bootstrap-markdown.zh.js" />
     <None Include="wwwroot\js\plugins\markdown\markdown.js" />

@@ -25,6 +25,10 @@ namespace WindySong.NoteBook.Web.Controllers
         {
             return View();
         }
+        public IActionResult Col()
+        {
+            return View();
+        }
 
         /// <summary>
         /// cTab分页数据
@@ -49,6 +53,12 @@ namespace WindySong.NoteBook.Web.Controllers
             return Json(jsonPagTab);
         }
 
+        /// <summary>
+        /// 添加TAB
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public IActionResult AddTab(TabAddModel model)
         {
@@ -67,6 +77,64 @@ namespace WindySong.NoteBook.Web.Controllers
             {
                 return Json(this.GetSwalJson(0, "添加失败", "error", "error"));
             }
+        }
+
+        /// <summary>
+        /// 更新TAB
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult UpdatTab(TabUpdateModel model)
+        {
+            //判断数据是否合法
+            if (!ModelState.IsValid)
+            {
+                return Json(this.GetSwalJson(0, "非法数据", this.IfModelStateString(), "error"));
+            }
+            bool bl = false;
+            bl = _noteBookApp.UpdateTab(model);
+            if (bl)
+            {
+                return Json(this.GetSwalJson(1, "更新成功", "success", "success"));
+            }
+            else
+            {
+                return Json(this.GetSwalJson(0, "更新失败", "error", "error"));
+            }
+        }
+
+        /// <summary>
+        /// 删除TAB
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult DeleteTab(TabDeleteModel model)
+        {
+            //判断数据是否合法
+            if (!ModelState.IsValid)
+            {
+                return Json(this.GetSwalJson(0, "非法数据", this.IfModelStateString(), "error"));
+            }
+            var jsonResults = new JsonResultsString();
+            int i = 0;
+            i = _noteBookApp.DeleteTab(model);
+            switch (i)
+            {
+                case 1:
+                    jsonResults = this.GetSwalJson(1, "删除成功", "success", "success");
+                    break;
+                case 0:
+                    jsonResults = this.GetSwalJson(1, "删除失败", "error", "error");
+                    break;
+                case -1:
+                    jsonResults = this.GetSwalJson(-1, "删除失败", "选中的竖列存在未删除的选项卡", "error");
+                    break;
+            }
+            return Json(jsonResults);
         }
     }
 }

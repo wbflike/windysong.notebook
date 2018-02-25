@@ -73,7 +73,7 @@ namespace WindySong.NoteBook.App.Implements
             {
                 tab.description = model.addDescription;
             }
-            if(model.addRank == 0)
+            if(model.addRank == 0 || model.addRank == null)
             {
                 IQuery<CTab> q = this.DbContext.Query<CTab>();
                 var max = q.Max(a => a.rank);
@@ -81,7 +81,7 @@ namespace WindySong.NoteBook.App.Implements
             }
             else
             {
-                tab.rank = model.addRank;
+                tab.rank = model.addRank.Value;
             }
             tab.lastTime = DateTime.Now.ToString();
             try
@@ -92,6 +92,78 @@ namespace WindySong.NoteBook.App.Implements
             catch(Exception ex)
             {
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// 更新TAB
+        /// </summary>
+        /// <param name="model">UpdateAddModel</param>
+        /// <returns></returns>
+        public bool UpdateTab(TabUpdateModel model)
+        {
+            CTab tab = new CTab();
+            IQuery<CTab> qCTab = this.DbContext.Query<CTab>();
+            tab = qCTab.Where(a => a.id == model.updateid).FirstOrDefault();
+            tab.name = model.updateName;
+            if (model.updateDescription == null)
+            {
+                tab.description = "";
+            }
+            else
+            {
+                tab.description = model.updateDescription;
+            }
+            if (model.updateRank == 0 || model.updateRank == null)
+            {
+                IQuery<CTab> q = this.DbContext.Query<CTab>();
+                var max = q.Max(a => a.rank);
+                tab.rank = max + 1;
+            }
+            else
+            {
+                tab.rank = model.updateRank.Value;
+            }
+            try
+            {
+                this.DbContext.Update(tab);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        /// <summary>
+        /// 删除TAB
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int DeleteTab(TabDeleteModel model)
+        {
+            string str = model.deleteid;
+            str = str.Substring(0, str.Length - 1);
+            string[] arrId = str.Split(',');                                                                                          
+            foreach(var id in arrId)
+            {
+                int i = 0;
+                i = this.DbContext.Query<UCol>().Where(u => u.cTabId == int.Parse(id)).Count();
+                if(i>0)//uCol存在cTab记录
+                {
+                    return -1;
+                }
+            }
+            try
+            {
+                foreach (var id in arrId)
+                {
+                    this.DbContext.Delete<CTab>(a => a.id == int.Parse(id));
+                }
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return 0;
             }
         }
     }
