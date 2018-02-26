@@ -16,21 +16,21 @@ namespace WindySong.NoteBook.App.Interfaces
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        JsonPagTab GetPageTab(TabPostModel model);
+        JsonPagTab GetPageTab(TabDataListModel model);
 
         /// <summary>
         /// 添加TAB
         /// </summary>
         /// <param name="model">TabAddModel</param>
         /// <returns></returns>
-        bool AddTab(TabAddModel model);
+        bool AddTab(TabModel model);
 
         /// <summary>
         /// 更新TAB
         /// </summary>
         /// <param name="model">UpdateAddModel</param>
         /// <returns></returns>
-        bool UpdateTab(TabUpdateModel model);
+        bool UpdateTab(TabModel model);
 
         /// <summary>
         /// 删除TAB

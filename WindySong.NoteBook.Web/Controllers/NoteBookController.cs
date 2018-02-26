@@ -36,7 +36,7 @@ namespace WindySong.NoteBook.Web.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpGet]
-        public IActionResult TabJson(TabPostModel model)
+        public IActionResult TabJson(TabDataListModel model)
         {
             JsonPagTab jsonPagTab = new JsonPagTab();
             //判断数据是否合法
@@ -60,7 +60,7 @@ namespace WindySong.NoteBook.Web.Controllers
         /// <returns></returns>
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public IActionResult AddTab(TabAddModel model)
+        public IActionResult AddTab(TabModel model)
         {
             //判断数据是否合法
             if (!ModelState.IsValid)
@@ -86,7 +86,7 @@ namespace WindySong.NoteBook.Web.Controllers
         /// <returns></returns>
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public IActionResult UpdatTab(TabUpdateModel model)
+        public IActionResult UpdatTab(TabModel model)
         {
             //判断数据是否合法
             if (!ModelState.IsValid)

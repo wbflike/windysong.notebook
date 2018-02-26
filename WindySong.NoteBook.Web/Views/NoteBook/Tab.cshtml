@@ -7,7 +7,7 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="~/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="~/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
     <link href="~/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
@@ -29,10 +29,10 @@
                         </div>
                     </div>                  
                 </form>
-                <!--添加表单-->
-                <form id="addTabForm" name="addTabForm" class="form-horizontal" asp-controller="NoteBook" asp-action="AddTab">
+                <!--表单-->
+                <form id="TabForm" name="TabForm" class="form-horizontal" asp-controller="NoteBook" asp-action="UpdatTab">
                     <!-- 模态框（Modal）Bootstrap 模态框 -->
-                    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="TabModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <!--id="myModal" 通过在一个按钮上配置 data-toggle="modal" data-target="#myModal"联动  -->
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -40,8 +40,8 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                                         &times;
                                     </button>
-                                    <h4 class="modal-title" id="myModalLabel">
-                                        添加选项卡
+                                    <h4 class="modal-title" id="MyModalText">
+                                        选项卡 
                                     </h4>
                                 </div>
                                 <div class="modal-body">
@@ -50,7 +50,9 @@
                                         <div class="col-sm-10">
                                             <div class="form-group">
                                                 <!--使用form-group包裹表单，才能正确的显示前端验证提示信息-->
-                                                <input type="text" class="form-control" id="addName" name="addName">
+                                                <input type="text" class="form-control" id="Name" name="Name">
+                                                <input type="hidden" name="Id" id="Id" >
+                                                <input type="hidden" name="Type" id="Type">
                                             </div>
                                         </div>
                                     </div>
@@ -59,7 +61,7 @@
                                         <label class="col-sm-2 control-label">描述</label>
                                         <div class="col-sm-10">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" id="addDescription" name="addDescription">
+                                                <input type="text" class="form-control" id="Description" name="Description">
                                             </div>
                                         </div>
                                     </div>
@@ -68,7 +70,7 @@
                                         <label class="col-sm-2 control-label">排序值</label>
                                         <div class="col-sm-10">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" id="addRank" name="addRank" >
+                                                <input type="text" class="form-control" id="Rank" name="Rank">
                                                 <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 如果不填写则取当前最大排序值</span>
                                             </div>
                                         </div>
@@ -80,65 +82,6 @@
                                     </button>
                                     <button type="button" class="btn btn-primary" id="btn_save" name="btn_save">
                                         保存
-                                    </button>
-                                </div>
-                            </div><!-- /.modal-content -->
-                        </div>
-                    </div>
-                    <!-- /.modal -->
-                </form>
-                <!--更新表单-->
-                <form id="updateTabForm" name="updateTabForm" class="form-horizontal" asp-controller="NoteBook" asp-action="UpdatTab">
-                    <!-- 模态框（Modal）Bootstrap 模态框 -->
-                    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <!--id="myModal" 通过在一个按钮上配置 data-toggle="modal" data-target="#myModal"联动  -->
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                        &times;
-                                    </button>
-                                    <h4 class="modal-title" id="myModalLabel">
-                                        更新选项卡
-                                    </h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">名称</label>
-                                        <div class="col-sm-10">
-                                            <div class="form-group">
-                                                <!--使用form-group包裹表单，才能正确的显示前端验证提示信息-->
-                                                <input type="text" class="form-control" id="updateName" name="updateName">
-                                                <input type="hidden" name="updateid" id="updateid" >
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="hr-line-dashed"></div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">描述</label>
-                                        <div class="col-sm-10">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" id="updateDescription" name="updateDescription">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="hr-line-dashed"></div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">排序值</label>
-                                        <div class="col-sm-10">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" id="updateRank" name="updateRank">
-                                                <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 如果不填写则取当前最大排序值</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                                        关闭
-                                    </button>
-                                    <button type="button" class="btn btn-primary" id="btn_update" name="btn_update">
-                                        更新
                                     </button>
                                 </div>
                             </div><!-- /.modal-content -->
@@ -311,11 +254,14 @@
 
                 //数据列表新增事件
                 $("#btn_add").click(function () {
-
+                    $("#Type").val("Add");
+                    $("#Id").val("");
+                    $("#MyModalText").html("添加选项卡");
                     //打开模态框
-                    $('#addModal').modal({
+                    $('#TabModal').modal({
                         keyboard: true
                     });
+
                 });
 
                 //数据列表编辑事件
@@ -332,13 +278,17 @@
                         PopupDia("错误", "请选择有效数据", "error");
                         return;
                     }
+
+                    $("#Type").val("Update");
+                    $("#MyModalText").html("更新选项卡");
+
                     //获取选中的行信息并赋值到模态框
-                    $("#updateid").val(arrselections[0].id);
-                    $("#updateName").val(arrselections[0].name);
-                    $("#updateDescription").val(arrselections[0].description);
-                    $("#updateRank").val(arrselections[0].rank);
+                    $("#Id").val(arrselections[0].id);
+                    $("#Name").val(arrselections[0].name);
+                    $("#Description").val(arrselections[0].description);
+                    $("#Rank").val(arrselections[0].rank);
                     //打开更新模态框
-                    $('#updateModal').modal({
+                    $('#TabModal').modal({
                         keyboard: true
                     });
 
@@ -407,11 +357,7 @@
         $(document).ready(function () {
             //文档加载完成后添加保存按钮的单击事件
             $("#btn_save").click(function () {
-                $('#addTabForm').submit();
-            });
-            //文档加载完成后添加更新按钮的单击事件
-            $("#btn_update").click(function () {
-                $('#updateTabForm').submit();
+                $('#TabForm').submit();
             });
         });
 
@@ -439,133 +385,108 @@
         // validate signup form on keyup and submit
         var icon = "<i class='fa fa-times-circle'></i> ";
         //添加验证
-        $("#addTabForm").validate({
+        $("#TabForm").validate({
             rules: {
-                addName: {
+                Name: {
                     required: true,
                     minlength: 2,
                     maxlength: 12
                 },
-                addDescription: {
+                Description: {
                     minlength: 2,
                     maxlength: 20
                 },
-                addRank: {
+                Rank: {
                     digits: true
                     
                 }
             },
             messages: {
-                addName: {
+                Name: {
                     required: icon + "请输入名称",
                     minlength: icon + "站点名称必须2个字符以上",
                     maxlength: icon + "站点名称必须12个字符以下"
                 },
-                addDescription: {
+                Description: {
                     minlength: icon + "描述必须2个字符以上",
                     maxlength: icon + "描述必须20个字符以下"
                 }
                 ,
-                addRank: {
+                Rank: {
                     digits: icon + "排序字段必须为数字"
                 }
             },
             //表单验证成功执行方法
             submitHandler: function () {
-                //开始ajax请求
-                $.ajax({
-                    url: '/NoteBook/AddTab',
-                    type: 'post',
-                    dataType: 'json',
-                    data: $("#addTabForm").serialize(),
-                    cache: false,
-                    error: erryFunction,  //错误执行方法    
-                    success: succFunction//成功执行方法
-                });
-                
-                function erryFunction() {
-                    PopupDia("请求失败", "error", "error");
-                }
-                function succFunction(data) {
-                    //获取返回的json数据
-                    var state = data.state;
-                    var title = data.title;
-                    var text = data.text;
-                    var type = data.type;
-                    PopupDia(title, text, type);
-                    //刷新表格
-                    $("#tb_data").bootstrapTable('refresh');
-                }
-            }
-        });
-
-        //更新验证
-        $("#updateTabForm").validate({
-            rules: {
-                updateName: {
-                    required: true,
-                    minlength: 2,
-                    maxlength: 12
-                },
-                updateDescription: {
-                    minlength: 2,
-                    maxlength: 20
-                },
-                updateRank: {
-                    digits: true
-
-                }
-            },
-            messages: {
-                updateName: {
-                    required: icon + "请输入名称",
-                    minlength: icon + "站点名称必须2个字符以上",
-                    maxlength: icon + "站点名称必须12个字符以下"
-                },
-                updateDescription: {
-                    minlength: icon + "描述必须2个字符以上",
-                    maxlength: icon + "描述必须20个字符以下"
-                }
-                ,
-                updateRank: {
-                    digits: icon + "排序字段必须为数字"
-                }
-            },
-            //表单验证成功执行方法
-            submitHandler: function () {
-                //开始ajax请求
-                $.ajax({
-                    url: '/NoteBook/UpdatTab',
-                    type: 'post',
-                    dataType: 'json',
-                    data: $("#updateTabForm").serialize(),
-                    cache: false,
-                    error: erryFunction,  //错误执行方法    
-                    success: succFunction//成功执行方法
-                });
-
-                function erryFunction() {
-                    PopupDia("请求失败", "error", "error");
-                }
-                function succFunction(data) {
-                    //更新表格
-                    var uprow = {
-                        "name": $("#updateName").val(),
-                        "description": $("#updateDescription").val(),
-                        "rank": $("#updateRank").val()
+                var submitType = $("#Type").val();
+                if (submitType == "Add")
+                {
+                    //开始ajax请求
+                    $.ajax({
+                        url: '/NoteBook/AddTab',
+                        type: 'post',
+                        dataType: 'json',
+                        data: $("#TabForm").serialize(),
+                        cache: false,
+                        error: erryFunction,  //错误执行方法    
+                        success: succFunction//成功执行方法
+                    });
+                    function erryFunction() {
+                        PopupDia("请求失败", "error", "error");
                     }
-                    //更新表格数据   
-                    $('#tb_data').bootstrapTable('updateRow', { index: getIdSelections()[0] - 1, row: uprow });//index---->更新行的索引。row---->要更新的数据
-                    //获取返回的json数据
-                    var state = data.state;
-                    var title = data.title;
-                    var text = data.text;
-                    var type = data.type;
-                    PopupDia(title, text, type);
-                    
+                    function succFunction(data) {
+                        //获取返回的json数据
+                        var state = data.state;
+                        var title = data.title;
+                        var text = data.text;
+                        var type = data.type;
+                        PopupDia(title, text, type);
+                        //刷新表格
+                        $("#tb_data").bootstrapTable('refresh');
+                    }
                 }
+
+                if (submitType == "Update")
+                {
+                    //开始ajax请求
+                    $.ajax({
+                        url: '/NoteBook/UpdatTab',
+                        type: 'post',
+                        dataType: 'json',
+                        data: $("#TabForm").serialize(),
+                        cache: false,
+                        error: erryFunction,  //错误执行方法    
+                        success: succFunction//成功执行方法
+                    });
+
+                    function erryFunction() {
+                        PopupDia("请求失败", "error", "error");
+                    }
+                    function succFunction(data) {
+                        //更新表格
+                        var uprow = {
+                            "name": $("#Name").val(),
+                            "description": $("#Description").val(),
+                            "rank": $("#Rank").val()
+                        }
+                        //更新表格数据   
+                        $('#tb_data').bootstrapTable('updateRow', { index: getIdSelections()[0] - 1, row: uprow });//index---->更新行的索引。row---->要更新的数据
+                        var index = $("#tb_data").find("tr.danger").data("index");
+                        console.log(index);
+                        //获取返回的json数据
+                        var state = data.state;
+                        var title = data.title;
+                        var text = data.text;
+                        var type = data.type;
+                        PopupDia(title, text, type);
+
+                    }
+
+                }
+                
             }
         });
+
     </script>
 </body>
 </html>

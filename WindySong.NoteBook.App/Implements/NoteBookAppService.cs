@@ -19,7 +19,7 @@ namespace WindySong.NoteBook.App.Implements
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public JsonPagTab GetPageTab(TabPostModel model)
+        public JsonPagTab GetPageTab(TabDataListModel model)
         {
             var json = new JsonPagTab();
             //返回json的tab数据
@@ -61,19 +61,19 @@ namespace WindySong.NoteBook.App.Implements
         /// </summary>
         /// <param name="model">TabAddModel</param>
         /// <returns></returns>
-        public bool AddTab(TabAddModel model)
+        public bool AddTab(TabModel model)
         {
             CTab tab = new CTab();
-            tab.name = model.addName;
-            if(model.addDescription == null)
+            tab.name = model.Name;
+            if(model.Description == null)
             {
                 tab.description = "";
             }
             else
             {
-                tab.description = model.addDescription;
+                tab.description = model.Description;
             }
-            if(model.addRank == 0 || model.addRank == null)
+            if(model.Rank == 0 || model.Rank == null)
             {
                 IQuery<CTab> q = this.DbContext.Query<CTab>();
                 var max = q.Max(a => a.rank);
@@ -81,7 +81,7 @@ namespace WindySong.NoteBook.App.Implements
             }
             else
             {
-                tab.rank = model.addRank.Value;
+                tab.rank = model.Rank.Value;
             }
             tab.lastTime = DateTime.Now.ToString();
             try
@@ -100,21 +100,21 @@ namespace WindySong.NoteBook.App.Implements
         /// </summary>
         /// <param name="model">UpdateAddModel</param>
         /// <returns></returns>
-        public bool UpdateTab(TabUpdateModel model)
+        public bool UpdateTab(TabModel model)
         {
             CTab tab = new CTab();
             IQuery<CTab> qCTab = this.DbContext.Query<CTab>();
-            tab = qCTab.Where(a => a.id == model.updateid).FirstOrDefault();
-            tab.name = model.updateName;
-            if (model.updateDescription == null)
+            tab = qCTab.Where(a => a.id == model.Id).FirstOrDefault();
+            tab.name = model.Name;
+            if (model.Description == null)
             {
                 tab.description = "";
             }
             else
             {
-                tab.description = model.updateDescription;
+                tab.description = model.Description;
             }
-            if (model.updateRank == 0 || model.updateRank == null)
+            if (model.Rank == 0 || model.Rank == null)
             {
                 IQuery<CTab> q = this.DbContext.Query<CTab>();
                 var max = q.Max(a => a.rank);
@@ -122,7 +122,7 @@ namespace WindySong.NoteBook.App.Implements
             }
             else
             {
-                tab.rank = model.updateRank.Value;
+                tab.rank = model.Rank.Value;
             }
             try
             {
