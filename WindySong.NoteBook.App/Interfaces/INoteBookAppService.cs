@@ -16,7 +16,7 @@ namespace WindySong.NoteBook.App.Interfaces
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        JsonPagTab GetPageTab(TabDataListModel model);
+        JsonPagTab GetPageTab(DataPageModel model);
 
         /// <summary>
         /// 添加TAB
@@ -38,5 +38,11 @@ namespace WindySong.NoteBook.App.Interfaces
         /// <param name="model">TabDeleteModel</param>
         /// <returns></returns>
         int DeleteTab(TabDeleteModel model);
+
+        /// <summary>
+        /// 获取Tab Select
+        /// </summary>
+        /// <returns></returns>
+        JsonTabSelect GetTabSelect();
     }
 }

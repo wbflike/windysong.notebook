@@ -36,7 +36,7 @@ namespace WindySong.NoteBook.Web.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpGet]
-        public IActionResult TabJson(TabDataListModel model)
+        public IActionResult GetTab(DataPageModel model)
         {
             JsonPagTab jsonPagTab = new JsonPagTab();
             //判断数据是否合法
@@ -135,6 +135,18 @@ namespace WindySong.NoteBook.Web.Controllers
                     break;
             }
             return Json(jsonResults);
+        }
+
+        /// <summary>
+        /// 获取选项卡
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult GetTabSelect()
+        {
+            JsonTabSelect json = new JsonTabSelect();
+            json = this._noteBookApp.GetTabSelect();
+
+            return Json(json);
         }
     }
 }

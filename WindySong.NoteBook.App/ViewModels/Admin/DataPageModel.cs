@@ -8,7 +8,7 @@ namespace WindySong.NoteBook.App.ViewModels.Admin
     /// <summary>
     /// Tab选项卡分页请求
     /// </summary>
-    public class TabDataListModel
+    public class DataPageModel
     {
         /// <summary>
         /// 每页显示多少条数据

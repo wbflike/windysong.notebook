@@ -19,7 +19,7 @@ namespace WindySong.NoteBook.App.Implements
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public JsonPagTab GetPageTab(TabDataListModel model)
+        public JsonPagTab GetPageTab(DataPageModel model)
         {
             var json = new JsonPagTab();
             //返回json的tab数据
@@ -165,6 +165,31 @@ namespace WindySong.NoteBook.App.Implements
             {
                 return 0;
             }
+        }
+
+        /// <summary>
+        /// 获取Tab Select
+        /// </summary>
+        /// <returns></returns>
+        public JsonTabSelect GetTabSelect()
+        {
+            var json = new JsonTabSelect();
+            //返回json的tab数据
+            List<JsonTabValue> listJsonTabValue = new List<JsonTabValue>();
+            //数据库查询的tab数据
+            List<CTab> list = new List<CTab>();
+            IQuery<CTab> q = this.DbContext.Query<CTab>();
+            list = q.Where(a => 1 == 1).OrderBy(a => a.rank).ToList();
+            foreach (var cTab in list)
+            {
+                var jsonTab = new JsonTabValue();
+                jsonTab.id = cTab.id;
+                jsonTab.name = cTab.name;
+                listJsonTabValue.Add(jsonTab);
+            }
+            json.options = listJsonTabValue;
+
+            return json;
         }
     }
 }

@@ -30,7 +30,7 @@
                     </div>                  
                 </form>
                 <!--表单-->
-                <form id="TabForm" name="TabForm" class="form-horizontal" asp-controller="NoteBook" asp-action="UpdatTab">
+                <form id="EditForm" name="EditForm" class="form-horizontal" asp-controller="NoteBook" asp-action="UpdatTab">
                     <!-- 模态框（Modal）Bootstrap 模态框 -->
                     <div class="modal fade" id="TabModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <!--id="myModal" 通过在一个按钮上配置 data-toggle="modal" data-target="#myModal"联动  -->
@@ -90,7 +90,7 @@
                     <!-- /.modal -->
                 </form>
                 <!--删除表单-->
-                <form id="deleteTabForm" name="deleteTabForm" class="form-horizontal" asp-controller="NoteBook" asp-action="DeleteTab">
+                <form id="deleteForm" name="deleteForm" class="form-horizontal" asp-controller="NoteBook" asp-action="DeleteTab">
                     <input type="hidden" name="deleteid" id="deleteid">
                 </form>
             </div>
@@ -143,7 +143,7 @@
             //初始化Table
             oTableInit.Init = function () {
                 $('#tb_data').bootstrapTable({
-                    url: '/NoteBook/TabJson',         //请求后台的URL（*）
+                    url: '/NoteBook/GetTab',         //请求后台的URL（*）
                     method: 'get',                      //请求方式（*）
                     toolbar: '#toolbar',                //工具按钮用哪个容器
                     striped: true,                      //是否显示行间隔色
@@ -229,11 +229,21 @@
             layer.msg(strTitle + ',' + strText, { icon: iconnumber, offset: 't' });
         }
 
-        //获取选中行的index索引号
-        function getIdSelections() {
-            return $.map($("#tb_data").bootstrapTable('getSelections'), function (row) {
-                return row.id
-            });
+        //ajax请求失败方法
+        function erryFunction() {
+            PopupDia("请求失败", "error", "error");
+        }
+        //ajax请求成功方法
+        function succFunction(data) {
+            //刷新表格
+            $("#tb_data").bootstrapTable('refresh');
+            //获取返回的json数据
+            var state = data.state;
+            var title = data.title;
+            var text = data.text;
+            var type = data.type;
+            PopupDia(title, text, type);
+            
         }
 
         var ButtonInit = function () {
@@ -257,6 +267,10 @@
                     $("#Type").val("Add");
                     $("#Id").val("");
                     $("#MyModalText").html("添加选项卡");
+
+                    $("#Name").val("");
+                    $("#Description").val("");
+                    $("#Rank").val("");
                     //打开模态框
                     $('#TabModal').modal({
                         keyboard: true
@@ -320,25 +334,12 @@
                                 url: '/NoteBook/DeleteTab',
                                 type: 'post',
                                 dataType: 'json',
-                                data: $("#deleteTabForm").serialize(),
+                                data: $("#deleteForm").serialize(),
                                 cache: false,
                                 error: erryFunction,  //错误执行方法    
                                 success: succFunction//成功执行方法
                             });
 
-                            function erryFunction() {
-                                PopupDia("请求失败", "error", "error");
-                            }
-                            function succFunction(data) {
-                                //获取返回的json数据
-                                var state = data.state;
-                                var title = data.title;
-                                var text = data.text;
-                                var type = data.type;
-                                PopupDia(title, text, type);
-                                //刷新表格
-                                $("#tb_data").bootstrapTable('refresh');
-                            }
                         },
                         function ()//点击取消
                         {
@@ -357,7 +358,7 @@
         $(document).ready(function () {
             //文档加载完成后添加保存按钮的单击事件
             $("#btn_save").click(function () {
-                $('#TabForm').submit();
+                $('#EditForm').submit();
             });
         });
 
@@ -381,11 +382,14 @@
 
 
         });
+
+
+
         //添加表单验证
         // validate signup form on keyup and submit
         var icon = "<i class='fa fa-times-circle'></i> ";
         //添加验证
-        $("#TabForm").validate({
+        $("#EditForm").validate({
             rules: {
                 Name: {
                     required: true,
@@ -426,24 +430,11 @@
                         url: '/NoteBook/AddTab',
                         type: 'post',
                         dataType: 'json',
-                        data: $("#TabForm").serialize(),
+                        data: $("#EditForm").serialize(),
                         cache: false,
                         error: erryFunction,  //错误执行方法    
                         success: succFunction//成功执行方法
                     });
-                    function erryFunction() {
-                        PopupDia("请求失败", "error", "error");
-                    }
-                    function succFunction(data) {
-                        //获取返回的json数据
-                        var state = data.state;
-                        var title = data.title;
-                        var text = data.text;
-                        var type = data.type;
-                        PopupDia(title, text, type);
-                        //刷新表格
-                        $("#tb_data").bootstrapTable('refresh');
-                    }
                 }
 
                 if (submitType == "Update")
@@ -453,34 +444,12 @@
                         url: '/NoteBook/UpdatTab',
                         type: 'post',
                         dataType: 'json',
-                        data: $("#TabForm").serialize(),
+                        data: $("#EditForm").serialize(),
                         cache: false,
                         error: erryFunction,  //错误执行方法    
                         success: succFunction//成功执行方法
                     });
 
-                    function erryFunction() {
-                        PopupDia("请求失败", "error", "error");
-                    }
-                    function succFunction(data) {
-                        //更新表格
-                        var uprow = {
-                            "name": $("#Name").val(),
-                            "description": $("#Description").val(),
-                            "rank": $("#Rank").val()
-                        }
-                        //更新表格数据   
-                        $('#tb_data').bootstrapTable('updateRow', { index: getIdSelections()[0] - 1, row: uprow });//index---->更新行的索引。row---->要更新的数据
-                        var index = $("#tb_data").find("tr.danger").data("index");
-                        console.log(index);
-                        //获取返回的json数据
-                        var state = data.state;
-                        var title = data.title;
-                        var text = data.text;
-                        var type = data.type;
-                        PopupDia(title, text, type);
-
-                    }
 
                 }
                 
