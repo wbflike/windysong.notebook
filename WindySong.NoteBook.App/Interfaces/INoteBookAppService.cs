@@ -44,5 +44,19 @@ namespace WindySong.NoteBook.App.Interfaces
         /// </summary>
         /// <returns></returns>
         JsonTabSelect GetTabSelect();
+
+        /// <summary>
+        /// 添加Col
+        /// </summary>
+        /// <param name="model">TabAddModel</param>
+        /// <returns></returns>
+        bool AddCol(ColModel model);
+
+        /// <summary>
+        /// 获取Col分页数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        JsonPagCol GetPageCol(DataPageModel model);
     }
 }

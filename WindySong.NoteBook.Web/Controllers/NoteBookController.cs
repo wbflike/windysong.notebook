@@ -148,5 +148,31 @@ namespace WindySong.NoteBook.Web.Controllers
 
             return Json(json);
         }
+
+        /// <summary>
+        /// 添加Col
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult AddCol(ColModel model)
+        {
+            //判断数据是否合法
+            if (!ModelState.IsValid)
+            {
+                return Json(this.GetSwalJson(0, "非法数据", this.IfModelStateString(), "error"));
+            }
+            bool bl = false;
+            bl = _noteBookApp.AddCol(model);
+            if (bl)
+            {
+                return Json(this.GetSwalJson(1, "添加成功", "success", "success"));
+            }
+            else
+            {
+                return Json(this.GetSwalJson(0, "添加失败", "error", "error"));
+            }
+        }
     }
 }

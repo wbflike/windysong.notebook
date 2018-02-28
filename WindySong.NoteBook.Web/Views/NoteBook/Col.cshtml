@@ -51,10 +51,6 @@
                                             <div class="form-group">
                                                 <!--使用form-group包裹表单，才能正确的显示前端验证提示信息-->
                                                 <select class="form-control m-b" name="CTabId" id="CTabId">
-                                                    @*<option value="volvo">Volvo</option>
-                                                    <option value="saab">Saab</option>
-                                                    <option value="opel">Opel</option>
-                                                    <option value="audi">Audi</option>*@
                                                 </select>
                                             </div>
                                         </div>
@@ -68,15 +64,6 @@
                                                 <input type="text" class="form-control" id="Name" name="Name">
                                                 <input type="hidden" name="Id" id="Id">
                                                 <input type="hidden" name="Type" id="Type">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="hr-line-dashed"></div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">描述</label>
-                                        <div class="col-sm-10">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" id="Description" name="Description">
                                             </div>
                                         </div>
                                     </div>
@@ -182,6 +169,7 @@
                     showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
                     cardView: false,                    //是否显示详细视图
                     detailView: false,                   //是否显示父子表
+                    
                     columns: [
                         {
                             checkbox: true
@@ -191,8 +179,13 @@
                             title: 'ID'
                         },
                         {
+                            visible: false,//不显示
+                            field: 'tabId',
+                            title: '选项卡ID'
+                        },
+                        {
                             field: 'tabName',
-                            title: '名称'
+                            title: '选项卡名称'
                         },
                         {
                             field: 'name',
@@ -280,10 +273,9 @@
                 $("#btn_add").click(function () {
                     $("#Type").val("Add");
                     $("#Id").val("");
-                    $("#MyModalText").html("添加选项卡");
+                    $("#MyModalText").html("添加竖列");
 
                     $("#Name").val("");
-                    $("#Description").val("");
                     $("#Rank").val("");
                     //打开模态框
                     $('#TabModal').modal({
@@ -428,10 +420,6 @@
                     minlength: 2,
                     maxlength: 12
                 },
-                Description: {
-                    minlength: 2,
-                    maxlength: 20
-                },
                 Rank: {
                     digits: true
 
@@ -442,10 +430,6 @@
                     required: icon + "请输入名称",
                     minlength: icon + "站点名称必须2个字符以上",
                     maxlength: icon + "站点名称必须12个字符以下"
-                },
-                Description: {
-                    minlength: icon + "描述必须2个字符以上",
-                    maxlength: icon + "描述必须20个字符以下"
                 }
                 ,
                 Rank: {
@@ -459,7 +443,7 @@
                 {
                     //开始ajax请求
                     $.ajax({
-                        url: '/NoteBook/AddTab',
+                        url: '/NoteBook/AddCol',
                         type: 'post',
                         dataType: 'json',
                         data: $("#EditForm").serialize(),

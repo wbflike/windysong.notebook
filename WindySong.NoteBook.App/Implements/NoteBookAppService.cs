@@ -23,7 +23,7 @@ namespace WindySong.NoteBook.App.Implements
         {
             var json = new JsonPagTab();
             //返回json的tab数据
-            List<JsonTab> listJsonTab = new List<JsonTab>();
+            List<JsonTab> listJson = new List<JsonTab>();
             //数据库查询的tab数据
             List<CTab> list = new List<CTab>();
             IQuery<CTab> q = this.DbContext.Query<CTab>();
@@ -49,9 +49,9 @@ namespace WindySong.NoteBook.App.Implements
                 jsonTab.description = cTab.description;
                 jsonTab.rank = cTab.rank;
                 jsonTab.lastTime = cTab.lastTime;
-                listJsonTab.Add(jsonTab);
+                listJson.Add(jsonTab);
             }
-            json.rows = listJsonTab;
+            json.rows = listJson;
 
             return json;
         }
@@ -117,8 +117,15 @@ namespace WindySong.NoteBook.App.Implements
             if (model.Rank == 0 || model.Rank == null)
             {
                 IQuery<CTab> q = this.DbContext.Query<CTab>();
-                var max = q.Max(a => a.rank);
-                tab.rank = max + 1;
+                try
+                {
+                    var max = q.Max(a => a.rank);
+                    tab.rank = max + 1;
+                }
+                catch (Exception ex)
+                {
+                    tab.rank = 1;
+                }
             }
             else
             {
@@ -191,5 +198,106 @@ namespace WindySong.NoteBook.App.Implements
 
             return json;
         }
+
+        /// <summary>
+        /// 添加TAB
+        /// </summary>
+        /// <param name="model">TabAddModel</param>
+        /// <returns></returns>
+        public bool AddCol(ColModel model)
+        {
+            UCol col = new UCol();
+            col.name = model.Name;
+            col.cTabId = model.CTabId;
+            if (model.Rank == 0 || model.Rank == null)
+            {
+                IQuery<UCol> q = this.DbContext.Query<UCol>();
+                try
+                {
+                    var max = q.Max(a => a.rank);
+                    col.rank = max + 1;
+                }
+                catch (Exception ex)
+                {
+                    col.rank = 1;
+                }
+            }
+            else
+            {
+                col.rank = model.Rank.Value;
+            }
+            col.lastTime = DateTime.Now.ToString();
+            try
+            {
+                col = this.DbContext.Insert(col);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 返回Col分页数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public JsonPagCol GetPageCol(DataPageModel model)
+        {
+            var json = new JsonPagCol();
+            //返回json的数据
+            List<JsonCol> listJson = new List<JsonCol>();
+            //数据库查询的col数据
+            List<UCol> list = new List<UCol>();
+            IQuery<UCol> q = this.DbContext.Query<UCol>();
+            if (string.IsNullOrEmpty(model.searchKey))
+            {
+                //获取数据行数
+                json.total = q.Count();
+                //TakePage 第一个参数是page,第二个是pageNumber  offset表示走第几条数据开始取  limit表示取几条
+                //list = q.Where(a => 1 == 1).OrderBy(a => a.rank).TakePage((model.offset / model.limit) + 1, model.limit).ToList();
+
+                //多表查询
+                //1 建立连接
+                var col_tab = this.DbContext.Query<UCol>()
+                         .InnerJoin<CTab>((col, tab) => col.cTabId == tab.id);
+
+                /* 调用 Select 方法返回一个泛型为包含 UCol、CTab 匿名类型的 IQuery 对象。
+                 * Select 方法也可以返回自定义类型 。
+                */
+                var qq = col_tab.Select((col, tab) => new
+                {
+                    UCol = col,
+                    CTab = tab
+                });
+
+                /* 根据条件筛选，然后调用 ToList 就会返回一个泛型为 new { UCol = col, CTab = tab } 的 List 集合 */
+                var result = qq.Where(a => 1 == 1)
+                .Select(a => new { id = a.UCol.id, tabId = a.UCol.cTabId, tabName = a.CTab.name, name = a.UCol.name, rank=a.UCol.rank, lastTime=a.UCol.lastTime })
+                .OrderBy(a => a.rank).TakePage((model.offset / model.limit) + 1, model.limit).ToList();
+            }
+            else
+            {
+                //获取数据行数
+                json.total = q.Where(a => a.name.Contains(model.searchKey) || a.description.Contains(model.searchKey)).Count();
+                //TakePage 第一个参数是page,第二个是pageNumber
+                list = q.Where(a => a.name.Contains(model.searchKey) || a.description.Contains(model.searchKey)).OrderBy(a => a.rank).TakePage((model.offset / model.limit) + 1, model.limit).ToList();
+            }
+            foreach (var cTab in list)
+            {
+                var jsonTab = new JsonTab();
+                jsonTab.id = cTab.id;
+                jsonTab.name = cTab.name;
+                jsonTab.description = cTab.description;
+                jsonTab.rank = cTab.rank;
+                jsonTab.lastTime = cTab.lastTime;
+                listJsonTab.Add(jsonTab);
+            }
+            json.rows = listJsonTab;
+
+            return json;
+        }
+
     }
 }
