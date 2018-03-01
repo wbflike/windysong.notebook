@@ -11,7 +11,7 @@
     <link href="~/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="~/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
     <link href="~/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-    <title>Col</title>
+    <title>一级分类</title>
 </head>
 <body>
     <div class="panel-body" style="padding-bottom:0px;">
@@ -50,8 +50,7 @@
                                         <div class="col-sm-10">
                                             <div class="form-group">
                                                 <!--使用form-group包裹表单，才能正确的显示前端验证提示信息-->
-                                                <select class="form-control m-b" name="CTabId" id="CTabId">
-                                                </select>
+                                                <select class="form-control m-b" name="CTabId" id="CTabId"></select>
                                             </div>
                                         </div>
                                     </div>
@@ -169,7 +168,7 @@
                     showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
                     cardView: false,                    //是否显示详细视图
                     detailView: false,                   //是否显示父子表
-                    
+
                     columns: [
                         {
                             checkbox: true
@@ -190,7 +189,7 @@
                         {
                             field: 'tabName',
                             title: '选项卡名称'
-                        },                        
+                        },
                         {
                             field: 'rank',
                             title: '排序值'
@@ -368,7 +367,7 @@
                 $('#EditForm').submit();
             });
 
-            //初始化Select 
+            //初始化Select
             $.ajax({
                 url: '/NoteBook/GetTabSelect',
                 type: 'post',
@@ -378,7 +377,7 @@
                 success: function (data) {//将JSON赋值到select
                     var expressCompany = $("#CTabId");
                     var str = '';
-                    var json = data.options;                   
+                    var json = data.options;
                     for (var o in json) {
                         str += '<option value="' + json[o].id + '">' + json[o].name + '</option>';
                     }

@@ -141,6 +141,7 @@ namespace WindySong.NoteBook.App.Implements
                 return false;
             }
         }
+
         /// <summary>
         /// 删除TAB
         /// </summary>
@@ -248,8 +249,7 @@ namespace WindySong.NoteBook.App.Implements
             var json = new JsonPagCol();
             //返回json的数据
             List<JsonCol> listJson = new List<JsonCol>();
-            //数据库查询的col数据
-            List<UCol> list = new List<UCol>();
+
             IQuery<UCol> q = this.DbContext.Query<UCol>();
             if (string.IsNullOrEmpty(model.searchKey))
             {
@@ -260,8 +260,7 @@ namespace WindySong.NoteBook.App.Implements
 
                 //多表查询
                 //1 建立连接
-                var col_tab = this.DbContext.Query<UCol>()
-                         .InnerJoin<CTab>((col, tab) => col.cTabId == tab.id);
+                var col_tab = q.InnerJoin<CTab>((col, tab) => col.cTabId == tab.id);
 
                 /* 调用 Select 方法返回一个泛型为包含 UCol、CTab 匿名类型的 IQuery 对象。
                  * Select 方法也可以返回自定义类型 。
@@ -276,28 +275,127 @@ namespace WindySong.NoteBook.App.Implements
                 var result = qq.Where(a => 1 == 1)
                 .Select(a => new { id = a.UCol.id, tabId = a.UCol.cTabId, tabName = a.CTab.name, name = a.UCol.name, rank=a.UCol.rank, lastTime=a.UCol.lastTime })
                 .OrderBy(a => a.rank).TakePage((model.offset / model.limit) + 1, model.limit).ToList();
+
+                foreach(var col in result)
+                {
+                    var jsonCol = new JsonCol();
+                    jsonCol.id = col.id;
+                    jsonCol.tabId = col.tabId;
+                    jsonCol.tabName = col.tabName;
+                    jsonCol.name = col.name;
+                    jsonCol.rank = col.rank;
+                    jsonCol.lastTime = col.lastTime;
+                    listJson.Add(jsonCol);
+                }
             }
             else
             {
+                var col_tab = q.InnerJoin<CTab>((col, tab) => col.cTabId == tab.id);
+                var qq = col_tab.Select((col, tab) => new
+                {
+                    UCol = col,
+                    CTab = tab
+                });
+
                 //获取数据行数
-                json.total = q.Where(a => a.name.Contains(model.searchKey) || a.description.Contains(model.searchKey)).Count();
+                json.total = qq.Where(a => a.CTab.name.Contains(model.searchKey) || a.UCol.name.Contains(model.searchKey)).Count();
+
                 //TakePage 第一个参数是page,第二个是pageNumber
-                list = q.Where(a => a.name.Contains(model.searchKey) || a.description.Contains(model.searchKey)).OrderBy(a => a.rank).TakePage((model.offset / model.limit) + 1, model.limit).ToList();
+                var result = qq.Where(a => a.CTab.name.Contains(model.searchKey) || a.UCol.name.Contains(model.searchKey))
+                .Select(a => new { id = a.UCol.id, tabId = a.UCol.cTabId, tabName = a.CTab.name, name = a.UCol.name, rank = a.UCol.rank, lastTime = a.UCol.lastTime })
+                .OrderBy(a => a.rank).TakePage((model.offset / model.limit) + 1, model.limit).ToList();
+
+                foreach (var col in result)
+                {
+                    var jsonCol = new JsonCol();
+                    jsonCol.id = col.id;
+                    jsonCol.tabId = col.tabId;
+                    jsonCol.tabName = col.tabName;
+                    jsonCol.name = col.name;
+                    jsonCol.rank = col.rank;
+                    jsonCol.lastTime = col.lastTime;
+                    listJson.Add(jsonCol);
+                }
             }
-            foreach (var cTab in list)
-            {
-                var jsonTab = new JsonTab();
-                jsonTab.id = cTab.id;
-                jsonTab.name = cTab.name;
-                jsonTab.description = cTab.description;
-                jsonTab.rank = cTab.rank;
-                jsonTab.lastTime = cTab.lastTime;
-                listJsonTab.Add(jsonTab);
-            }
-            json.rows = listJsonTab;
+
+            json.rows = listJson;
 
             return json;
         }
 
+        /// <summary>
+        /// 更新Col
+        /// </summary>
+        /// <param name="model">ColModel</param>
+        /// <returns></returns>
+        public bool UpdateCol(ColModel model)
+        {
+            UCol col = new UCol();
+            IQuery<UCol> qCol = this.DbContext.Query<UCol>();
+            col = qCol.Where(a => a.id == model.Id).FirstOrDefault();
+            col.name = model.Name;
+            col.cTabId = model.CTabId;
+            if (model.Rank == 0 || model.Rank == null)
+            {
+                IQuery<UCol> q = this.DbContext.Query<UCol>();
+                try
+                {
+                    var max = q.Max(a => a.rank);
+                    col.rank = max + 1;
+                }
+                catch (Exception ex)
+                {
+                    col.rank = 1;
+                }
+            }
+            else
+            {
+                col.rank = model.Rank.Value;
+            }
+            
+
+            try
+            {
+                this.DbContext.Update(col);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 删除Col
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int DeleteCol(TabDeleteModel model)
+        {
+            string str = model.deleteid;
+            str = str.Substring(0, str.Length - 1);
+            string[] arrId = str.Split(',');
+            foreach (var id in arrId)
+            {
+                int i = 0;
+                i = this.DbContext.Query<UBlock>().Where(u => u.uColId == int.Parse(id)).Count();
+                if (i > 0)//uCol存在记录
+                {
+                    return -1;
+                }
+            }
+            try
+            {
+                foreach (var id in arrId)
+                {
+                    this.DbContext.Delete<UCol>(a => a.id == int.Parse(id));
+                }
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
     }
 }

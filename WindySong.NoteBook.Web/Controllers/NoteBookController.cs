@@ -29,6 +29,10 @@ namespace WindySong.NoteBook.Web.Controllers
         {
             return View();
         }
+        public IActionResult Block()
+        {
+            return View();
+        }
 
         /// <summary>
         /// cTab分页数据
@@ -38,19 +42,19 @@ namespace WindySong.NoteBook.Web.Controllers
         [HttpGet]
         public IActionResult GetTab(DataPageModel model)
         {
-            JsonPagTab jsonPagTab = new JsonPagTab();
+            JsonPagTab jsonPag = new JsonPagTab();
             //判断数据是否合法
             if (!ModelState.IsValid)
             {
-                jsonPagTab.total = 1;
+                jsonPag.total = 1;
                 List<JsonTab> list = new List<JsonTab>();
                 list.Add(new JsonTab() { id = 1, name = "参数非法", description = "参数非法", rank = 1, lastTime = "参数非法" });
-                jsonPagTab.rows = list;
-                return Json(jsonPagTab);
+                jsonPag.rows = list;
+                return Json(jsonPag);
             }
-            jsonPagTab = this._noteBookApp.GetPageTab(model);
+            jsonPag = this._noteBookApp.GetPageTab(model);
 
-            return Json(jsonPagTab);
+            return Json(jsonPag);
         }
 
         /// <summary>
@@ -131,7 +135,7 @@ namespace WindySong.NoteBook.Web.Controllers
                     jsonResults = this.GetSwalJson(1, "删除失败", "error", "error");
                     break;
                 case -1:
-                    jsonResults = this.GetSwalJson(-1, "删除失败", "选中的竖列存在未删除的选项卡", "error");
+                    jsonResults = this.GetSwalJson(-1, "删除失败", "选中的选项卡存在关联的竖列", "error");
                     break;
             }
             return Json(jsonResults);
@@ -174,5 +178,88 @@ namespace WindySong.NoteBook.Web.Controllers
                 return Json(this.GetSwalJson(0, "添加失败", "error", "error"));
             }
         }
+
+        /// <summary>
+        /// Col分页数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult ColJson(DataPageModel model)
+        {
+            JsonPagCol jsonPag = new JsonPagCol();
+            //判断数据是否合法
+            if (!ModelState.IsValid)
+            {
+                jsonPag.total = 1;
+                List<JsonCol> list = new List<JsonCol>();
+                list.Add(new JsonCol() { id = 1,tabId = 1,tabName = "参数非法", name = "参数非法",  rank = 1, lastTime = "参数非法" });
+                jsonPag.rows = list;
+                return Json(jsonPag);
+            }
+            jsonPag = this._noteBookApp.GetPageCol(model);
+
+            return Json(jsonPag);
+        }
+
+        /// <summary>
+        /// 更新Col
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult UpdatCol(ColModel model)
+        {
+            //判断数据是否合法
+            if (!ModelState.IsValid)
+            {
+                return Json(this.GetSwalJson(0, "非法数据", this.IfModelStateString(), "error"));
+            }
+            bool bl = false;
+            bl = _noteBookApp.UpdateCol(model);
+            if (bl)
+            {
+                return Json(this.GetSwalJson(1, "更新成功", "success", "success"));
+            }
+            else
+            {
+                return Json(this.GetSwalJson(0, "更新失败", "error", "error"));
+            }
+        }
+
+        /// <summary>
+        /// 删除TAB
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult DeleteCol(TabDeleteModel model)
+        {
+            //判断数据是否合法
+            if (!ModelState.IsValid)
+            {
+                return Json(this.GetSwalJson(0, "非法数据", this.IfModelStateString(), "error"));
+            }
+            var jsonResults = new JsonResultsString();
+            int i = 0;
+            i = _noteBookApp.DeleteCol(model);
+            switch (i)
+            {
+                case 1:
+                    jsonResults = this.GetSwalJson(1, "删除成功", "success", "success");
+                    break;
+                case 0:
+                    jsonResults = this.GetSwalJson(1, "删除失败", "error", "error");
+                    break;
+                case -1:
+                    jsonResults = this.GetSwalJson(-1, "删除失败", "选中的竖列存在关联的一级分类", "error");
+                    break;
+            }
+            return Json(jsonResults);
+        }
+
+
     }
 }

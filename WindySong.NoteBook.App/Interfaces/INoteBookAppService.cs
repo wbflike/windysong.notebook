@@ -58,5 +58,19 @@ namespace WindySong.NoteBook.App.Interfaces
         /// <param name="model"></param>
         /// <returns></returns>
         JsonPagCol GetPageCol(DataPageModel model);
+
+        /// <summary>
+        /// 更新Col
+        /// </summary>
+        /// <param name="model">UpdateAddModel</param>
+        /// <returns></returns>
+        bool UpdateCol(ColModel model);
+
+        /// <summary>
+        /// 删除Col
+        /// </summary>
+        /// <param name="model">TabDeleteModel</param>
+        /// <returns></returns>
+        int DeleteCol(TabDeleteModel model);
     }
 }
