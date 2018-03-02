@@ -116,7 +116,7 @@ namespace WindySong.NoteBook.Web.Controllers
         /// <returns></returns>
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public IActionResult DeleteTab(TabDeleteModel model)
+        public IActionResult DeleteTab(DeleteModel model)
         {
             //判断数据是否合法
             if (!ModelState.IsValid)
@@ -147,7 +147,7 @@ namespace WindySong.NoteBook.Web.Controllers
         /// <returns></returns>
         public IActionResult GetTabSelect()
         {
-            JsonTabSelect json = new JsonTabSelect();
+            JsonSelect json = new JsonSelect();
             json = this._noteBookApp.GetTabSelect();
 
             return Json(json);
@@ -235,7 +235,7 @@ namespace WindySong.NoteBook.Web.Controllers
         /// <returns></returns>
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public IActionResult DeleteCol(TabDeleteModel model)
+        public IActionResult DeleteCol(DeleteModel model)
         {
             //判断数据是否合法
             if (!ModelState.IsValid)
@@ -260,6 +260,124 @@ namespace WindySong.NoteBook.Web.Controllers
             return Json(jsonResults);
         }
 
+        /// <summary>
+        /// 获取选项卡
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult GetColSelect()
+        {
+            JsonSelect json = new JsonSelect();
+            json = this._noteBookApp.GetColSelect();
+
+            return Json(json);
+        }
+
+        /// <summary>
+        /// 添加Block
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult AddBlock(BlockModel model)
+        {
+            //判断数据是否合法
+            if (!ModelState.IsValid)
+            {
+                return Json(this.GetSwalJson(0, "非法数据", this.IfModelStateString(), "error"));
+            }
+            bool bl = false;
+            bl = _noteBookApp.AddBlock(model);
+            if (bl)
+            {
+                return Json(this.GetSwalJson(1, "添加成功", "success", "success"));
+            }
+            else
+            {
+                return Json(this.GetSwalJson(0, "添加失败", "error", "error"));
+            }
+        }
+
+        /// <summary>
+        /// Block分页数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult BlockJson(DataPageModel model)
+        {
+            JsonPagBlock jsonPag = new JsonPagBlock();
+            //判断数据是否合法
+            if (!ModelState.IsValid)
+            {
+                jsonPag.total = 1;
+                List<JsonBlock> list = new List<JsonBlock>();
+                list.Add(new JsonBlock() { id = 1, colId = 1, colName = "参数非法", name = "参数非法", rank = 1, lastTime = "参数非法" });
+                jsonPag.rows = list;
+                return Json(jsonPag);
+            }
+            jsonPag = this._noteBookApp.GetPageBlock(model);
+
+            return Json(jsonPag);
+        }
+
+        /// <summary>
+        /// 更新Block
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult UpdatBlock(BlockModel model)
+        {
+            //判断数据是否合法
+            if (!ModelState.IsValid)
+            {
+                return Json(this.GetSwalJson(0, "非法数据", this.IfModelStateString(), "error"));
+            }
+            bool bl = false;
+            bl = _noteBookApp.UpdateBlock(model);
+            if (bl)
+            {
+                return Json(this.GetSwalJson(1, "更新成功", "success", "success"));
+            }
+            else
+            {
+                return Json(this.GetSwalJson(0, "更新失败", "error", "error"));
+            }
+        }
+
+        /// <summary>
+        /// 删除Block
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult DeleteBlock(DeleteModel model)
+        {
+            //判断数据是否合法
+            if (!ModelState.IsValid)
+            {
+                return Json(this.GetSwalJson(0, "非法数据", this.IfModelStateString(), "error"));
+            }
+            var jsonResults = new JsonResultsString();
+            int i = 0;
+            i = _noteBookApp.DeleteBlock(model);
+            switch (i)
+            {
+                case 1:
+                    jsonResults = this.GetSwalJson(1, "删除成功", "success", "success");
+                    break;
+                case 0:
+                    jsonResults = this.GetSwalJson(1, "删除失败", "error", "error");
+                    break;
+                case -1:
+                    jsonResults = this.GetSwalJson(-1, "删除失败", "选中的一级分类存在关联的二级分类", "error");
+                    break;
+            }
+            return Json(jsonResults);
+        }
 
     }
 }

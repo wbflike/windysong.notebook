@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WindySong.NoteBook.App.ViewModels.Admin
 {
-    public class TabDeleteModel
+    public class DeleteModel
     {
         /// <summary>
         /// ID

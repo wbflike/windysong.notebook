@@ -41,16 +41,16 @@
                                         &times;
                                     </button>
                                     <h4 class="modal-title" id="MyModalText">
-                                        竖列
+                                        一级分类
                                     </h4>
                                 </div>
                                 <div class="modal-body">
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">选项卡名称</label>
+                                        <label class="col-sm-2 control-label">竖列名称</label>
                                         <div class="col-sm-10">
                                             <div class="form-group">
                                                 <!--使用form-group包裹表单，才能正确的显示前端验证提示信息-->
-                                                <select class="form-control m-b" name="CTabId" id="CTabId"></select>
+                                                <select class="form-control m-b" name="UColId" id="UColId"></select>
                                             </div>
                                         </div>
                                     </div>
@@ -144,7 +144,7 @@
             //初始化Table
             oTableInit.Init = function () {
                 $('#tb_data').bootstrapTable({
-                    url: '/NoteBook/ColJson',         //请求后台的URL（*）
+                    url: '/NoteBook/BlockJson',         //请求后台的URL（*）
                     method: 'get',                      //请求方式（*）
                     toolbar: '#toolbar',                //工具按钮用哪个容器
                     striped: true,                      //是否显示行间隔色
@@ -183,12 +183,12 @@
                         },
                         {
                             visible: false,//不显示
-                            field: 'tabId',
-                            title: '选项卡ID'
+                            field: 'colId',
+                            title: '竖列ID'
                         },
                         {
-                            field: 'tabName',
-                            title: '选项卡名称'
+                            field: 'colName',
+                            title: '竖列名称'
                         },
                         {
                             field: 'rank',
@@ -272,7 +272,7 @@
                 $("#btn_add").click(function () {
                     $("#Type").val("Add");
                     $("#Id").val("");
-                    $("#MyModalText").html("添加竖列");
+                    $("#MyModalText").html("添加一级分类");
 
                     $("#Name").val("");
                     $("#Rank").val("");
@@ -299,13 +299,13 @@
                     }
 
                     $("#Type").val("Update");
-                    $("#MyModalText").html("更新竖列");
+                    $("#MyModalText").html("更新一级分类");
 
                     //获取选中的行信息并赋值到模态框
                     $("#Id").val(arrselections[0].id);
                     $("#Name").val(arrselections[0].name);
                     //设置value项选中
-                    $("#CTabId").val(arrselections[0].tabId);
+                    $("#UColId").val(arrselections[0].colId);
                     $("#Rank").val(arrselections[0].rank);
                     //打开更新模态框
                     $('#TabModal').modal({
@@ -337,7 +337,7 @@
                             $("#deleteid").val(idlist);
                             //开始ajax请求
                             $.ajax({
-                                url: '/NoteBook/DeleteCol',
+                                url: '/NoteBook/DeleteBlock',
                                 type: 'post',
                                 dataType: 'json',
                                 data: $("#deleteForm").serialize(),
@@ -369,13 +369,13 @@
 
             //初始化Select
             $.ajax({
-                url: '/NoteBook/GetTabSelect',
+                url: '/NoteBook/GetColSelect',
                 type: 'post',
                 dataType: 'json',
                 cache: false,
                 error: erryFunction,  //错误执行方法
                 success: function (data) {//将JSON赋值到select
-                    var expressCompany = $("#CTabId");
+                    var expressCompany = $("#UColId");
                     var str = '';
                     var json = data.options;
                     for (var o in json) {
@@ -443,7 +443,7 @@
                 {
                     //开始ajax请求
                     $.ajax({
-                        url: '/NoteBook/AddCol',
+                        url: '/NoteBook/AddBlock',
                         type: 'post',
                         dataType: 'json',
                         data: $("#EditForm").serialize(),
@@ -457,7 +457,7 @@
                 {
                     //开始ajax请求
                     $.ajax({
-                        url: '/NoteBook/UpdatCol',
+                        url: '/NoteBook/UpdatBlock',
                         type: 'post',
                         dataType: 'json',
                         data: $("#EditForm").serialize(),

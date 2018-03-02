@@ -35,20 +35,20 @@ namespace WindySong.NoteBook.App.Interfaces
         /// <summary>
         /// 删除TAB
         /// </summary>
-        /// <param name="model">TabDeleteModel</param>
+        /// <param name="model">DeleteModel</param>
         /// <returns></returns>
-        int DeleteTab(TabDeleteModel model);
+        int DeleteTab(DeleteModel model);
 
         /// <summary>
         /// 获取Tab Select
         /// </summary>
         /// <returns></returns>
-        JsonTabSelect GetTabSelect();
+        JsonSelect GetTabSelect();
 
         /// <summary>
         /// 添加Col
         /// </summary>
-        /// <param name="model">TabAddModel</param>
+        /// <param name="model">ColModel</param>
         /// <returns></returns>
         bool AddCol(ColModel model);
 
@@ -62,15 +62,49 @@ namespace WindySong.NoteBook.App.Interfaces
         /// <summary>
         /// 更新Col
         /// </summary>
-        /// <param name="model">UpdateAddModel</param>
+        /// <param name="model">ColModel</param>
         /// <returns></returns>
         bool UpdateCol(ColModel model);
 
         /// <summary>
         /// 删除Col
         /// </summary>
-        /// <param name="model">TabDeleteModel</param>
+        /// <param name="model">DeleteModel</param>
         /// <returns></returns>
-        int DeleteCol(TabDeleteModel model);
+        int DeleteCol(DeleteModel model);
+
+        /// <summary>
+        /// 获取Col Select
+        /// </summary>
+        /// <returns></returns>
+        JsonSelect GetColSelect();
+
+        /// <summary>
+        /// 添加Block
+        /// </summary>
+        /// <param name="model">BlockModel</param>
+        /// <returns></returns>
+        bool AddBlock(BlockModel model);
+
+        /// <summary>
+        /// 获取Block分页数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        JsonPagBlock GetPageBlock(DataPageModel model);
+
+        /// <summary>
+        /// 更新Block
+        /// </summary>
+        /// <param name="model">BlockModel</param>
+        /// <returns></returns>
+        bool UpdateBlock(BlockModel model);
+
+        /// <summary>
+        /// 删除Block
+        /// </summary>
+        /// <param name="model">DeleteModel</param>
+        /// <returns></returns>
+        int DeleteBlock(DeleteModel model);
     }
 }

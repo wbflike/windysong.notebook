@@ -17,4 +17,3 @@ E:\git\windysong.notebook\Common\obj\Debug\netstandard2.0\Common.dll
 E:\git\windysong.notebook\Common\obj\Debug\netstandard2.0\Common.pdb
 E:\Git\windysong.notebook\Common\bin\Debug\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll
 E:\Git\windysong.notebook\Common\bin\Debug\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.xml
-E:\Git\windysong.notebook\Common\obj\Debug\netstandard2.0\Common.csprojResolveAssemblyReference.cache

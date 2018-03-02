@@ -7,12 +7,12 @@ namespace WindySong.NoteBook.App.ViewModels.Json
     /// <summary>
     /// Tab Select 
     /// </summary>
-    public class JsonTabSelect
+    public class JsonSelect
     {
-        public List<JsonTabValue> options { get; set; }
+        public List<JsonSelectValue> options { get; set; }
     }
 
-    public class JsonTabValue
+    public class JsonSelectValue
     {
         public int id { get; set; }
         public string name { get; set; }
