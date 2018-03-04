@@ -106,5 +106,39 @@ namespace WindySong.NoteBook.App.Interfaces
         /// <param name="model">DeleteModel</param>
         /// <returns></returns>
         int DeleteBlock(DeleteModel model);
+
+        /// <summary>
+        /// 获取Block Select
+        /// </summary>
+        /// <returns></returns>
+        JsonSelect GetBlockSelect();
+
+        /// <summary>
+        /// 添加List
+        /// </summary>
+        /// <param name="model">ListModel</param>
+        /// <returns></returns>
+        bool AddList(ListModel model);
+
+        /// <summary>
+        /// 获取Block分页数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        JsonPagList GetPageList(DataPageModel model);
+
+        /// <summary>
+        /// 更新List
+        /// </summary>
+        /// <param name="model">ListModel</param>
+        /// <returns></returns>
+        bool UpdateList(ListModel model);
+
+        /// <summary>
+        /// 删除List
+        /// </summary>
+        /// <param name="model">DeleteModel</param>
+        /// <returns></returns>
+        int DeleteList(DeleteModel model);
     }
 }

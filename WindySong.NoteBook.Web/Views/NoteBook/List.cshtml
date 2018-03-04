@@ -1,0 +1,477 @@
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="~/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="~/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <title>二级分类</title>
+</head>
+<body>
+    <div class="panel-body" style="padding-bottom:0px;">
+        <div class="panel panel-default">
+            <div class="panel-heading">查询条件</div>
+            <div class="panel-body">
+                <form id="dataListForm" class="form-horizontal">
+                    <div class="form-group" style="margin-top:15px">
+                        <label class="control-label col-sm-1" for="txt_search_departmentname">名称</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="txt_search" name="txt_search">
+                        </div>
+                        <div class="col-sm-4" style="text-align:left;">
+                            <button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询</button>
+                        </div>
+                    </div>
+                </form>
+                <!--表单-->
+                <form id="EditForm" name="EditForm" class="form-horizontal" asp-controller="NoteBook" asp-action="UpdatCol">
+                    <!-- 模态框（Modal）Bootstrap 模态框 -->
+                    <div class="modal fade" id="TabModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <!--id="myModal" 通过在一个按钮上配置 data-toggle="modal" data-target="#myModal"联动  -->
+                        <div class="modal-dialog" style="width:40%;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <h4 class="modal-title" id="MyModalText">
+                                        二级分类
+                                    </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">一级分类</label>
+                                        <div class="col-sm-10">
+                                            <div class="form-group">
+                                                <!--使用form-group包裹表单，才能正确的显示前端验证提示信息-->
+                                                <select class="form-control m-b" name="BlockId" id="BlockId"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">名称</label>
+                                        <div class="col-sm-10">
+                                            <div class="form-group">
+                                                <!--使用form-group包裹表单，才能正确的显示前端验证提示信息-->
+                                                <input type="text" class="form-control" id="Name" name="Name">
+                                                <input type="hidden" name="Id" id="Id">
+                                                <input type="hidden" name="Type" id="Type">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">排序值</label>
+                                        <div class="col-sm-10">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="Rank" name="Rank">
+                                                <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 如果不填写则取当前最大排序值</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                        关闭
+                                    </button>
+                                    <button type="button" class="btn btn-primary" id="btn_save" name="btn_save">
+                                        保存
+                                    </button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div>
+                    </div>
+                    <!-- /.modal -->
+                </form>
+                <!--删除表单-->
+                <form id="deleteForm" name="deleteForm" class="form-horizontal" asp-controller="NoteBook" asp-action="DeleteCol">
+                    <input type="hidden" name="deleteid" id="deleteid">
+                </form>
+            </div>
+        </div>
+
+        <div id="toolbar" class="btn-group">
+            <button id="btn_add" type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+            </button>
+            <button id="btn_edit" type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+            </button>
+            <button id="btn_delete" type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+            </button>
+        </div>
+        <table id="tb_data" data-reorderable-columns="true"></table>
+    </div>
+
+
+    <!-- 全局js -->
+    <script src="~/js/jquery.min.js?v=2.1.4"></script>
+    <script src="~/js/bootstrap.min.js?v=3.3.6"></script>
+    <!-- bootstrap-table-->
+    <script src="~/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="~/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- jQuery Validation plugin javascript-->
+    <script src="~/js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="~/js/plugins/validate/messages_zh.min.js"></script>
+    <!-- layer -->
+    <script src="~/js/plugins/layer/layer.js"></script>
+
+    <script>
+        $(function () {
+
+            //1.初始化Table
+            var oTable = new TableInit();
+            oTable.Init();
+
+            //2.初始化Button的点击事件
+            var oButtonInit = new ButtonInit();
+            oButtonInit.Init();
+
+        });
+
+        //绑定表格数据
+        var TableInit = function () {
+            var oTableInit = new Object();
+            //初始化Table
+            oTableInit.Init = function () {
+                $('#tb_data').bootstrapTable({
+                    url: '/NoteBook/ListJson',         //请求后台的URL（*）
+                    method: 'get',                      //请求方式（*）
+                    toolbar: '#toolbar',                //工具按钮用哪个容器
+                    striped: true,                      //是否显示行间隔色
+                    cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                    pagination: true,                   //是否显示分页（*）
+                    sortable: false,                     //是否启用排序
+                    sortOrder: "asc",                   //排序方式
+                    queryParams: oTableInit.queryParams,//传递参数（*）
+                    sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+                    pageNumber: 1,                       //初始化加载第一页，默认第一页
+                    pageSize: 10,                       //每页的记录行数（*）
+                    pageList: [10, 20, 50, 100],        //可供选择的每页的行数（*）
+                    //search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+                    strictSearch: true,
+                    showColumns: true,                  //是否显示所有的列
+                    showRefresh: true,                  //是否显示刷新按钮
+                    minimumCountColumns: 2,             //最少允许的列数
+                    clickToSelect: true,                //是否启用点击选中行
+                    //height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                    uniqueId: "id",                     //每一行的唯一标识，一般为主键列
+                    showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
+                    cardView: false,                    //是否显示详细视图
+                    detailView: false,                   //是否显示父子表
+
+                    columns: [
+                        {
+                            checkbox: true
+                        },
+                        {
+                            field: 'id',
+                            title: 'ID'
+                        },
+                        {
+                            field: 'name',
+                            title: '名称'
+                        },
+                        {
+                            visible: false,//不显示
+                            field: 'blockId',
+                            title: '一级分类ID'
+                        },
+                        {
+                            field: 'blockName',
+                            title: '一级分类名称'
+                        },
+                        {
+                            field: 'rank',
+                            title: '排序值'
+                        }
+                        ,
+                        {
+                            field: 'lastTime',
+                            title: '添加时间'
+                        }
+                    ]
+                });
+            };
+
+            //得到查询的参数
+            oTableInit.queryParams = function (params) {
+                var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                    //__RequestVerificationToken: $("input[name='__RequestVerificationToken'] ").val(),
+                    limit: params.limit,   //页面大小
+                    offset: params.offset,  //页码
+                    searchKey: $("input[name='txt_search'] ").val()
+
+                };
+                return temp;
+            };
+            return oTableInit;
+        };
+
+        //弹出提示窗
+        function PopupDia(strTitle, strText, strType) {
+            var iconnumber;
+            if (strType == "success")
+            {
+                iconnumber = 1;
+            }
+            else if (strType == "error")
+            {
+                iconnumber = 2;
+            }
+            else
+            {
+                iconnumber = 1;
+            }
+            layer.msg(strTitle + ',' + strText, { icon: iconnumber, offset: 't' });
+        }
+
+        //ajax请求失败方法
+        function erryFunction() {
+            PopupDia("请求失败", "error", "error");
+        }
+        //ajax请求成功方法
+        function succFunction(data) {
+            //刷新表格
+            $("#tb_data").bootstrapTable('refresh');
+            //获取返回的json数据
+            var state = data.state;
+            var title = data.title;
+            var text = data.text;
+            var type = data.type;
+            PopupDia(title, text, type);
+
+        }
+
+        var ButtonInit = function () {
+            var oInit = new Object();
+            var postdata = {};
+
+            oInit.Init = function () {
+                //初始化页面上面的按钮事件
+
+                //搜索查询按钮
+                $("#btn_query").click(function () {
+                    //1.初始化Table
+                    //var oTable = new TableInit();
+                    //oTable.Init();
+                    $("#tb_data").bootstrapTable('refresh');
+                });
+
+
+                //数据列表新增事件
+                $("#btn_add").click(function () {
+                    $("#Type").val("Add");
+                    $("#Id").val("");
+                    $("#MyModalText").html("添加二级分类");
+
+                    $("#Name").val("");
+                    $("#Rank").val("");
+                    //打开模态框
+                    $('#TabModal').modal({
+                        keyboard: true
+                    });
+
+                });
+
+                //数据列表编辑事件
+                $("#btn_edit").click(function () {
+                    //获取选中数据
+                    var arrselections = $("#tb_data").bootstrapTable('getSelections');
+
+                    if (arrselections.length > 1) {
+                        PopupDia("错误", "只能选择一行进行编辑", "error");
+                        //console.log("只能选择一行进行编辑");
+                        return;
+                    }
+                    if (arrselections.length <= 0) {
+                        PopupDia("错误", "请选择有效数据", "error");
+                        return;
+                    }
+
+                    $("#Type").val("Update");
+                    $("#MyModalText").html("更新二级分类");
+
+                    //获取选中的行信息并赋值到模态框
+                    $("#Id").val(arrselections[0].id);
+                    $("#Name").val(arrselections[0].name);
+                    //设置value项选中
+                    $("#BlockId").val(arrselections[0].blockId);
+                    $("#Rank").val(arrselections[0].rank);
+                    //打开更新模态框
+                    $('#TabModal').modal({
+                        keyboard: true
+                    });
+
+                });
+
+                //删除事件
+                $("#btn_delete").click(function () {
+                    var arrselections = $("#tb_data").bootstrapTable('getSelections');
+                    if (arrselections.length <= 0) {
+                        PopupDia("错误", "请选择有效数据", "error");
+                        return;
+                    }
+                    //询问框
+                    layer.confirm('确认要删除选择的数据吗？',
+                        {
+                            btn: ['确定', '取消']
+                        },
+                        function ()//点击确定
+                        {
+                            //获取选中数据
+                            var arrselections = $("#tb_data").bootstrapTable('getSelections');
+                            var idlist = "";
+                            for (var i = 0; i < arrselections.length; i++) {
+                                idlist += arrselections[i].id + ",";
+                            }
+                            $("#deleteid").val(idlist);
+                            //开始ajax请求
+                            $.ajax({
+                                url: '/NoteBook/DeleteList',
+                                type: 'post',
+                                dataType: 'json',
+                                data: $("#deleteForm").serialize(),
+                                cache: false,
+                                error: erryFunction,  //错误执行方法
+                                success: succFunction//成功执行方法
+                            });
+
+                        },
+                        function ()//点击取消
+                        {
+
+                        }
+                    );
+
+                });
+
+            };
+
+            return oInit;
+        };
+
+        //数据验证和提交
+        $(document).ready(function () {
+            //文档加载完成后添加保存按钮的单击事件
+            $("#btn_save").click(function () {
+                $('#EditForm').submit();
+            });
+
+            //初始化Select
+            $.ajax({
+                url: '/NoteBook/GetBlockSelect',
+                type: 'post',
+                dataType: 'json',
+                cache: false,
+                error: erryFunction,  //错误执行方法
+                success: function (data) {//将JSON赋值到select
+                    var expressCompany = $("#BlockId");
+                    var str = '';
+                    var json = data.options;
+                    for (var o in json) {
+                        str += '<option value="' + json[o].id + '">' + json[o].name + '</option>';
+                    }
+                    expressCompany.append(str);
+                }
+            });
+        });
+
+        $.validator.setDefaults({
+            highlight: function (element) {
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            success: function (element) {
+                element.closest('.form-group').removeClass('has-error').addClass('has-success');
+            },
+            errorElement: "span",
+            errorPlacement: function (error, element) {
+                if (element.is(":radio") || element.is(":checkbox")) {
+                    error.appendTo(element.parent().parent().parent());
+                } else {
+                    error.appendTo(element.parent());
+                }
+            },
+            errorClass: "help-block m-b-none",
+            validClass: "help-block m-b-none"
+
+
+        });
+
+
+
+        //添加表单验证
+        // validate signup form on keyup and submit
+        var icon = "<i class='fa fa-times-circle'></i> ";
+        //添加验证
+        $("#EditForm").validate({
+            rules: {
+                Name: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 12
+                },
+                Rank: {
+                    digits: true
+
+                }
+            },
+            messages: {
+                Name: {
+                    required: icon + "请输入名称",
+                    minlength: icon + "站点名称必须2个字符以上",
+                    maxlength: icon + "站点名称必须12个字符以下"
+                }
+                ,
+                Rank: {
+                    digits: icon + "排序字段必须为数字"
+                }
+            },
+            //表单验证成功执行方法
+            submitHandler: function () {
+                var submitType = $("#Type").val();
+                if (submitType == "Add")
+                {
+                    //开始ajax请求
+                    $.ajax({
+                        url: '/NoteBook/AddList',
+                        type: 'post',
+                        dataType: 'json',
+                        data: $("#EditForm").serialize(),
+                        cache: false,
+                        error: erryFunction,  //错误执行方法
+                        success: succFunction//成功执行方法
+                    });
+                }
+
+                if (submitType == "Update")
+                {
+                    //开始ajax请求
+                    $.ajax({
+                        url: '/NoteBook/UpdatList',
+                        type: 'post',
+                        dataType: 'json',
+                        data: $("#EditForm").serialize(),
+                        cache: false,
+                        error: erryFunction,  //错误执行方法
+                        success: succFunction//成功执行方法
+                    });
+
+
+                }
+
+            }
+        });
+
+    </script>
+</body>
+</html>

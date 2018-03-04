@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WindySong.NoteBook.App.ViewModels.Admin
 {
-    public class ColModel
+    public class ListModel
     {
         /// <summary>
         /// ID
@@ -16,9 +16,9 @@ namespace WindySong.NoteBook.App.ViewModels.Admin
         /// <summary>
         /// TabId
         /// </summary>
-        [Required(ErrorMessage = "选项卡必填!")]
-        [RegularExpression(@"^[0-9]*$", ErrorMessage = "选项卡必须为数字!")]
-        public int CTabId { get; set; }
+        [Required(ErrorMessage = "一级分类必填!")]
+        [RegularExpression(@"^[0-9]*$", ErrorMessage = "一级分类为数字!")]
+        public int BlockId { get; set; }
 
         /// <summary>
         /// 名称

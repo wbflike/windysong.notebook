@@ -116,10 +116,9 @@ namespace WindySong.NoteBook.App.Implements
             }
             if (model.Rank == 0 || model.Rank == null)
             {
-                IQuery<CTab> q = this.DbContext.Query<CTab>();
                 try
                 {
-                    var max = q.Max(a => a.rank);
+                    var max = qCTab.Max(a => a.rank);
                     tab.rank = max + 1;
                 }
                 catch (Exception ex)
@@ -337,10 +336,9 @@ namespace WindySong.NoteBook.App.Implements
             col.cTabId = model.CTabId;
             if (model.Rank == 0 || model.Rank == null)
             {
-                IQuery<UCol> q = this.DbContext.Query<UCol>();
                 try
                 {
-                    var max = q.Max(a => a.rank);
+                    var max = qCol.Max(a => a.rank);
                     col.rank = max + 1;
                 }
                 catch (Exception ex)
@@ -471,7 +469,7 @@ namespace WindySong.NoteBook.App.Implements
         }
 
         /// <summary>
-        /// 返回Col分页数据
+        /// 返回Block分页数据
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -574,10 +572,9 @@ namespace WindySong.NoteBook.App.Implements
             block.uColId = model.UColId;
             if (model.Rank == 0 || model.Rank == null)
             {
-                IQuery<UBlock> q = this.DbContext.Query<UBlock>();
                 try
                 {
-                    var max = q.Max(a => a.rank);
+                    var max = qBlock.Max(a => a.rank);
                     block.rank = max + 1;
                 }
                 catch (Exception ex)
@@ -603,7 +600,7 @@ namespace WindySong.NoteBook.App.Implements
         }
 
         /// <summary>
-        /// 删除Col
+        /// 删除Blcok
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -634,5 +631,248 @@ namespace WindySong.NoteBook.App.Implements
                 return 0;
             }
         }
+
+        /// <summary>
+        /// 获取Block Select
+        /// </summary>
+        /// <returns></returns>
+        public JsonSelect GetBlockSelect()
+        {
+            var json = new JsonSelect();
+            //返回json的tab数据
+            List<JsonSelectValue> listJsonValue = new List<JsonSelectValue>();
+            //数据库查询的block数据
+            IQuery<UBlock> q = this.DbContext.Query<UBlock>();
+            var join = q.InnerJoin<UCol>((block, col) => block.uColId == col.id)
+                .InnerJoin<CTab>((block, col, tab) => col.cTabId == tab.id);
+            var qq = join.Select((block, col, tab) => new
+            {
+                UBlock=block,
+                UCol = col,
+                CTab = tab
+            });
+            var result = qq.Where(a => 1 == 1)
+                .Select(a => new { id = a.UBlock.id, tabName = a.CTab.name, name = a.UBlock.name, rank = a.UBlock.rank })
+                .OrderBy(a => a.tabName).ToList();
+
+            foreach (var a in result)
+            {
+                var jsonValue = new JsonSelectValue();
+                jsonValue.id = a.id;
+                jsonValue.name = a.tabName + "->" + a.name;
+                listJsonValue.Add(jsonValue);
+            }
+            json.options = listJsonValue;
+
+            return json;
+        }
+
+        /// <summary>
+        /// 添加List
+        /// </summary>
+        /// <param name="model">ListModel</param>
+        /// <returns></returns>
+        public bool AddList(ListModel model)
+        {
+            UList list = new UList();
+            list.name = model.Name;
+            list.uBlockId = model.BlockId;
+            if (model.Rank == 0 || model.Rank == null)
+            {
+                IQuery<UList> q = this.DbContext.Query<UList>();
+                try
+                {
+                    var max = q.Max(a => a.rank);
+                    list.rank = max + 1;
+                }
+                catch (Exception ex)
+                {
+                    list.rank = 1;
+                }
+            }
+            else
+            {
+                list.rank = model.Rank.Value;
+            }
+            list.lastTime = DateTime.Now.ToString();
+            try
+            {
+                list = this.DbContext.Insert(list);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 返回List分页数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public JsonPagList GetPageList(DataPageModel model)
+        {
+            var json = new JsonPagList();
+            //返回json的数据
+            List<JsonList> listJson = new List<JsonList>();
+
+            IQuery<UList> q = this.DbContext.Query<UList>();
+            if (string.IsNullOrEmpty(model.searchKey))
+            {
+                //获取数据行数
+                json.total = q.Count();
+                //TakePage 第一个参数是page,第二个是pageNumber  offset表示走第几条数据开始取  limit表示取几条
+                //list = q.Where(a => 1 == 1).OrderBy(a => a.rank).TakePage((model.offset / model.limit) + 1, model.limit).ToList();
+
+                //多表查询
+                //1 建立连接
+                var join = q.InnerJoin<UBlock>((list, block) => list.uBlockId == block.id)
+                    .InnerJoin<UCol>((list, block, col) => block.uColId == col.id)
+                    .InnerJoin<CTab>((list, block, col,tab) => col.cTabId == tab.id);
+
+                /* 调用 Select 方法返回一个泛型为包含 UCol、CTab 匿名类型的 IQuery 对象。
+                 * Select 方法也可以返回自定义类型 。
+                */
+                var qq = join.Select((list, block, col, tab) => new
+                {
+                    UList = list,
+                    UBlock = block,
+                    UCol = col,
+                    CTab = tab
+                });
+
+                /* 根据条件筛选，然后调用 ToList 就会返回一个泛型为 new { UCol = col, CTab = tab } 的 List 集合 */
+                var result = qq.Where(a => 1 == 1)
+                .Select(a => new { id = a.UList.id, tabName = a.CTab.name, blockId = a.UBlock.id, blockName = a.UBlock.name, name = a.UList.name, rank = a.UList.rank, lastTime = a.UList.lastTime })
+                .OrderBy(a => a.tabName).TakePage((model.offset / model.limit) + 1, model.limit).ToList();
+
+                foreach (var temp in result)
+                {
+                    var jsonData = new JsonList();
+                    jsonData.id = temp.id;
+                    jsonData.blockId = temp.blockId;
+                    jsonData.blockName = temp.tabName + "->" + temp.blockName;
+                    jsonData.name = temp.name;
+                    jsonData.rank = temp.rank;
+                    jsonData.lastTime = temp.lastTime;
+
+                    listJson.Add(jsonData);
+                }
+            }
+            else
+            {
+                var join = q.InnerJoin<UBlock>((list, block) => list.uBlockId == block.id)
+                    .InnerJoin<UCol>((list, block, col) => block.uColId == col.id)
+                    .InnerJoin<CTab>((list, block, col, tab) => col.cTabId == tab.id);
+                var qq = join.Select((list, block, col, tab) => new
+                {
+                    UList = list,
+                    UBlock = block,
+                    UCol = col,
+                    CTab = tab
+                });
+
+                //获取数据行数
+                json.total = qq.Where(a => a.CTab.name.Contains(model.searchKey) || a.UCol.name.Contains(model.searchKey) || a.UBlock.name.Contains(model.searchKey) || a.UList.name.Contains(model.searchKey)).Count();
+
+                //TakePage 第一个参数是page,第二个是pageNumber
+                var result = qq.Where(a => a.CTab.name.Contains(model.searchKey) || a.UCol.name.Contains(model.searchKey) || a.UBlock.name.Contains(model.searchKey) || a.UList.name.Contains(model.searchKey))
+                .Select(a => new { id = a.UList.id, tabName = a.CTab.name, blockId = a.UBlock.id, blockName = a.UBlock.name, name = a.UList.name, rank = a.UList.rank, lastTime = a.UList.lastTime })
+                .OrderBy(a => a.tabName).TakePage((model.offset / model.limit) + 1, model.limit).ToList();
+
+                foreach (var temp in result)
+                {
+                    var jsonData = new JsonList();
+                    jsonData.id = temp.id;
+                    jsonData.blockId = temp.blockId;
+                    jsonData.blockName = temp.tabName + "->" + temp.blockName;
+                    jsonData.name = temp.name;
+                    jsonData.rank = temp.rank;
+                    jsonData.lastTime = temp.lastTime;
+
+                    listJson.Add(jsonData);
+                }
+            }
+
+            json.rows = listJson;
+
+            return json;
+        }
+
+        /// <summary>
+        /// 更新List
+        /// </summary>
+        /// <param name="model">ColModel</param>
+        /// <returns></returns>
+        public bool UpdateList(ListModel model)
+        {
+            UList list = new UList();
+            IQuery<UList> qList = this.DbContext.Query<UList>();
+            list = qList.Where(a => a.id == model.Id).FirstOrDefault();
+            list.name = model.Name;
+            list.uBlockId = model.BlockId;
+            if (model.Rank == 0 || model.Rank == null)
+            {
+                try
+                {
+                    var max = qList.Max(a => a.rank);
+                    list.rank = max + 1;
+                }
+                catch (Exception ex)
+                {
+                    list.rank = 1;
+                }
+            }
+            else
+            {
+                list.rank = model.Rank.Value;
+            }
+
+
+            try
+            {
+                this.DbContext.Update(list);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 删除List
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int DeleteList(DeleteModel model)
+        {
+            string str = model.deleteid;
+            str = str.Substring(0, str.Length - 1);
+            string[] arrId = str.Split(',');
+            foreach (var id in arrId)
+            {
+                int i = 0;
+                i = this.DbContext.Query<Api>().Where(u => u.uListId == int.Parse(id)).Count();
+                if (i > 0)//list存在记录
+                {
+                    return -1;
+                }
+            }
+            try
+            {
+                foreach (var id in arrId)
+                {
+                    this.DbContext.Delete<UList>(a => a.id == int.Parse(id));
+                }
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
+
     }
 }

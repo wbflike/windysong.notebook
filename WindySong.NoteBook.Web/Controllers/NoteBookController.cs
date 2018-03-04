@@ -33,6 +33,10 @@ namespace WindySong.NoteBook.Web.Controllers
         {
             return View();
         }
+        public IActionResult List()
+        {
+            return View();
+        }
 
         /// <summary>
         /// cTab分页数据
@@ -379,5 +383,124 @@ namespace WindySong.NoteBook.Web.Controllers
             return Json(jsonResults);
         }
 
+
+        /// <summary>
+        /// 获取一级分类
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult GetBlockSelect()
+        {
+            JsonSelect json = new JsonSelect();
+            json = this._noteBookApp.GetBlockSelect();
+
+            return Json(json);
+        }
+
+        /// <summary>
+        /// 添加List
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult AddList(ListModel model)
+        {
+            //判断数据是否合法
+            if (!ModelState.IsValid)
+            {
+                return Json(this.GetSwalJson(0, "非法数据", this.IfModelStateString(), "error"));
+            }
+            bool bl = false;
+            bl = _noteBookApp.AddList(model);
+            if (bl)
+            {
+                return Json(this.GetSwalJson(1, "添加成功", "success", "success"));
+            }
+            else
+            {
+                return Json(this.GetSwalJson(0, "添加失败", "error", "error"));
+            }
+        }
+
+        /// <summary>
+        /// Block分页数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult ListJson(DataPageModel model)
+        {
+            JsonPagList jsonPag = new JsonPagList();
+            //判断数据是否合法
+            if (!ModelState.IsValid)
+            {
+                jsonPag.total = 1;
+                List<JsonList> list = new List<JsonList>();
+                list.Add(new JsonList() { id = 1, blockId = 1, blockName = "参数非法", name = "参数非法", rank = 1, lastTime = "参数非法" });
+                jsonPag.rows = list;
+                return Json(jsonPag);
+            }
+            jsonPag = this._noteBookApp.GetPageList(model);
+
+            return Json(jsonPag);
+        }
+
+        /// <summary>
+        /// 更新List
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult UpdatList(ListModel model)
+        {
+            //判断数据是否合法
+            if (!ModelState.IsValid)
+            {
+                return Json(this.GetSwalJson(0, "非法数据", this.IfModelStateString(), "error"));
+            }
+            bool bl = false;
+            bl = _noteBookApp.UpdateList(model);
+            if (bl)
+            {
+                return Json(this.GetSwalJson(1, "更新成功", "success", "success"));
+            }
+            else
+            {
+                return Json(this.GetSwalJson(0, "更新失败", "error", "error"));
+            }
+        }
+
+        /// <summary>
+        /// 删除List
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult DeleteList(DeleteModel model)
+        {
+            //判断数据是否合法
+            if (!ModelState.IsValid)
+            {
+                return Json(this.GetSwalJson(0, "非法数据", this.IfModelStateString(), "error"));
+            }
+            var jsonResults = new JsonResultsString();
+            int i = 0;
+            i = _noteBookApp.DeleteList(model);
+            switch (i)
+            {
+                case 1:
+                    jsonResults = this.GetSwalJson(1, "删除成功", "success", "success");
+                    break;
+                case 0:
+                    jsonResults = this.GetSwalJson(1, "删除失败", "error", "error");
+                    break;
+                case -1:
+                    jsonResults = this.GetSwalJson(-1, "删除失败", "选中的二级分类存在关联的API", "error");
+                    break;
+            }
+            return Json(jsonResults);
+        }
     }
 }
