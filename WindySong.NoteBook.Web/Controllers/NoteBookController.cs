@@ -37,6 +37,10 @@ namespace WindySong.NoteBook.Web.Controllers
         {
             return View();
         }
+        public IActionResult Api()
+        {
+            return View();
+        }
 
         /// <summary>
         /// cTab分页数据
