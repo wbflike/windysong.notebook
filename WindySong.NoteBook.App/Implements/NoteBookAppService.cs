@@ -668,6 +668,42 @@ namespace WindySong.NoteBook.App.Implements
         }
 
         /// <summary>
+        /// 获取Block Select
+        /// </summary>
+        /// <param name="id">TabId</param>
+        /// <returns></returns>
+        public JsonSelect GetBlockSelect(int id)
+        {
+            var json = new JsonSelect();
+            //返回json的tab数据
+            List<JsonSelectValue> listJsonValue = new List<JsonSelectValue>();
+            //数据库查询的block数据
+            IQuery<UBlock> q = this.DbContext.Query<UBlock>();
+            var join = q.InnerJoin<UCol>((block, col) => block.uColId == col.id)
+                .InnerJoin<CTab>((block, col, tab) => col.cTabId == tab.id);
+            var qq = join.Select((block, col, tab) => new
+            {
+                UBlock = block,
+                UCol = col,
+                CTab = tab
+            });
+            var result = qq.Where(a => a.CTab.id == id)
+                .Select(a => new { id = a.UBlock.id, name = a.UBlock.name, rank = a.UBlock.rank })
+                .OrderBy(a => a.rank).ToList();
+
+            foreach (var a in result)
+            {
+                var jsonValue = new JsonSelectValue();
+                jsonValue.id = a.id;
+                jsonValue.name = a.name;
+                listJsonValue.Add(jsonValue);
+            }
+            json.options = listJsonValue;
+
+            return json;
+        }
+
+        /// <summary>
         /// 添加List
         /// </summary>
         /// <param name="model">ListModel</param>
@@ -874,5 +910,179 @@ namespace WindySong.NoteBook.App.Implements
             }
         }
 
+        /// <summary>
+        /// 获取List Select
+        /// </summary>
+        /// <param name="id">BlockId</param>
+        /// <returns></returns>
+        public JsonSelect GetListSelect(int id)
+        {
+            var json = new JsonSelect();
+            //返回json的tab数据
+            List<JsonSelectValue> listJsonValue = new List<JsonSelectValue>();
+            //数据库查询的UList数据
+            IQuery<UList> q = this.DbContext.Query<UList>();
+            var result = q.Where(a => a.uBlockId == id).OrderBy(a => a.rank).ToList();
+
+            foreach (var a in result)
+            {
+                var jsonValue = new JsonSelectValue();
+                jsonValue.id = a.id;
+                jsonValue.name = a.name;
+                listJsonValue.Add(jsonValue);
+            }
+            json.options = listJsonValue;
+
+            return json;
+        }
+
+        /// <summary>
+        /// 添加Api
+        /// </summary>
+        /// <param name="model">ApiModel</param>
+        /// <returns></returns>
+        public bool AddApi(ApiModel model)
+        {
+            Api api = new Api();
+            api.name = model.Name;
+            api.uListId = model.ListId;
+            api.parameter = model.Parameter;
+            api.description = model.Description;
+            if (model.Rank == 0 || model.Rank == null)
+            {
+                IQuery<Api> q = this.DbContext.Query<Api>();
+                try
+                {
+                    var max = q.Max(a => a.rank);
+                    api.rank = max + 1;
+                }
+                catch (Exception ex)
+                {
+                    api.rank = 1;
+                }
+            }
+            else
+            {
+                api.rank = model.Rank.Value;
+            }
+            api.lastTime = DateTime.Now.ToString();
+            try
+            {
+                api = this.DbContext.Insert(api);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 返回List分页数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public JsonPagApi GetPageApi(DataPageModel model)
+        {
+            var json = new JsonPagApi();
+            //返回json的数据
+            List<JsonApi> listJson = new List<JsonApi>();
+
+            IQuery<Api> q = this.DbContext.Query<Api>();
+            if (string.IsNullOrEmpty(model.searchKey))
+            {
+                //获取数据行数
+                json.total = q.Count();
+                //TakePage 第一个参数是page,第二个是pageNumber  offset表示走第几条数据开始取  limit表示取几条
+                //list = q.Where(a => 1 == 1).OrderBy(a => a.rank).TakePage((model.offset / model.limit) + 1, model.limit).ToList();
+
+                //多表查询
+                //1 建立连接
+                var join = q.InnerJoin<UList>((api, list) => list.id == api.uListId)
+                    .InnerJoin<UBlock>((api, list, block) => block.id == list.uBlockId)
+                    .InnerJoin<UCol>((api, list, block,col) => col.id == block.uColId)
+                    .InnerJoin<CTab>((api, list, block, col,tab) => tab.id == col.cTabId);
+
+                /* 调用 Select 方法返回一个泛型为包含 UCol、CTab 匿名类型的 IQuery 对象。
+                 * Select 方法也可以返回自定义类型 。
+                */
+                var qq = join.Select((api, list, block, col, tab) => new
+                {
+                    Api =api,
+                    UList = list,
+                    UBlock = block,
+                    UCol = col,
+                    CTab = tab
+                });
+
+                /* 根据条件筛选，然后调用 ToList 就会返回一个泛型为 new { UCol = col, CTab = tab } 的 List 集合 */
+                var result = qq.Where(a => 1 == 1)
+                .Select(a => new { id=a.Api.id, name=a.Api.name, parameter=a.Api.parameter, tabId=a.CTab.id, tabName=a.CTab.name, blockId=a.UBlock.id, blockName=a.UBlock.name, listId=a.UList.id, listName=a.UList.name, rank=a.Api.rank, lastTime=a.Api.lastTime })
+                .OrderBy(a => a.lastTime).TakePage((model.offset / model.limit) + 1, model.limit).ToList();
+
+                foreach (var temp in result)
+                {
+                    var jsonData = new JsonApi();
+                    jsonData.id = temp.id;
+                    jsonData.name = temp.name;
+                    jsonData.parameter = temp.parameter;
+                    jsonData.tabId = temp.tabId;
+                    jsonData.tabName = temp.tabName;
+                    jsonData.blockId = temp.blockId;
+                    jsonData.blockName = temp.blockName;
+                    jsonData.listId = temp.listId;
+                    jsonData.listName = temp.listName;
+                    jsonData.rank = temp.rank;
+                    jsonData.lastTime = temp.lastTime;
+
+                    listJson.Add(jsonData);
+                }
+            }
+            else
+            {
+                var join = q.InnerJoin<UList>((api, list) => list.id == api.uListId)
+                    .InnerJoin<UBlock>((api, list, block) => block.id == list.uBlockId)
+                    .InnerJoin<UCol>((api, list, block, col) => col.id == block.uColId)
+                    .InnerJoin<CTab>((api, list, block, col, tab) => tab.id == col.cTabId);
+                var qq = join.Select((api, list, block, col, tab) => new
+                {
+                    Api = api,
+                    UList = list,
+                    UBlock = block,
+                    UCol = col,
+                    CTab = tab
+                });
+
+                //获取数据行数
+                json.total = qq.Where(a => a.Api.name.Contains(model.searchKey) || a.Api.parameter.Contains(model.searchKey)).Count();
+
+                //TakePage 第一个参数是page,第二个是pageNumber
+                var result = qq.Where(a => a.Api.name.Contains(model.searchKey) || a.Api.parameter.Contains(model.searchKey))
+                .Select(a => new { id = a.Api.id, name = a.Api.name, parameter = a.Api.parameter, tabId = a.CTab.id, tabName = a.CTab.name, blockId = a.UBlock.id, blockName = a.UBlock.name, listId = a.UList.id, listName = a.UList.name, rank = a.Api.rank, lastTime = a.Api.lastTime })
+                .OrderBy(a => a.lastTime).TakePage((model.offset / model.limit) + 1, model.limit).ToList();
+
+                foreach (var temp in result)
+                {
+                    var jsonData = new JsonApi();
+                    jsonData.id = temp.id;
+                    jsonData.name = temp.name;
+                    jsonData.parameter = temp.parameter;
+                    jsonData.tabId = temp.tabId;
+                    jsonData.tabName = temp.tabName;
+                    jsonData.blockId = temp.blockId;
+                    jsonData.blockName = temp.blockName;
+                    jsonData.listId = temp.listId;
+                    jsonData.listName = temp.listName;
+                    jsonData.rank = temp.rank;
+                    jsonData.lastTime = temp.lastTime;
+
+                    listJson.Add(jsonData);
+                }
+            }
+
+            json.rows = listJson;
+
+            return json;
+        }
     }
 }

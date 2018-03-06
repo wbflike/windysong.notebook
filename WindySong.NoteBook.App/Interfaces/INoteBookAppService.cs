@@ -114,6 +114,13 @@ namespace WindySong.NoteBook.App.Interfaces
         JsonSelect GetBlockSelect();
 
         /// <summary>
+        /// 获取Block Select
+        /// </summary>
+        /// <param name="id">TabId</param>
+        /// <returns></returns>
+        JsonSelect GetBlockSelect(int id);
+
+        /// <summary>
         /// 添加List
         /// </summary>
         /// <param name="model">ListModel</param>
@@ -121,7 +128,7 @@ namespace WindySong.NoteBook.App.Interfaces
         bool AddList(ListModel model);
 
         /// <summary>
-        /// 获取Block分页数据
+        /// 获取List分页数据
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -140,5 +147,26 @@ namespace WindySong.NoteBook.App.Interfaces
         /// <param name="model">DeleteModel</param>
         /// <returns></returns>
         int DeleteList(DeleteModel model);
+
+        /// <summary>
+        /// 获取List Select
+        /// </summary>
+        /// <param name="id">BlockId</param>
+        /// <returns></returns>
+        JsonSelect GetListSelect(int id);
+
+        /// <summary>
+        /// 添加Api
+        /// </summary>
+        /// <param name="model">ApiModel</param>
+        /// <returns></returns>
+        bool AddApi(ApiModel model);
+
+        /// <summary>
+        /// 获取Api分页数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        JsonPagApi GetPageApi(DataPageModel model);
     }
 }

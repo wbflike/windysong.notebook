@@ -182,7 +182,7 @@
             //初始化Table
             oTableInit.Init = function () {
                 $('#tb_data').bootstrapTable({
-                    url: '/NoteBook/ListJson',         //请求后台的URL（*）
+                    url: '/NoteBook/ApiJson',         //请求后台的URL（*）
                     method: 'get',                      //请求方式（*）
                     toolbar: '#toolbar',                //工具按钮用哪个容器
                     striped: true,                      //是否显示行间隔色
@@ -220,19 +220,40 @@
                             title: '名称'
                         },
                         {
+                            field: 'parameter',
+                            title: '参数'
+                        },
+                        {
+                            visible: false,//不显示
+                            field: 'tabId',
+                            title: '选项卡Id'
+                        },
+                        {
+                            field: 'tabName',
+                            title: '选项卡'
+                        },
+                        {
                             visible: false,//不显示
                             field: 'blockId',
-                            title: '一级分类ID'
+                            title: '一级分类Id'
                         },
                         {
                             field: 'blockName',
-                            title: '一级分类名称'
+                            title: '一级分类'
                         },
+                        {
+                            visible: false,//不显示
+                            field: 'listId',
+                            title: '二级分类ID'
+                        },
+                        {
+                            field: 'listName',
+                            title: '二级分类'
+                        },                        
                         {
                             field: 'rank',
                             title: '排序值'
-                        }
-                        ,
+                        },
                         {
                             field: 'lastTime',
                             title: '添加时间'
@@ -401,8 +422,67 @@
             return oInit;
         };
 
-        //数据验证和提交
+        //设置SelectBlock 参数为BlockId
+        function SetListSelect(i) {
+            $("#ListId").empty();
+            //初始化Select
+            $.ajax({
+                url: '/NoteBook/GetListSelect/' + i,
+                type: 'get',
+                dataType: 'json',
+                cache: false,
+                error: erryFunction,  //错误执行方法
+                success: function (data) {//将JSON赋值到select
+                    var expressCompany = $("#ListId");
+                    var str = '';
+                    var json = data.options;
+                    for (var o in json) {
+                        str += '<option value="' + json[o].id + '">' + json[o].name + '</option>';
+                    }
+                    expressCompany.append(str);
+                }
+            });
+        }
+
+        //设置SelectBlock 参数为TabId
+        function SetBlockSelect(i) {
+            $("#BlockId").empty();
+            //初始化Select
+            $.ajax({
+                url: '/NoteBook/GetBlockSelect/' + i,
+                type: 'get',
+                dataType: 'json',
+                cache: false,
+                error: erryFunction,  //错误执行方法
+                success: function (data) {//将JSON赋值到select
+                    var expressCompany = $("#BlockId");
+                    var str = '';
+                    var json = data.options;
+                    for (var o in json) {
+                        str += '<option value="' + json[o].id + '">' + json[o].name + '</option>';
+                        if (o == 0) {
+                            SetListSelect(json[o].id);
+                        }
+                    }
+                    expressCompany.append(str);
+                }
+            });
+        }
+
+        //文档加载完成绑定事件
         $(document).ready(function () {
+
+            //Select联动
+            $('#TabId').change(function () {
+                var id = $("#TabId").children('option:selected').val()//这就是selected的值  
+                //var p2 = $("#TabId").find("option:selected").text();//获取select 选中的 text
+                SetBlockSelect(id); 
+            });
+            $('#BlockId').change(function () {
+                var id = $("#BlockId").children('option:selected').val()//这就是selected的值  
+                SetListSelect(id);
+            });
+
             //文档加载完成后添加保存按钮的单击事件
             $("#btn_save").click(function () {
                 $('#EditForm').submit();
@@ -423,7 +503,7 @@
                         str += '<option value="' + json[o].id + '">' + json[o].name + '</option>';
                         if (o == 0)
                         {
-                            console.log(json[o].id);
+                            SetBlockSelect(json[o].id);
                         }
                     }
                     expressCompany.append(str);
@@ -461,23 +541,51 @@
         //添加验证
         $("#EditForm").validate({
             rules: {
+                TabId: {
+                    required: true
+                },
+                BlockId: {
+                    required: true
+                },
+                ListId: {
+                    required: true
+                },
                 Name: {
                     required: true,
                     minlength: 2,
-                    maxlength: 12
+                    maxlength: 200
+                },
+                Parameter: {
+                    maxlength: 100
+                },
+                Description: {
+                    maxlength: 8000
                 },
                 Rank: {
                     digits: true
-
                 }
             },
             messages: {
+                TabId: {
+                    required: icon + "请选择选项卡"
+                },
+                BlockId: {
+                    required: icon + "请选择一级分类"
+                },
+                ListId: {
+                    required: icon + "请选择二级分类"
+                },
                 Name: {
                     required: icon + "请输入名称",
-                    minlength: icon + "站点名称必须2个字符以上",
-                    maxlength: icon + "站点名称必须12个字符以下"
-                }
-                ,
+                    minlength: icon + "名称必须2个字符以上",
+                    maxlength: icon + "名称必须200个字符以下"
+                },
+                Parameter: {
+                    maxlength: icon + "参数必须100个字符以下"
+                },
+                Description: {
+                    maxlength: icon + "描述必须8000个字符以下"
+                },
                 Rank: {
                     digits: icon + "排序字段必须为数字"
                 }
@@ -489,7 +597,7 @@
                 {
                     //开始ajax请求
                     $.ajax({
-                        url: '/NoteBook/AddList',
+                        url: '/NoteBook/AddApi',
                         type: 'post',
                         dataType: 'json',
                         data: $("#EditForm").serialize(),

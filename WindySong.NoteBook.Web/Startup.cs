@@ -80,7 +80,7 @@ namespace WindySong.NoteBook.Web
             app.UseMvc(routes =>
             {
                 //defatul路由名称 控制器名称Home  方法名称 Index
-                routes.MapRoute("defatul", "{controller=Home}/{action=Index}");
+                routes.MapRoute("defatul", "{controller=Home}/{action=Index}/{id?}");
             });
 
         }

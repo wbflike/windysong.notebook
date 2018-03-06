@@ -153,6 +153,7 @@ namespace WindySong.NoteBook.Web.Controllers
         /// 获取选项卡
         /// </summary>
         /// <returns></returns>
+        [HttpPost]
         public IActionResult GetTabSelect()
         {
             JsonSelect json = new JsonSelect();
@@ -272,6 +273,7 @@ namespace WindySong.NoteBook.Web.Controllers
         /// 获取选项卡
         /// </summary>
         /// <returns></returns>
+        [HttpPost]
         public IActionResult GetColSelect()
         {
             JsonSelect json = new JsonSelect();
@@ -392,10 +394,25 @@ namespace WindySong.NoteBook.Web.Controllers
         /// 获取一级分类
         /// </summary>
         /// <returns></returns>
+        [HttpPost]
         public IActionResult GetBlockSelect()
         {
             JsonSelect json = new JsonSelect();
             json = this._noteBookApp.GetBlockSelect();
+
+            return Json(json);
+        }
+
+        /// <summary>
+        /// 获取一级分类
+        /// </summary>
+        /// <param name="id">TabID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetBlockSelect(int id)
+        {
+            JsonSelect json = new JsonSelect();
+            json = this._noteBookApp.GetBlockSelect(id);
 
             return Json(json);
         }
@@ -427,7 +444,7 @@ namespace WindySong.NoteBook.Web.Controllers
         }
 
         /// <summary>
-        /// Block分页数据
+        /// List分页数据
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -505,6 +522,69 @@ namespace WindySong.NoteBook.Web.Controllers
                     break;
             }
             return Json(jsonResults);
+        }
+
+        /// <summary>
+        /// 获取二级分类
+        /// </summary>
+        /// <param name="id">BlockID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetListSelect(int id)
+        {
+            JsonSelect json = new JsonSelect();
+            json = this._noteBookApp.GetListSelect(id);
+
+            return Json(json);
+        }
+
+        /// <summary>
+        /// 添加List
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult AddApi(ApiModel model)
+        {
+            //判断数据是否合法
+            if (!ModelState.IsValid)
+            {
+                return Json(this.GetSwalJson(0, "非法数据", this.IfModelStateString(), "error"));
+            }
+            bool bl = false;
+            bl = _noteBookApp.AddApi(model);
+            if (bl)
+            {
+                return Json(this.GetSwalJson(1, "添加成功", "success", "success"));
+            }
+            else
+            {
+                return Json(this.GetSwalJson(0, "添加失败", "error", "error"));
+            }
+        }
+
+        /// <summary>
+        /// Api分页数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult ApiJson(DataPageModel model)
+        {
+            JsonPagApi jsonPag = new JsonPagApi();
+            //判断数据是否合法
+            if (!ModelState.IsValid)
+            {
+                jsonPag.total = 1;
+                List<JsonApi> list = new List<JsonApi>();
+                list.Add(new JsonApi() { id = 1, name = "参数非法", parameter = "参数非法", tabId = 1, tabName= "参数非法", blockId=1, blockName= "参数非法", listId=1, listName= "参数非法", rank = 1, lastTime = "参数非法" });
+                jsonPag.rows = list;
+                return Json(jsonPag);
+            }
+            jsonPag = this._noteBookApp.GetPageApi(model);
+
+            return Json(jsonPag);
         }
     }
 }
