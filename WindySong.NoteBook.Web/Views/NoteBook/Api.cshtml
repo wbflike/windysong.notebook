@@ -32,7 +32,7 @@
                 <!--表单-->
                 <form id="EditForm" name="EditForm" class="form-horizontal" asp-controller="NoteBook" asp-action="UpdatApi">
                     <!-- 模态框（Modal）Bootstrap 模态框 -->
-                    <div class="modal fade" id="TabModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="MyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <!--id="myModal" 通过在一个按钮上配置 data-toggle="modal" data-target="#myModal"联动  -->
                         <div class="modal-dialog" style="width:60%;">
                             <div class="modal-content">
@@ -132,6 +132,54 @@
                 <form id="deleteForm" name="deleteForm" class="form-horizontal" asp-controller="NoteBook" asp-action="DeleteCol">
                     <input type="hidden" name="deleteid" id="deleteid">
                 </form>
+                <!-- 模态框（Modal）Bootstrap 模态框 -->
+                <div class="modal fade" id="ShowModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <!--id="myModal" 通过在一个按钮上配置 data-toggle="modal" data-target="#myModal"联动  -->
+                    <div class="modal-dialog" style="width:60%;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+
+                            </div>
+                            <div class="modal-body">                                                                   
+                                <div class="wrapper wrapper-content animated fadeInUp">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="ibox">
+                                                <div class="ibox-content">
+                                                    <div class="project-list">
+                                                        <table class="table-responsive">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td >
+                                                                       进行中
+                                                                    </td>
+                                                                    <td>
+                                                                        创建于 2014.08.15
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    关闭
+                                </button>
+                              
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div>
+                </div>
+                <!-- /.modal -->
+
             </div>
         </div>
 
@@ -206,7 +254,7 @@
                     showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
                     cardView: false,                    //是否显示详细视图
                     detailView: false,                   //是否显示父子表
-
+                    onDblClickRow: onDblClickRow,//双击触发的事件，当双击就会获取row，row就是该整行的内容
                     columns: [
                         {
                             checkbox: true
@@ -294,6 +342,15 @@
             layer.msg(strTitle + ',' + strText, { icon: iconnumber, offset: 't' });
         }
 
+        //表格行双击事件
+        function onDblClickRow(row) {
+            console.log(row.name);
+            //打开模态框
+            $('#ShowModal').modal({
+                keyboard: true
+            });
+        }  
+
         //ajax请求失败方法
         function erryFunction() {
             PopupDia("请求失败", "error", "error");
@@ -339,7 +396,7 @@
                     $("#Rank").val("");
 
                     //打开模态框
-                    $('#TabModal').modal({
+                    $('#MyModal').modal({
                         keyboard: true
                     });
 
@@ -361,16 +418,37 @@
                     }
 
                     $("#Type").val("Update");
-                    $("#MyModalText").html("更新二级分类");
+                    $("#MyModalText").html("更新API");
 
-                    //获取选中的行信息并赋值到模态框
-                    $("#Id").val(arrselections[0].id);
-                    $("#Name").val(arrselections[0].name);
+                    var id = arrselections[0].id;
+                    //设备文本框
+                    $.ajax({
+                        url: '/NoteBook/GetApi/' + id,
+                        type: 'get',
+                        dataType: 'json',
+                        cache: false,
+                        error: erryFunction,  //错误执行方法
+                        success: function (data) {//将JSON赋值到select
+                            //获取选中的行信息并赋值到模态框
+                            $("#Id").val(data.id);
+                            $("#Name").val(data.name);
+                            $("#Parameter").val(data.parameter);
+                            $("#Description").val(data.description);
+                            $("#Rank").val(data.rank);
+                        }
+                    });
+
+                    
                     //设置value项选中
+                    $("#TabId").val(arrselections[0].tabId);
+                    //设置一级分类
+                    SetBlockSelect(arrselections[0].tabId);
                     $("#BlockId").val(arrselections[0].blockId);
-                    $("#Rank").val(arrselections[0].rank);
+                    //设置二级分类
+                    SetListSelect(arrselections[0].blockId);
+                    $("#ListId").val(arrselections[0].listId);
                     //打开更新模态框
-                    $('#TabModal').modal({
+                    $('#MyModal').modal({
                         keyboard: true
                     });
 
@@ -399,7 +477,7 @@
                             $("#deleteid").val(idlist);
                             //开始ajax请求
                             $.ajax({
-                                url: '/NoteBook/DeleteList',
+                                url: '/NoteBook/DeleteApi',
                                 type: 'post',
                                 dataType: 'json',
                                 data: $("#deleteForm").serialize(),
@@ -427,6 +505,7 @@
             $("#ListId").empty();
             //初始化Select
             $.ajax({
+                async: false,  //这里设置为false，为同步，不添加该语句为异步
                 url: '/NoteBook/GetListSelect/' + i,
                 type: 'get',
                 dataType: 'json',
@@ -449,6 +528,7 @@
             $("#BlockId").empty();
             //初始化Select
             $.ajax({
+                async: false,  //这里设置为false，为同步，不添加该语句为异步
                 url: '/NoteBook/GetBlockSelect/' + i,
                 type: 'get',
                 dataType: 'json',
@@ -611,7 +691,7 @@
                 {
                     //开始ajax请求
                     $.ajax({
-                        url: '/NoteBook/UpdatList',
+                        url: '/NoteBook/UpdatApi',
                         type: 'post',
                         dataType: 'json',
                         data: $("#EditForm").serialize(),

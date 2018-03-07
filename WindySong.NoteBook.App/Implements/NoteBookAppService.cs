@@ -1084,5 +1084,92 @@ namespace WindySong.NoteBook.App.Implements
 
             return json;
         }
+
+        /// <summary>
+        /// 获取Api
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <returns></returns>
+        public ApiModel GetApi(int id)
+        {
+            IQuery<Api> q = this.DbContext.Query<Api>();
+            Api api = q.Where(a => a.id == id).FirstOrDefault();
+            var model = new ApiModel();
+            model.Id = api.id;
+            model.ListId = api.uListId;
+            model.Name = api.name;
+            model.Parameter = api.parameter;
+            model.Description = api.description;
+            model.Rank = api.rank;
+
+            return model;
+        }
+
+        /// <summary>
+        /// 更新Api
+        /// </summary>
+        /// <param name="model">ApiModel</param>
+        /// <returns></returns>
+        public bool UpdateApi(ApiModel model)
+        {
+            Api api = new Api();
+            IQuery<Api> qApi = this.DbContext.Query<Api>();
+            api = qApi.Where(a => a.id == model.Id).FirstOrDefault();
+            api.uListId = model.ListId;
+            api.name = model.Name;
+            api.parameter = model.Parameter;
+            api.description = model.Description;
+            if (model.Rank == 0 || model.Rank == null)
+            {
+                try
+                {
+                    var max = qApi.Max(a => a.rank);
+                    api.rank = max + 1;
+                }
+                catch (Exception ex)
+                {
+                    api.rank = 1;
+                }
+            }
+            else
+            {
+                api.rank = model.Rank.Value;
+            }
+
+
+            try
+            {
+                this.DbContext.Update(api);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 删除Api
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int DeleteApi(DeleteModel model)
+        {
+            string str = model.deleteid;
+            str = str.Substring(0, str.Length - 1);
+            string[] arrId = str.Split(',');
+            try
+            {
+                foreach (var id in arrId)
+                {
+                    this.DbContext.Delete<Api>(a => a.id == int.Parse(id));
+                }
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
     }
 }

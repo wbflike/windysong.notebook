@@ -140,7 +140,7 @@ namespace WindySong.NoteBook.Web.Controllers
                     jsonResults = this.GetSwalJson(1, "删除成功", "success", "success");
                     break;
                 case 0:
-                    jsonResults = this.GetSwalJson(1, "删除失败", "error", "error");
+                    jsonResults = this.GetSwalJson(0, "删除失败", "error", "error");
                     break;
                 case -1:
                     jsonResults = this.GetSwalJson(-1, "删除失败", "选中的选项卡存在关联的竖列", "error");
@@ -260,7 +260,7 @@ namespace WindySong.NoteBook.Web.Controllers
                     jsonResults = this.GetSwalJson(1, "删除成功", "success", "success");
                     break;
                 case 0:
-                    jsonResults = this.GetSwalJson(1, "删除失败", "error", "error");
+                    jsonResults = this.GetSwalJson(0, "删除失败", "error", "error");
                     break;
                 case -1:
                     jsonResults = this.GetSwalJson(-1, "删除失败", "选中的竖列存在关联的一级分类", "error");
@@ -380,7 +380,7 @@ namespace WindySong.NoteBook.Web.Controllers
                     jsonResults = this.GetSwalJson(1, "删除成功", "success", "success");
                     break;
                 case 0:
-                    jsonResults = this.GetSwalJson(1, "删除失败", "error", "error");
+                    jsonResults = this.GetSwalJson(0, "删除失败", "error", "error");
                     break;
                 case -1:
                     jsonResults = this.GetSwalJson(-1, "删除失败", "选中的一级分类存在关联的二级分类", "error");
@@ -515,7 +515,7 @@ namespace WindySong.NoteBook.Web.Controllers
                     jsonResults = this.GetSwalJson(1, "删除成功", "success", "success");
                     break;
                 case 0:
-                    jsonResults = this.GetSwalJson(1, "删除失败", "error", "error");
+                    jsonResults = this.GetSwalJson(0, "删除失败", "error", "error");
                     break;
                 case -1:
                     jsonResults = this.GetSwalJson(-1, "删除失败", "选中的二级分类存在关联的API", "error");
@@ -585,6 +585,75 @@ namespace WindySong.NoteBook.Web.Controllers
             jsonPag = this._noteBookApp.GetPageApi(model);
 
             return Json(jsonPag);
+        }
+
+        /// <summary>
+        /// 获取一级分类
+        /// </summary>
+        /// <param name="id">TabID</param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult GetApi(int id)
+        {
+            ApiModel json = new ApiModel();
+            json = this._noteBookApp.GetApi(id);
+
+            return Json(json);
+        }
+
+        /// <summary>
+        /// 更新Api
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult UpdatApi(ApiModel model)
+        {
+            //判断数据是否合法
+            if (!ModelState.IsValid)
+            {
+                return Json(this.GetSwalJson(0, "非法数据", this.IfModelStateString(), "error"));
+            }
+            bool bl = false;
+            bl = _noteBookApp.UpdateApi(model);
+            if (bl)
+            {
+                return Json(this.GetSwalJson(1, "更新成功", "success", "success"));
+            }
+            else
+            {
+                return Json(this.GetSwalJson(0, "更新失败", "error", "error"));
+            }
+        }
+
+        /// <summary>
+        /// 删除Api
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult DeleteApi(DeleteModel model)
+        {
+            //判断数据是否合法
+            if (!ModelState.IsValid)
+            {
+                return Json(this.GetSwalJson(0, "非法数据", this.IfModelStateString(), "error"));
+            }
+            var jsonResults = new JsonResultsString();
+            int i = 0;
+            i = _noteBookApp.DeleteApi(model);
+            switch (i)
+            {
+                case 1:
+                    jsonResults = this.GetSwalJson(1, "删除成功", "success", "success");
+                    break;
+                case 0:
+                    jsonResults = this.GetSwalJson(0, "删除失败", "error", "error");
+                    break;
+            }
+            return Json(jsonResults);
         }
     }
 }

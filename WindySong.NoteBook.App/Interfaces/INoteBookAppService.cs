@@ -168,5 +168,26 @@ namespace WindySong.NoteBook.App.Interfaces
         /// <param name="model"></param>
         /// <returns></returns>
         JsonPagApi GetPageApi(DataPageModel model);
+
+        /// <summary>
+        /// 获取Api
+        /// </summary>
+        /// <param name="id">Id</param>
+        /// <returns></returns>
+        ApiModel GetApi(int id);
+
+        /// <summary>
+        /// 更新Api
+        /// </summary>
+        /// <param name="model">ApiModel</param>
+        /// <returns></returns>
+        bool UpdateApi(ApiModel model);
+
+        /// <summary>
+        /// 删除Api
+        /// </summary>
+        /// <param name="model">DeleteModel</param>
+        /// <returns></returns>
+        int DeleteApi(DeleteModel model);
     }
 }

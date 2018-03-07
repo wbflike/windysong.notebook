@@ -32,7 +32,7 @@
                 <!--表单-->
                 <form id="EditForm" name="EditForm" class="form-horizontal" asp-controller="NoteBook" asp-action="UpdatCol">
                     <!-- 模态框（Modal）Bootstrap 模态框 -->
-                    <div class="modal fade" id="TabModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="MyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <!--id="myModal" 通过在一个按钮上配置 data-toggle="modal" data-target="#myModal"联动  -->
                         <div class="modal-dialog" style="width:40%;">
                             <div class="modal-content">
@@ -278,7 +278,7 @@
                     $("#Name").val("");
                     $("#Rank").val("");
                     //打开模态框
-                    $('#TabModal').modal({
+                    $('#MyModal').modal({
                         keyboard: true
                     });
 
@@ -309,7 +309,7 @@
                     $("#CTabId").val(arrselections[0].tabId);
                     $("#Rank").val(arrselections[0].rank);
                     //打开更新模态框
-                    $('#TabModal').modal({
+                    $('#MyModal').modal({
                         keyboard: true
                     });
 
