@@ -11,6 +11,22 @@
     <link href="~/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="~/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
     <link href="~/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+    <!-- 全局js -->
+    <script src="~/js/jquery.min.js?v=2.1.4"></script>
+    <script src="~/js/bootstrap.min.js?v=3.3.6"></script>
+    <!-- bootstrap-table-->
+    <script src="~/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="~/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- jQuery Validation plugin javascript-->
+    <script src="~/js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="~/js/plugins/validate/messages_zh.min.js"></script>
+    <!-- layer -->
+    <script src="~/js/plugins/layer/layer.js"></script>
+    <!-- ckeditor -->
+    <script type="text/javascript" src="~/ckeditor_4.8/ckeditor.js"></script>
+
     <title>API</title>
 </head>
 <body>
@@ -47,27 +63,21 @@
                                 <div class="modal-body">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">选项卡</label>
-                                        <div class="col-sm-5">
+                                        <div class="col-sm-2">
                                             <div class="form-group">
                                                 <!--使用form-group包裹表单，才能正确的显示前端验证提示信息-->
                                                 <select class="form-control m-b" name="TabId" id="TabId"></select>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="hr-line-dashed"></div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">一级分类</label>
-                                        <div class="col-sm-5">
+                                        <label class="col-sm-1 control-label">一级分类</label>
+                                        <div class="col-sm-2">
                                             <div class="form-group">
                                                 <!--使用form-group包裹表单，才能正确的显示前端验证提示信息-->
                                                 <select class="form-control m-b" name="BlockId" id="BlockId"></select>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="hr-line-dashed"></div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">二级分类</label>
-                                        <div class="col-sm-5">
+                                        <label class="col-sm-1 control-label">二级分类</label>
+                                        <div class="col-sm-2">
                                             <div class="form-group">
                                                 <!--使用form-group包裹表单，才能正确的显示前端验证提示信息-->
                                                 <select class="form-control m-b" name="ListId" id="ListId"></select>
@@ -101,6 +111,7 @@
                                         <div class="col-sm-10">
                                             <div class="form-group">
                                                 <textarea class="form-control" rows="3" id="Description" name="Description"></textarea>
+                                                <script type="text/javascript">CKEDITOR.replace('Description');</script>
                                             </div>
                                         </div>
                                     </div>
@@ -143,28 +154,74 @@
                                 </button>
 
                             </div>
-                            <div class="modal-body">                                                                   
-                                <div class="wrapper wrapper-content animated fadeInUp">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="ibox">
-                                                <div class="ibox-content">
-                                                    <div class="project-list">
-                                                        <table class="table-responsive">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td >
-                                                                       进行中
-                                                                    </td>
-                                                                    <td>
-                                                                        创建于 2014.08.15
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
+                            <div class="modal-body">    
+                                <div class="container-fluid">
+                                    <div class="row-fluid">
+                                        <div class="span12">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr class="text-info">
+                                                        <td class="text-right col-md-1">
+                                                            选项卡：
+                                                        </td>
+                                                        <td>
+                                                            <div class="text-warning" id="TabHtml"></div>
+                                                        </td>
+                                                        <td class="text-right">
+                                                            一级分类：
+                                                        </td>
+                                                        <td>
+                                                            <div class="text-warning" id="BlockHtml"></div>
+                                                        </td>
+                                                        <td class="text-right">
+                                                            二级分类：
+                                                        </td>
+                                                        <td>
+                                                            <div class="text-warning" id="ListHtml"></div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="text-info">
+                                                        <td class="text-right">
+                                                            名称：
+                                                        </td>
+                                                        <td colspan="5">
+                                                            <div class="text-warning" id="NameHtml"></div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="text-info">
+                                                        <td class="text-right">
+                                                            参数：
+                                                        </td>
+                                                        <td colspan="5">
+                                                            <div class="text-warning" id="ParameterHtml"></div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr >
+                                                        <td class="text-right text-info">
+                                                            描述：
+                                                        </td>
+                                                        <td colspan="5">
+                                                            <div id="DescriptionHtml">描述</div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="text-info">
+                                                        <td class="text-right">
+                                                            排序值：
+                                                        </td>
+                                                        <td colspan="5">
+                                                            <div class="text-warning" id="RankHtml"></div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="text-info">
+                                                        <td class="text-right">
+                                                            添加时间：
+                                                        </td>
+                                                        <td colspan="5">
+                                                            <div class="text-warning" id="LastTimeHtml"></div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -197,19 +254,6 @@
         <table id="tb_data" data-reorderable-columns="true"></table>
     </div>
 
-
-    <!-- 全局js -->
-    <script src="~/js/jquery.min.js?v=2.1.4"></script>
-    <script src="~/js/bootstrap.min.js?v=3.3.6"></script>
-    <!-- bootstrap-table-->
-    <script src="~/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-    <script src="~/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
-    <script src="~/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-    <!-- jQuery Validation plugin javascript-->
-    <script src="~/js/plugins/validate/jquery.validate.min.js"></script>
-    <script src="~/js/plugins/validate/messages_zh.min.js"></script>
-    <!-- layer -->
-    <script src="~/js/plugins/layer/layer.js"></script>
 
     <script>
         $(function () {
@@ -344,7 +388,27 @@
 
         //表格行双击事件
         function onDblClickRow(row) {
-            console.log(row.name);
+            $("#TabHtml").html(row.tabName);
+            $("#BlockHtml").html(row.blockName);
+            $("#ListHtml").html(row.listName);
+            $("#LastTimeHtml").html(row.lastTime);
+            var id = row.id;
+            //设备文本框
+            $.ajax({
+                async: false,  //这里设置为false，为同步，不添加该语句为异步
+                url: '/NoteBook/GetApi/' + id,
+                type: 'get',
+                dataType: 'json',
+                cache: false,
+                error: erryFunction,  //错误执行方法
+                success: function (data) {//将JSON赋值到select
+                    //获取选中的行信息并赋值到模态框
+                    $("#NameHtml").html(data.name); 
+                    $("#ParameterHtml").html(data.parameter);
+                    $("#DescriptionHtml").html(data.description);
+                    $("#RankHtml").html(data.rank);
+                }
+            });
             //打开模态框
             $('#ShowModal').modal({
                 keyboard: true
@@ -421,8 +485,9 @@
                     $("#MyModalText").html("更新API");
 
                     var id = arrselections[0].id;
-                    //设备文本框
+                    //设置文本框
                     $.ajax({
+                        async: false,  //这里设置为false，为同步，不添加该语句为异步
                         url: '/NoteBook/GetApi/' + id,
                         type: 'get',
                         dataType: 'json',
@@ -434,6 +499,9 @@
                             $("#Name").val(data.name);
                             $("#Parameter").val(data.parameter);
                             $("#Description").val(data.description);
+                            CKEDITOR.replace("Description").setData("123");
+                            //var obj = CKEDITOR.replace("Description");
+                            //obj.setData(data.description);
                             $("#Rank").val(data.rank);
                         }
                     });
