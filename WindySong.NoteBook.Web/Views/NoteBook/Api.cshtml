@@ -11,7 +11,6 @@
     <link href="~/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="~/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
     <link href="~/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-
     <!-- 全局js -->
     <script src="~/js/jquery.min.js?v=2.1.4"></script>
     <script src="~/js/bootstrap.min.js?v=3.3.6"></script>
@@ -24,9 +23,41 @@
     <script src="~/js/plugins/validate/messages_zh.min.js"></script>
     <!-- layer -->
     <script src="~/js/plugins/layer/layer.js"></script>
-    <!-- ckeditor -->
-    <script type="text/javascript" src="~/ckeditor_4.8/ckeditor.js"></script>
-
+    <!-- tinymce -->
+    <script src="~/tinymce_4.7.9/tinymce.min.js"></script>
+    <script src="~/tinymce_4.7.9/jquery.tinymce.min.js"></script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector: 'textarea',
+            height: 200,
+            plugins: 'codesample link table help print code insertdatetime',
+            codesample_languages: [
+                { text: 'HTML/XML', value: 'markup' },
+                { text: 'JavaScript', value: 'javascript' },
+                { text: 'CSS', value: 'css' },
+                { text: 'PHP', value: 'php' },
+                { text: 'Ruby', value: 'ruby' },
+                { text: 'Python', value: 'python' },
+                { text: 'Java', value: 'java' },
+                { text: 'C', value: 'c' },
+                { text: 'C#', value: 'csharp' },
+                { text: 'C++', value: 'cpp' },
+                { text: 'CSS-Extras', value: 'css-extras' },
+                { text: 'F#', value: 'fsharp' },
+                { text: 'GO', value: 'go' },
+                { text: 'JSON', value: 'json' },
+                { text: 'Kotlin', value: 'kotlin' },
+                { text: 'Lua', value: 'lua' },
+                { text: 'ASM', value: 'nasm' },
+                { text: 'Object-C', value: 'objectivec' },
+                { text: 'R', value: 'r' },
+                { text: 'SQL', value: 'sql' },
+                { text: 'Swift', value: 'swift' },
+            ],
+            toolbar: 'codesample',
+            language: 'zh_CN'
+        });
+    </script>
     <title>API</title>
 </head>
 <body>
@@ -48,7 +79,7 @@
                 <!--表单-->
                 <form id="EditForm" name="EditForm" class="form-horizontal" asp-controller="NoteBook" asp-action="UpdatApi">
                     <!-- 模态框（Modal）Bootstrap 模态框 -->
-                    <div class="modal fade" id="MyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="MyModal"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <!--id="myModal" 通过在一个按钮上配置 data-toggle="modal" data-target="#myModal"联动  -->
                         <div class="modal-dialog" style="width:60%;">
                             <div class="modal-content">
@@ -69,14 +100,14 @@
                                                 <select class="form-control m-b" name="TabId" id="TabId"></select>
                                             </div>
                                         </div>
-                                        <label class="col-sm-1 control-label">一级分类</label>
+                                        <label class="col-sm-1 control-label">一级</label>
                                         <div class="col-sm-2">
                                             <div class="form-group">
                                                 <!--使用form-group包裹表单，才能正确的显示前端验证提示信息-->
                                                 <select class="form-control m-b" name="BlockId" id="BlockId"></select>
                                             </div>
                                         </div>
-                                        <label class="col-sm-1 control-label">二级分类</label>
+                                        <label class="col-sm-1 control-label">二级</label>
                                         <div class="col-sm-2">
                                             <div class="form-group">
                                                 <!--使用form-group包裹表单，才能正确的显示前端验证提示信息-->
@@ -110,8 +141,7 @@
                                         <label class="col-sm-2 control-label">描述</label>
                                         <div class="col-sm-10">
                                             <div class="form-group">
-                                                <textarea class="form-control" rows="3" id="Description" name="Description"></textarea>
-                                                <script type="text/javascript">CKEDITOR.replace('Description');</script>
+                                                <textarea  id="Description" name="Description"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -144,7 +174,7 @@
                     <input type="hidden" name="deleteid" id="deleteid">
                 </form>
                 <!-- 模态框（Modal）Bootstrap 模态框 -->
-                <div class="modal fade" id="ShowModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal fade" id="ShowModal"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <!--id="myModal" 通过在一个按钮上配置 data-toggle="modal" data-target="#myModal"联动  -->
                     <div class="modal-dialog" style="width:60%;">
                         <div class="modal-content">
@@ -154,7 +184,7 @@
                                 </button>
 
                             </div>
-                            <div class="modal-body">    
+                            <div class="modal-body">
                                 <div class="container-fluid">
                                     <div class="row-fluid">
                                         <div class="span12">
@@ -230,7 +260,7 @@
                                 <button type="button" class="btn btn-default" data-dismiss="modal">
                                     关闭
                                 </button>
-                              
+
                             </div>
                         </div><!-- /.modal-content -->
                     </div>
@@ -341,7 +371,7 @@
                         {
                             field: 'listName',
                             title: '二级分类'
-                        },                        
+                        },
                         {
                             field: 'rank',
                             title: '排序值'
@@ -403,7 +433,7 @@
                 error: erryFunction,  //错误执行方法
                 success: function (data) {//将JSON赋值到select
                     //获取选中的行信息并赋值到模态框
-                    $("#NameHtml").html(data.name); 
+                    $("#NameHtml").html(data.name);
                     $("#ParameterHtml").html(data.parameter);
                     $("#DescriptionHtml").html(data.description);
                     $("#RankHtml").html(data.rank);
@@ -413,7 +443,7 @@
             $('#ShowModal').modal({
                 keyboard: true
             });
-        }  
+        }
 
         //ajax请求失败方法
         function erryFunction() {
@@ -454,11 +484,11 @@
                     $("#Id").val("");
                     $("#MyModalText").html("添加API");
 
-                    $("#Name").val(""); 
+                    $("#Name").val("");
                     $("#Parameter").val("");
                     $("#Description").val("");
                     $("#Rank").val("");
-
+                    tinyMCE.activeEditor.setContent("");
                     //打开模态框
                     $('#MyModal').modal({
                         keyboard: true
@@ -498,15 +528,14 @@
                             $("#Id").val(data.id);
                             $("#Name").val(data.name);
                             $("#Parameter").val(data.parameter);
-                            $("#Description").val(data.description);
-                            CKEDITOR.replace("Description").setData("123");
-                            //var obj = CKEDITOR.replace("Description");
-                            //obj.setData(data.description);
+                            
+                            //对编辑器赋值
+                            tinyMCE.activeEditor.setContent(data.description);
                             $("#Rank").val(data.rank);
                         }
                     });
 
-                    
+
                     //设置value项选中
                     $("#TabId").val(arrselections[0].tabId);
                     //设置一级分类
@@ -622,12 +651,12 @@
 
             //Select联动
             $('#TabId').change(function () {
-                var id = $("#TabId").children('option:selected').val()//这就是selected的值  
+                var id = $("#TabId").children('option:selected').val()//这就是selected的值
                 //var p2 = $("#TabId").find("option:selected").text();//获取select 选中的 text
-                SetBlockSelect(id); 
+                SetBlockSelect(id);
             });
             $('#BlockId').change(function () {
-                var id = $("#BlockId").children('option:selected').val()//这就是selected的值  
+                var id = $("#BlockId").children('option:selected').val()//这就是selected的值
                 SetListSelect(id);
             });
 
@@ -657,7 +686,7 @@
                     expressCompany.append(str);
                 }
             });
-            
+
         });
 
         $.validator.setDefaults({
@@ -743,6 +772,8 @@
                 var submitType = $("#Type").val();
                 if (submitType == "Add")
                 {
+                    //编辑器复制给表单文本框
+                    $("#Description").val(tinyMCE.activeEditor.getContent());
                     //开始ajax请求
                     $.ajax({
                         url: '/NoteBook/AddApi',
@@ -757,6 +788,8 @@
 
                 if (submitType == "Update")
                 {
+                    //编辑器复制给表单文本框
+                    $("#Description").val(tinyMCE.activeEditor.getContent());
                     //开始ajax请求
                     $.ajax({
                         url: '/NoteBook/UpdatApi',
