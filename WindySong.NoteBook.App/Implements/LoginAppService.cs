@@ -36,7 +36,7 @@ namespace WindySong.NoteBook.App.Implements
                 //更新最后更新时间
                 string strDate = DateTime.Now.ToString();
                 this.DbContext.Update<Users>(a=>a.id == _users.id,a=>new Users() {lastTime= strDate });
-                return new LoginModel() { id=_users.id,name=_users.userName,photo=_users.photo};
+                return new LoginModel() { id=_users.id,name=_users.userName};
             }
             
         }

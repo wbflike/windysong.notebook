@@ -42,8 +42,8 @@
                             <span><img alt="image" class="img-circle" src="~/img/profile_small.jpg" /></span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
-                                    <span class="block m-t-xs"><strong class="font-bold">Beaut-zihan</strong></span>
-                                    <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
+                                    <span class="block m-t-xs"><strong class="font-bold">Hello</strong></span>
+                                    <span class="text-muted text-xs block">@ViewData["UserName"]<b class="caret"></b></span>
                                 </span>
                             </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
@@ -55,7 +55,7 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="login.html">安全退出</a>
+                                    <a href="/AdminIndex/LogOut">安全退出</a>
                                 </li>
                             </ul>
                         </div>
@@ -153,7 +153,7 @@
                         </li>
                     </ul>
                 </div>
-                <a href="login.html" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+                <a href="/AdminIndex/LogOut" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
             </div>
             <div class="row J_mainContent" id="content-main">
                 <!--框架-->

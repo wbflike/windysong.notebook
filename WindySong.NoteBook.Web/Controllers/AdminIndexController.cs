@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WindySong.NoteBook.Web.Common;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace WindySong.NoteBook.Web.Controllers
 {
@@ -15,12 +17,19 @@ namespace WindySong.NoteBook.Web.Controllers
 
         public IActionResult Index()
         {
+            ViewData["UserName"] = User.Identity.Name;
             return View();
         }
 
         public IActionResult Main()
         {
             return View();
+        }
+        public IActionResult LogOut()
+        {
+            //删除cookies
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToRoute(new { controller = "Login", action = "Index" });
         }
     }
 }

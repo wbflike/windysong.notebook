@@ -24,8 +24,31 @@ namespace WindySong.NoteBook.Web.Controllers
         }
 
         //[Route("Login")] /*路由特性定义 这个路由特性表示 URL/Login 将访问到这个Action*/
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Index(String ReturnUrl)
         {
+            //如果用户没有登录
+            if(!User.Identity.IsAuthenticated)
+            {
+                //URL不为空
+                if (!string.IsNullOrEmpty(ReturnUrl))
+                {
+                    ViewBag.returnUrl = ReturnUrl;
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(ReturnUrl))
+                {
+                    return new RedirectResult(ReturnUrl);
+                }
+                else
+                {
+                    return RedirectToRoute(new { controller = "AdminIndex", action = "Index" });
+                }
+                
+            }
+            
             return View();
         }
 
@@ -66,7 +89,16 @@ namespace WindySong.NoteBook.Web.Controllers
                     // 指定过期时间AddMinutes 添加天
                     ExpiresUtc = DateTime.UtcNow.AddDays(7)
                 });
-                return RedirectToRoute(new { controller = "AdminIndex", action = "Index" });//跳转到其他controller RedirectToAction("AdminIndex/Index");//调整到其他Action
+                if (!string.IsNullOrEmpty(loginModel.returnUrl))
+                {
+                    //返回URL
+                    return new RedirectResult(loginModel.returnUrl);
+                }
+                else
+                {
+                    return RedirectToRoute(new { controller = "AdminIndex", action = "Index" });//跳转到其他controller RedirectToAction("AdminIndex/Index");//调整到其他Action
+                }
+                
             }
         }
 

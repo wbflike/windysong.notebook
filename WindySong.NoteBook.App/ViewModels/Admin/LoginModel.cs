@@ -18,6 +18,6 @@ namespace WindySong.NoteBook.App.ViewModels.Admin
         [RegularExpression(@"^.{6,16}$", ErrorMessage = "密码必须为6到16位字符!<br />")]
         public string password { get; set; }
 
-        public string photo { get; set; }
+        public string returnUrl { get; set; }
     }
 }
