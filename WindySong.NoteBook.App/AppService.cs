@@ -62,5 +62,17 @@ namespace WindySong.NoteBook.App
             return sysConfig;
         }
 
+        /// <summary>
+        /// 获取用户头像
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public string GetUserPhoto(int userId)
+        {
+            IQuery<Users> q = this.DbContext.Query<Users>();
+            Users users = q.Where(a =>a.id == userId).FirstOrDefault();
+            return users.photo;
+        }
+
     }
 }

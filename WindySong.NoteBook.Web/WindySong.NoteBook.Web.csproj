@@ -5,22 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="wwwroot\plugins\fullavatareditor\asp.net\**" />
-    <Compile Remove="wwwroot\plugins\fullavatareditor\asp\**" />
-    <Compile Remove="wwwroot\plugins\fullavatareditor\jsp\**" />
-    <Compile Remove="wwwroot\plugins\fullavatareditor\php\**" />
-    <Content Remove="wwwroot\plugins\fullavatareditor\asp.net\**" />
-    <Content Remove="wwwroot\plugins\fullavatareditor\asp\**" />
-    <Content Remove="wwwroot\plugins\fullavatareditor\jsp\**" />
-    <Content Remove="wwwroot\plugins\fullavatareditor\php\**" />
-    <EmbeddedResource Remove="wwwroot\plugins\fullavatareditor\asp.net\**" />
-    <EmbeddedResource Remove="wwwroot\plugins\fullavatareditor\asp\**" />
-    <EmbeddedResource Remove="wwwroot\plugins\fullavatareditor\jsp\**" />
-    <EmbeddedResource Remove="wwwroot\plugins\fullavatareditor\php\**" />
-    <None Remove="wwwroot\plugins\fullavatareditor\asp.net\**" />
-    <None Remove="wwwroot\plugins\fullavatareditor\asp\**" />
-    <None Remove="wwwroot\plugins\fullavatareditor\jsp\**" />
-    <None Remove="wwwroot\plugins\fullavatareditor\php\**" />
+    <Compile Remove="wwwroot\plugins\fullavatareditor\**" />
+    <Content Remove="wwwroot\plugins\fullavatareditor\**" />
+    <EmbeddedResource Remove="wwwroot\plugins\fullavatareditor\**" />
+    <None Remove="wwwroot\plugins\fullavatareditor\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -290,15 +278,6 @@
     <None Include="wwwroot\js\plugins\webuploader\webuploader.withoutimage.js" />
     <None Include="wwwroot\js\plugins\webuploader\webuploader.withoutimage.min.js" />
     <None Include="wwwroot\js\welcome.js" />
-    <None Include="wwwroot\plugins\fullavatareditor\expressInstall.swf" />
-    <None Include="wwwroot\plugins\fullavatareditor\fullAvatarEditor.swf" />
-    <None Include="wwwroot\plugins\fullavatareditor\scripts\fullAvatarEditor.js" />
-    <None Include="wwwroot\plugins\fullavatareditor\scripts\jQuery.Cookie.js" />
-    <None Include="wwwroot\plugins\fullavatareditor\scripts\jQuery.dialog.js" />
-    <None Include="wwwroot\plugins\fullavatareditor\scripts\jQuery.Drag.js" />
-    <None Include="wwwroot\plugins\fullavatareditor\scripts\jQuery.Resize.js" />
-    <None Include="wwwroot\plugins\fullavatareditor\scripts\swfobject.js" />
-    <None Include="wwwroot\plugins\fullavatareditor\scripts\test.js" />
     <None Include="wwwroot\tinymce_4.7.9\jquery.tinymce.min.js" />
     <None Include="wwwroot\tinymce_4.7.9\langs\readme.md" />
     <None Include="wwwroot\tinymce_4.7.9\langs\zh_CN.js" />
@@ -356,6 +335,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\WindySong.NoteBook.App\WindySong.NoteBook.App.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Upload\UserPhoto\" />
+    <Folder Include="wwwroot\plugins\" />
   </ItemGroup>
 
 </Project>

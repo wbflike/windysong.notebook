@@ -17,5 +17,13 @@ namespace WindySong.NoteBook.App.Interfaces
         /// <param name="model">UpdatePasswordModel</param>
         /// <returns>(1 更新成功)(0 更新失败)(-1 错误用户不存在)(-2 旧密码错误)</returns>
         int UpdatePassword(string userName, UpdatePasswordModel model);
+
+        /// <summary>
+        /// 更新用户头像信息
+        /// </summary>
+        /// <param name="userId">用户ID</param>
+        /// <param name="path">图片名称</param>
+        /// <returns></returns>
+        bool SetUserPhoto(int userId,string path);
     }
 }

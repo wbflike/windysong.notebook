@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using WindySong.NoteBook.Web.Common;
 using WindySong.NoteBook.App;
 using WindySong.NoteBook.App.Entity;
+using Microsoft.Extensions.FileProviders;
 
 namespace WindySong.NoteBook.Web
 {
@@ -55,6 +56,8 @@ namespace WindySong.NoteBook.Web
 
             //获取网站配置信息
             this.GetSysConfig();
+            //运行SQL拦截器
+            //new DBInterceptor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,6 +78,13 @@ namespace WindySong.NoteBook.Web
 
             //启用默认静态文件中间件 默认wwwroot底下的静态文件
             app.UseStaticFiles();
+            //自定义静态文件目录 用户上传目录
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), @"Upload")), //文件夹名称
+                RequestPath = new PathString("/Upload") //请求目录名称
+            });
 
             //添加自定义路由
             app.UseMvc(routes =>

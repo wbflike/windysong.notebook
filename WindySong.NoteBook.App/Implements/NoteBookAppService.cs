@@ -1018,8 +1018,8 @@ namespace WindySong.NoteBook.App.Implements
                 /* 根据条件筛选，然后调用 ToList 就会返回一个泛型为 new { UCol = col, CTab = tab } 的 List 集合 */
                 var result = qq.Where(a => 1 == 1)
                 .Select(a => new { id=a.Api.id, name=a.Api.name, parameter=a.Api.parameter, tabId=a.CTab.id, tabName=a.CTab.name, blockId=a.UBlock.id, blockName=a.UBlock.name, listId=a.UList.id, listName=a.UList.name, rank=a.Api.rank, lastTime=a.Api.lastTime })
-                .OrderBy(a => a.lastTime).TakePage((model.offset / model.limit) + 1, model.limit).ToList();
-
+                .OrderByDesc(a => a.id).TakePage((model.offset / model.limit) + 1, model.limit).ToList();
+                
                 foreach (var temp in result)
                 {
                     var jsonData = new JsonApi();
@@ -1059,7 +1059,7 @@ namespace WindySong.NoteBook.App.Implements
                 //TakePage 第一个参数是page,第二个是pageNumber
                 var result = qq.Where(a => a.Api.name.Contains(model.searchKey) || a.Api.parameter.Contains(model.searchKey))
                 .Select(a => new { id = a.Api.id, name = a.Api.name, parameter = a.Api.parameter, tabId = a.CTab.id, tabName = a.CTab.name, blockId = a.UBlock.id, blockName = a.UBlock.name, listId = a.UList.id, listName = a.UList.name, rank = a.Api.rank, lastTime = a.Api.lastTime })
-                .OrderBy(a => a.lastTime).TakePage((model.offset / model.limit) + 1, model.limit).ToList();
+                .OrderByDesc(a => a.id).TakePage((model.offset / model.limit) + 1, model.limit).ToList();
 
                 foreach (var temp in result)
                 {

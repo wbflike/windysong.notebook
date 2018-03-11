@@ -18,6 +18,7 @@ namespace WindySong.NoteBook.Web.Controllers
         public IActionResult Index()
         {
             ViewData["UserName"] = User.Identity.Name;
+            ViewBag.UserPhoto = this.GetUserPhoto();
             return View();
         }
 

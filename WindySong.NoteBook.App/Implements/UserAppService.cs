@@ -49,5 +49,27 @@ namespace WindySong.NoteBook.App.Implements
                 }
             }
         }
+
+        /// <summary>
+        /// 更新用户头像信息
+        /// </summary>
+        /// <param name="userId">用户ID</param>
+        /// <param name="path">图片名称</param>
+        /// <returns></returns>
+        public bool SetUserPhoto(int userId, string path)
+        {
+            IQuery<Users> q = this.DbContext.Query<Users>();
+            Users _users = q.Where(a => a.id == userId).FirstOrDefault();
+            _users.photo = path;
+            try
+            {
+                this.DbContext.Update(_users);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
     }
 }
