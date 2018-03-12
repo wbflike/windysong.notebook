@@ -13,11 +13,15 @@
 
   <ItemGroup>
     <None Remove="db\notebook.db" />
+    <None Remove="Resources\Font\WRYH.ttf" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="db\notebook.db">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Font\WRYH.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
@@ -339,6 +343,7 @@
 
   <ItemGroup>
     <Folder Include="Upload\UserPhoto\" />
+    <Folder Include="Upload\UserPhotoThumbnail\" />
     <Folder Include="wwwroot\plugins\" />
   </ItemGroup>
 

@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using System.Net.Http.Headers;
 using System.IO;
 using System.Security.Claims;
+using Common;
 
 namespace WindySong.NoteBook.Web.Controllers
 {
@@ -68,6 +69,8 @@ namespace WindySong.NoteBook.Web.Controllers
         [HttpPost]
         public IActionResult UserPhoto(IFormFile userPhoto)
         {
+            string originalPath = Directory.GetCurrentDirectory() + @"/Upload/UserPhoto/";
+            string thumbnailPath = Directory.GetCurrentDirectory() + @"/Upload/UserPhotoThumbnail/";
             var jsonResults = new JsonResultsString();
             // 文件大小
             long size = 0;
@@ -80,16 +83,22 @@ namespace WindySong.NoteBook.Web.Controllers
             {
                 return Json(this.GetSwalJson(0, "只能上传图片格式", "error", "error"));
             }
+            // 设置文件大小
+            size += userPhoto.Length;
+            //判断文件大小
+            if (size < 1)
+            {
+                return Json(this.GetSwalJson(0, "图片过小", "error", "error"));
+            }
 
             // 新文件名
             string shortfilename = $"{Guid.NewGuid()}{extName}";
             // 新文件名（包括路径）
-            filename = Directory.GetCurrentDirectory() + @"\Upload\UserPhoto\" + shortfilename;
+            filename = originalPath + shortfilename;
             
-            // 设置文件大小
-            size += userPhoto.Length;
+            
 
-            
+
             Stream stream = userPhoto.OpenReadStream();
             //通过byte正确安全的判断上传文件格式 
             //第一种方法
@@ -131,8 +140,6 @@ namespace WindySong.NoteBook.Web.Controllers
                     userPhoto.CopyTo(fs);
                     // 清空缓冲区数据
                     fs.Flush();
-                    _userApp.SetUserPhoto(int.Parse(User.FindFirstValue(ClaimTypes.Sid)), shortfilename);
-                    jsonResults = this.GetSwalJson(1, "上传成功", "success", "success");
                 }
                 catch (Exception e)
                 {
@@ -140,6 +147,26 @@ namespace WindySong.NoteBook.Web.Controllers
                 }
 
             }
+            try
+            {
+                bool bl = false;
+                bl = Photo.GetThumbnail(filename, thumbnailPath+ shortfilename, 64, 64);
+                if(bl)
+                {
+                    _userApp.SetUserPhoto(int.Parse(User.FindFirstValue(ClaimTypes.Sid)), shortfilename);
+                    jsonResults = this.GetSwalJson(1, "上传成功", "success", "success");
+                }
+                else
+                {
+                    jsonResults = this.GetSwalJson(0, "上传失败，服务器保存错误", "error", "error");
+                }
+                
+            }
+            catch (Exception e)
+            {
+                jsonResults = this.GetSwalJson(0, "上传失败，服务器保存错误", "error", "error");
+            }
+
             return Json(jsonResults);
         }
     }

@@ -55,6 +55,12 @@
                         <input type="password" class="form-control pword m-b" placeholder="密码" asp-for="password" />
                         <input type="hidden" value="@ViewBag.returnUrl" name="returnUrl" />
                     </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control uname"  asp-for="validateCode" />
+                    </div>
+                    <div class="form-group">
+                        <img id="imgVerify" src="/Login/ValidateCode" alt="看不清？点击更换" onclick="this.src = this.src + '?'" style="vertical-align:middle;" />
+                    </div>
                     <button class="btn btn-success btn-block" type="submit">登录</button>
                     <br />
                     <song class="text-warning">@Html.Raw(ViewData["formError"]) </song>
@@ -102,6 +108,9 @@
                     required: true,
                     minlength: 6,
                     maxlength: 16
+                },
+                validateCode: {
+                    required: true
                 }
             },
             messages: {
@@ -114,6 +123,9 @@
                     required: icon + "请输入您的密码",
                     minlength: icon + "密码必须6个字符以上",
                     maxlength: icon + "密码必须16个字符以下"
+                },
+                validateCode: {
+                    required: icon + "请输入验证码"
                 }
             }
         });

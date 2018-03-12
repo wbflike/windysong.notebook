@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using Common;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using WindySong.NoteBook.App;
@@ -63,6 +66,12 @@ namespace WindySong.NoteBook.Web.Common
             }
             //清空br标签
             return error;
+        }
+
+        public byte[] GetValidCodeByte( string code)
+        {
+            string path = Directory.GetCurrentDirectory() + @"/Resources/Font/WRYH.ttf";
+            return VerificationCode.GetValidCodeByte(code, path, 75, 25);
         }
 
         public JsonResultsString GetSwalJson(int state,string title,string text,string type)

@@ -11,6 +11,8 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using WindySong.NoteBook.App;
+using Microsoft.AspNetCore.Http;
+using Common;
 
 namespace WindySong.NoteBook.Web.Controllers
 {
@@ -64,6 +66,14 @@ namespace WindySong.NoteBook.Web.Controllers
                 this.IfModelStateViewData();
                 return View();
             }
+            //判断验证码是否合法
+            string clientValidCode = HttpContext.Session.GetString("ValidCode");
+            if(loginModel.validateCode != clientValidCode)
+            {
+                ViewData["formError"] = "验证码错误!";
+                return View();
+            }
+
             //登录验证方法
             LoginModel _logigModel = _loginApp.UserLogin(loginModel);
             //登录失败
@@ -100,6 +110,13 @@ namespace WindySong.NoteBook.Web.Controllers
                 }
                 
             }
+        }
+
+        public IActionResult ValidateCode()
+        {
+            string code = Commonly.GetRandomString(4);
+            HttpContext.Session.SetString("ValidCode", code);
+            return File(this.GetValidCodeByte(code), "image/png");
         }
 
     }

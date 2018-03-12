@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Common;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
-using Common;
 using System.IO;
 using WindySong.NoteBook.App.Interfaces;
 using WindySong.NoteBook.App.Implements;
@@ -31,6 +31,8 @@ namespace WindySong.NoteBook.Web
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            //添加Session服务
+            services.AddSession();
             //安装mvc服务
             services.AddMvc();
 
@@ -85,6 +87,8 @@ namespace WindySong.NoteBook.Web
                     Path.Combine(Directory.GetCurrentDirectory(), @"Upload")), //文件夹名称
                 RequestPath = new PathString("/Upload") //请求目录名称
             });
+            //添加session中间件
+            app.UseSession();
 
             //添加自定义路由
             app.UseMvc(routes =>

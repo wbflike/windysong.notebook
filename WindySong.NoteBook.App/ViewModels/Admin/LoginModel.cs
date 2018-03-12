@@ -17,6 +17,7 @@ namespace WindySong.NoteBook.App.ViewModels.Admin
         [Required(ErrorMessage = "密码为必填项!<br />")]
         [RegularExpression(@"^.{6,16}$", ErrorMessage = "密码必须为6到16位字符!<br />")]
         public string password { get; set; }
+        public string validateCode { get; set; }
 
         public string returnUrl { get; set; }
     }

@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "416814c2443ae3a6f78e3f702f1060a2f8a9f9a4"
+    "signature": "63daa4bf340a9ba3a31fdc666292ed9bb4f79303"
   },
   "compilationOptions": {
     "defines": [
@@ -2761,6 +2761,78 @@
           }
         }
       },
+      "SixLabors.Core/1.0.0-beta0004": {
+        "runtime": {
+          "lib/netcoreapp2.0/SixLabors.Core.dll": {}
+        },
+        "compile": {
+          "lib/netcoreapp2.0/SixLabors.Core.dll": {}
+        }
+      },
+      "SixLabors.Fonts/1.0.0-beta0003": {
+        "dependencies": {
+          "SixLabors.Core": "1.0.0-beta0004",
+          "System.Collections.Immutable": "1.4.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/SixLabors.Fonts.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/SixLabors.Fonts.dll": {}
+        }
+      },
+      "SixLabors.ImageSharp/1.0.0-beta0002": {
+        "dependencies": {
+          "SixLabors.Core": "1.0.0-beta0004",
+          "System.Buffers": "4.4.0",
+          "System.Memory": "4.4.0-preview2-25405-01",
+          "System.Runtime.CompilerServices.Unsafe": "4.4.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/SixLabors.ImageSharp.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/SixLabors.ImageSharp.dll": {}
+        }
+      },
+      "SixLabors.ImageSharp.Drawing/1.0.0-beta0002": {
+        "dependencies": {
+          "SixLabors.Core": "1.0.0-beta0004",
+          "SixLabors.ImageSharp": "1.0.0-beta0002",
+          "SixLabors.Shapes": "1.0.0-beta0003",
+          "SixLabors.Shapes.Text": "1.0.0-beta0003"
+        },
+        "runtime": {
+          "lib/netstandard2.0/SixLabors.ImageSharp.Drawing.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/SixLabors.ImageSharp.Drawing.dll": {}
+        }
+      },
+      "SixLabors.Shapes/1.0.0-beta0003": {
+        "dependencies": {
+          "SixLabors.Core": "1.0.0-beta0004",
+          "System.Buffers": "4.4.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/SixLabors.Shapes.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/SixLabors.Shapes.dll": {}
+        }
+      },
+      "SixLabors.Shapes.Text/1.0.0-beta0003": {
+        "dependencies": {
+          "SixLabors.Fonts": "1.0.0-beta0003",
+          "SixLabors.Shapes": "1.0.0-beta0003"
+        },
+        "runtime": {
+          "lib/netstandard2.0/SixLabors.Shapes.Text.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/SixLabors.Shapes.Text.dll": {}
+        }
+      },
       "SQLitePCLRaw.bundle_green/1.1.7": {
         "dependencies": {
           "SQLitePCLRaw.core": "1.1.7",
@@ -3381,6 +3453,28 @@
           "System.Reflection.Extensions": "4.3.0",
           "System.Resources.ResourceManager": "4.3.0",
           "System.Runtime": "4.3.0"
+        }
+      },
+      "System.Memory/4.4.0-preview2-25405-01": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "2.0.0",
+          "System.Runtime.CompilerServices.Unsafe": "4.4.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Memory.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/unix/lib/netcoreapp2.0/System.Memory.dll": {
+            "rid": "unix",
+            "assetType": "runtime"
+          },
+          "runtimes/win/lib/netcoreapp2.0/System.Memory.dll": {
+            "rid": "win",
+            "assetType": "runtime"
+          }
+        },
+        "compile": {
+          "ref/netstandard2.0/System.Memory.dll": {}
         }
       },
       "System.Net.Http/4.3.0": {
@@ -4181,6 +4275,10 @@
         }
       },
       "Common/1.0.0": {
+        "dependencies": {
+          "SixLabors.ImageSharp": "1.0.0-beta0002",
+          "SixLabors.ImageSharp.Drawing": "1.0.0-beta0002"
+        },
         "runtime": {
           "Common.dll": {}
         },
@@ -5823,6 +5921,48 @@
       "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
       "hashPath": "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
     },
+    "SixLabors.Core/1.0.0-beta0004": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cvARRKizglXytmRuVfDA/qCsHzahFApCkzdwtHi07Im0xKL36tPf16gWnPWyEGQJXBd3NzkmXFKPSv1gRSd4zQ==",
+      "path": "sixlabors.core/1.0.0-beta0004",
+      "hashPath": "sixlabors.core.1.0.0-beta0004.nupkg.sha512"
+    },
+    "SixLabors.Fonts/1.0.0-beta0003": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Cpq+1P2koooh+eHyVmKn+MqvbhgVf1uF3+BtXDtobvM1fTctyplXBg30RGvmG4TAaxYt/VFfpggvHTDl+Dyxvw==",
+      "path": "sixlabors.fonts/1.0.0-beta0003",
+      "hashPath": "sixlabors.fonts.1.0.0-beta0003.nupkg.sha512"
+    },
+    "SixLabors.ImageSharp/1.0.0-beta0002": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-sTOUx0gIDkIcedB/bcWNJIaeVEHV5UTEYxW0haMjV8fNO+ah2OyaH4Uxoago0OLYpM3RlSRCXZn5D8beyo2Sxw==",
+      "path": "sixlabors.imagesharp/1.0.0-beta0002",
+      "hashPath": "sixlabors.imagesharp.1.0.0-beta0002.nupkg.sha512"
+    },
+    "SixLabors.ImageSharp.Drawing/1.0.0-beta0002": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ZbBgbsf338N7Zk57iUQshUAaVzXNleZmXf/NQfhOPUkQxdcw5dm8k0bMIywHXWcI4OTGMwsABoYfQ94w3vg4Bw==",
+      "path": "sixlabors.imagesharp.drawing/1.0.0-beta0002",
+      "hashPath": "sixlabors.imagesharp.drawing.1.0.0-beta0002.nupkg.sha512"
+    },
+    "SixLabors.Shapes/1.0.0-beta0003": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-fwKhkZ3PLZ9cWebaZPvMsVAE1mfAYra6DH+J7EhPIbXjx+QGEVkI1irpWmOJ71k5qhd+d6DkYWe6P3ofNcwEOA==",
+      "path": "sixlabors.shapes/1.0.0-beta0003",
+      "hashPath": "sixlabors.shapes.1.0.0-beta0003.nupkg.sha512"
+    },
+    "SixLabors.Shapes.Text/1.0.0-beta0003": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-zzDMRJpcSe0xDu8eaOU4uiN2JBJvt4ibBevDFcTjy6L2fEoIgDaly2SHMMr/Wkpnt4WoKK4DPhmxng4SpRWRhQ==",
+      "path": "sixlabors.shapes.text/1.0.0-beta0003",
+      "hashPath": "sixlabors.shapes.text.1.0.0-beta0003.nupkg.sha512"
+    },
     "SQLitePCLRaw.bundle_green/1.1.7": {
       "type": "package",
       "serviceable": true,
@@ -6165,6 +6305,13 @@
       "sha512": "sha512-Yn/WfYe9RoRfmSLvUt2JerP0BTGGykCZkQPgojaxgzF2N0oPo+/AhB8TXOpdCcNlrG3VRtsamtK2uzsp3cqRVw==",
       "path": "system.linq.queryable/4.0.1",
       "hashPath": "system.linq.queryable.4.0.1.nupkg.sha512"
+    },
+    "System.Memory/4.4.0-preview2-25405-01": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9YCuIA7uv/aEGbwUGQ4QhlrxFgPW/CPwz32xoxSwnv2SIDqmeDDtO4RF+tN+LUzVLBa/vm24xc5rxzSNo1VBdw==",
+      "path": "system.memory/4.4.0-preview2-25405-01",
+      "hashPath": "system.memory.4.4.0-preview2-25405-01.nupkg.sha512"
     },
     "System.Net.Http/4.3.0": {
       "type": "package",
