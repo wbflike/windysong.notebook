@@ -5291,6 +5291,7 @@
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
           "Common": "1.0.0",
+          "Microsoft.Extensions.Caching.Memory": "2.0.0",
           "WindySong.NoteBook.Data": "1.0.0"
         },
         "compile": {

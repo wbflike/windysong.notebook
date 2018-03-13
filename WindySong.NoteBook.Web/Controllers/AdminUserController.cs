@@ -65,6 +65,7 @@ namespace WindySong.NoteBook.Web.Controllers
         {
             return View();
         }
+
         [ValidateAntiForgeryToken]
         [HttpPost]
         public IActionResult UserPhoto(IFormFile userPhoto)
@@ -150,7 +151,7 @@ namespace WindySong.NoteBook.Web.Controllers
             try
             {
                 bool bl = false;
-                bl = Photo.GetThumbnail(filename, thumbnailPath+ shortfilename, 64, 64);
+                bl = Images.ThumbnailImage(filename, thumbnailPath+ shortfilename, 64, 64);
                 if(bl)
                 {
                     _userApp.SetUserPhoto(int.Parse(User.FindFirstValue(ClaimTypes.Sid)), shortfilename);
