@@ -17,6 +17,7 @@ using WindySong.NoteBook.App;
 using WindySong.NoteBook.App.Entity;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 
 namespace WindySong.NoteBook.Web
 {
@@ -33,8 +34,7 @@ namespace WindySong.NoteBook.Web
         public void ConfigureServices(IServiceCollection services)
         {
             //添加缓存服务
-            services.AddMemoryCache();
-            
+            //services.AddMemoryCache();
             //添加Session服务
             services.AddSession();
             //安装mvc服务
@@ -46,7 +46,11 @@ namespace WindySong.NoteBook.Web
             services.AddScoped<ISysConfigAppService, SysConfigAppService>();
             services.AddScoped<IUserAppService, UserAppService>();
             services.AddScoped<INoteBookAppService, NoteBookAppService>();
-            services.AddScoped<ICacheService, MemoryCacheService>(a=> { return new MemoryCacheService("hello"); });
+            //注入缓存接口和实现类
+            //services.AddScoped<ICacheService, MemoryCacheService>();//第一种写法
+            //第二种写法
+            //var cacheService = new MemoryCacheService(new MemoryCache(Options.Create(new MemoryCacheOptions())));
+            //services.AddScoped<ICacheService>(_ => cacheService);
 
             //安装Cookies服务
             services.AddAuthentication(options =>
