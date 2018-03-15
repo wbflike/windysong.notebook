@@ -23,19 +23,12 @@ namespace WindySong.NoteBook.Web.Controllers
     {
         //用户操作接口
         private IUserAppService _userApp;
-        private IMemoryCache _cache;
-        public AdminUserController(IUserAppService userApp, IMemoryCache memoryCache)
+        public AdminUserController(IUserAppService userApp)
         {
             this._userApp = userApp;
-            _cache = memoryCache;
         }
         public IActionResult Password()
         {
-            string test = "";
-            bool bl;
-            bl = _cache.TryGetValue("123", out test);
-            string str = "";
-            str =  _cache.Get("123").ToString();
             return View();
         }
         //Token验证，防止CSRF XSS攻击

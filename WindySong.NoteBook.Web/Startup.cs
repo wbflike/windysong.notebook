@@ -21,6 +21,9 @@ using Microsoft.Extensions.Options;
 
 namespace WindySong.NoteBook.Web
 {
+    /// <summary>
+    /// 程序启用的时候运行一次
+    /// </summary>
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -34,7 +37,7 @@ namespace WindySong.NoteBook.Web
         public void ConfigureServices(IServiceCollection services)
         {
             //添加缓存服务
-            //services.AddMemoryCache();
+            services.AddMemoryCache();
             //添加Session服务
             services.AddSession();
             //安装mvc服务
@@ -49,8 +52,8 @@ namespace WindySong.NoteBook.Web
             //注入缓存接口和实现类
             //services.AddScoped<ICacheService, MemoryCacheService>();//第一种写法
             //第二种写法
-            //var cacheService = new MemoryCacheService(new MemoryCache(Options.Create(new MemoryCacheOptions())));
-            //services.AddScoped<ICacheService>(_ => cacheService);
+            var cacheService = new MemoryCacheService(new MemoryCache(Options.Create(new MemoryCacheOptions())));
+            services.AddScoped<ICacheService>(_ => cacheService);
 
             //安装Cookies服务
             services.AddAuthentication(options =>
@@ -67,6 +70,7 @@ namespace WindySong.NoteBook.Web
 
             //获取网站配置信息
             this.GetSysConfig();
+            this.SetMemoryCache(cacheService);
             //运行SQL拦截器
             //new DBInterceptor();
         }
@@ -111,7 +115,7 @@ namespace WindySong.NoteBook.Web
         /// <summary>
         /// 获取网站配置信息
         /// </summary>
-        public void GetSysConfig()
+        private void GetSysConfig()
         {
             //获取网站配置信息
             AppService app = new AppService();
@@ -119,6 +123,11 @@ namespace WindySong.NoteBook.Web
             WebSiteSysConfig.siteName = sysConfig.siteName;
             WebSiteSysConfig.siteKeyWords = sysConfig.siteKeyWords;
             WebSiteSysConfig.siteDescription = sysConfig.siteDescription;
+        }
+
+        private void SetMemoryCache(ICacheService cache)
+        {
+            cache.Add("wbf","871102");
         }
 
     }

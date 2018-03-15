@@ -10,15 +10,8 @@ namespace WindySong.NoteBook.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private IMemoryCache _cache;
-        public HomeController(IMemoryCache memoryCache)
-        {
-            _cache = memoryCache;
-        }
         public IActionResult Index()
         {
-            string bl = "";
-            bl = _cache.Set("123", "Hello");
             return View();
         }
     }
