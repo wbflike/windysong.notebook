@@ -65,11 +65,12 @@ namespace WindySong.NoteBook.Web
                 {
                     o.Cookie.HttpOnly = true;//禁止客户端JS读取cookie
                     o.LoginPath = new PathString("/Login/Index");//登录页面
-                    o.Events = new MyCookieEvents();//注册自己的cookie事件
+                    o.Events = new MyCookieEvents(cacheService);//注册自己的cookie事件
                 });
 
             //获取网站配置信息
             this.GetSysConfig();
+            //设置缓存
             this.SetMemoryCache(cacheService);
             //运行SQL拦截器
             //new DBInterceptor();
@@ -127,7 +128,13 @@ namespace WindySong.NoteBook.Web
 
         private void SetMemoryCache(ICacheService cache)
         {
-            cache.Add("wbf","871102");
+            List<string> list = new List<string>();
+            AppService app = new AppService();
+            list = app.GetUsersId();
+            foreach(var v in list)
+            {
+                cache.Add("userid:"+v, v);
+            }
         }
 
     }

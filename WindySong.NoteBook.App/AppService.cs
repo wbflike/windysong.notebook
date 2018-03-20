@@ -74,5 +74,21 @@ namespace WindySong.NoteBook.App
             return users.photo;
         }
 
+        /// <summary>
+        /// 获取usersid集合
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetUsersId()
+        {
+            IQuery<Users> q = this.DbContext.Query<Users>();
+            List<Users> users = q.Where(a => 1 == 1).ToList();
+            List<string> list = new List<string>();
+            foreach(var a in users)
+            {
+                list.Add(a.id.ToString());
+            }
+            return list;
+        }
+
     }
 }
