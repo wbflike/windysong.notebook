@@ -344,6 +344,7 @@
   <ItemGroup>
     <Folder Include="Upload\UserPhoto\" />
     <Folder Include="Upload\UserPhotoThumbnail\" />
+    <Folder Include="Upload\UserPhotoCut\" />
     <Folder Include="wwwroot\plugins\" />
   </ItemGroup>
 

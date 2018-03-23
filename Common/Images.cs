@@ -37,7 +37,7 @@ namespace Common
         }
 
         /// <summary>
-        /// 
+        /// 裁图
         /// </summary>
         /// <param name="left">开始裁图的x坐标,相当于用left和top在图片上定位出一个点，走这个点开始裁</param>
         /// <param name="top">开始裁图的y坐标,相当于用left和top在图片上定位出一个点，走这个点开始裁</param>
@@ -45,12 +45,22 @@ namespace Common
         /// <param name="height">裁图的高度</param>
         /// <param name="inputPath">输入路径包含文件名</param>
         /// <param name="outputPath">输出路径包含文件名</param>
-        public static void CutImage(int left, int top, int width, int height, string inputPath, string outputPath)
+        /// <returns></returns>
+        public static bool CutImage(int left, int top, int width, int height, string inputPath, string outputPath)
         {
-            using (Image<Rgba32> imageOld = Image.Load<Rgba32>(inputPath))
+            try
             {
-                imageOld.Clone(img => img.Crop(new Rectangle { X = left, Y = top, Width = width, Height = height })).Save(outputPath);
+                using (Image<Rgba32> imageOld = Image.Load<Rgba32>(inputPath))
+                {
+                    imageOld.Clone(img => img.Crop(new Rectangle { X = left, Y = top, Width = width, Height = height })).Save(outputPath);
+                }
+                return true;
             }
+            catch (Exception e)
+            {
+                return false;
+            }
+
         }
     }
 }

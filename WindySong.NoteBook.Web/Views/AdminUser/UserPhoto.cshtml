@@ -17,6 +17,7 @@
     <link href="~/css/animate.css" rel="stylesheet">
     <link href="~/css/style.css?v=4.1.0" rel="stylesheet">
     <link href="~/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="~/css/plugins/cropper/cropper.min.css" rel="stylesheet">
     <!-- 全局js -->
     <script src="~/js/jquery.min.js?v=2.1.4"></script>
     <script src="~/js/bootstrap.min.js?v=3.3.6"></script>
@@ -29,7 +30,15 @@
     <script src="~/js/plugins/layer/layer.js"></script>
     <!--文件选择框美化-->
     <script src="~/js/plugins/filestyle/bootstrap-filestyle.js"></script>
-
+    <!--cropper-->
+    <script src="~/js/plugins/cropper/cropper.min.js"></script>
+    <style>
+        .img-preview {
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body class="gray-bg">
     <div class="wrapper wrapper-content animated fadeInRight">
@@ -38,39 +47,148 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>头像上传 <small></small></h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-                        <form method="post" id="myform" class="form-horizontal" asp-controller="AdminUser" asp-action="UserPhoto" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">选择文件</label>
-                                <div class="col-sm-10">
-                                    <div class="form-group">
-                                        <!--使用form-group包裹表单，才能正确的显示前端验证提示信息-->
-                                        <input type="file" class ="filestyle" data-buttonName ="btn-primary" id="userPhoto" name="userPhoto">
-                                        <script>$(":file").filestyle({ buttonName: "btn-primary", buttonBefore: true });</script>
-                                        @*<input type="file"  id="userPhoto" name="userPhoto">*@
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="hr-line-dashed"></div>
-                            <div class="form-group">
-                                <div class="col-sm-4 col-sm-offset-2">
-                                    <button id="submitForm" class="btn btn-primary" type="button">保存内容</button>
-                                </div>
-                            </div>
-                        </form>
-
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="container">
+                @*<div class="row">
+                        <div class="col-sm-12 text-center">
+                            <label for="input" class="btn btn-danger" id="">
+                                <span>选择图片</span>
+                                <input type="file" id="input" class="sr-only">
+                            </label>
+                        </div>
+                    </div>*@
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-2">
+                        <img src="" id="photo">
+                    </div>
+                    <div class="col-sm-2">
+                        <div>
+                            <p>
+                                预览(100*100)：
+                            </p>
+                            <div class="img-preview">
+                            </div>
+                        </div>
+                        <div class="docs-data">
+                            <div class="input-group">
+                                <label class="input-group-addon" for="dataX">X</label>
+                                <input class="form-control" id="dataX" name="dataX" type="text" placeholder="x">
+                                <span class="input-group-addon">px</span>
+                            </div>
+                            <div class="input-group">
+                                <label class="input-group-addon" for="dataY">Y</label>
+                                <input class="form-control" id="dataY" name="dataY" type="text" placeholder="y">
+                                <span class="input-group-addon">px</span>
+                            </div>
+                            <div class="input-group">
+                                <label class="input-group-addon" for="dataWidth">Width</label>
+                                <input class="form-control" id="dataWidth" name="dataWidth" type="text" placeholder="width">
+                                <span class="input-group-addon">px</span>
+                            </div>
+                            <div class="input-group">
+                                <label class="input-group-addon" for="dataHeight">Height</label>
+                                <input class="form-control" id="dataHeight" name="dataHeight" type="text" placeholder="height">
+                                <span class="input-group-addon">px</span>
+                            </div>
+                            <div class="input-group">
+                                <label class="input-group-addon" for="dataRotate">Rotate</label>
+                                <input class="form-control" id="dataRotate" type="text" placeholder="rotate">
+                                <span class="input-group-addon">deg</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="ibox-content">
+                <form method="post" id="myform" class="form-horizontal" asp-controller="AdminUser" asp-action="UserPhoto" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">选择文件</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <!--使用form-group包裹表单，才能正确的显示前端验证提示信息-->
+                                <input type="file" class="filestyle" data-buttonName="btn-primary" id="userPhoto" name="userPhoto">
+                                <script>$(":file").filestyle({ buttonName: "btn-primary", buttonBefore: true });</script>
+                                @*<input type="file"  id="userPhoto" name="userPhoto">*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <button id="submitForm" class="btn btn-primary" type="button">保存内容</button>
+                        </div>
+                    </div>
+                </form>
 
+            </div>
+        </div>
+
+    </div>
+    <script>
+        $(function () {
+            initCropper($('#photo'), $('#userPhoto'));
+        });
+        // 修改自官方demo的js
+        var initCropper = function (img, input) {
+            var $image = img;
+            var options = {
+                aspectRatio: 1 / 1, // 纵横比
+                viewMode: 2,
+                preview: '.img-preview', // 预览图的class名
+                crop: function (data) {
+                    $("#dataX").val(Math.round(data.x));
+                    $("#dataY").val(Math.round(data.y));
+                    $("#dataHeight").val(Math.round(data.height));
+                    $("#dataWidth").val(Math.round(data.width));
+                    $("#dataRotate").val(Math.round(data.rotate));
+                    //console.log(Math.round(data.x));
+                    //console.log(Math.round(data.y));
+                    //console.log(Math.round(data.height));
+                    //console.log(Math.round(data.width));
+                    //console.log(Math.round(data.rotate));
+                }
+            };
+            $image.cropper(options);
+            var $inputImage = input;
+            var uploadedImageURL;
+            if (URL) {
+                // 给input添加监听
+                $inputImage.change(function () {
+                    var files = this.files;
+                    var file;
+                    if (!$image.data('cropper')) {
+                        return;
+                    }
+                    if (files && files.length) {
+                        file = files[0];
+                        // 判断是否是图像文件
+                        if (/^image\/\w+$/.test(file.type)) {
+                            // 如果URL已存在就先释放
+                            if (uploadedImageURL) {
+                                URL.revokeObjectURL(uploadedImageURL);
+                            }
+                            uploadedImageURL = URL.createObjectURL(file);
+                            // 销毁cropper后更改src属性再重新创建cropper
+                            $image.cropper('destroy').attr('src', uploadedImageURL).cropper(options);
+                            //$inputImage.val('');
+                        } else {
+                            PopupDia("请选择一个图像文件", "error", "error");
+                            $inputImage.val('');
+                        }
+                    }
+                });
+            } else {
+                $inputImage.prop('disabled', true).addClass('disabled');
+            }
+        }
+
+    </script>
     <script>
         $(document).ready(function () {
             //文档加载完成后添加保存按钮的单击事件
@@ -119,30 +237,34 @@
         var icon = "<i class='fa fa-times-circle'></i> ";
         $("#myform").validate({
             rules: {
-                oldPassword: {
+                userPhoto: {
                     required: true
                 }
             },
             messages: {
-                oldPassword: {
+                userPhoto: {
                     required: icon + "请选择文件"
                 }
             },
             //表单验证成功执行方法
             submitHandler: function (form) {
                 // js 获取文件对象
-                var fileObj = document.getElementById("userPhoto").files[0]; 
+                var fileObj = document.getElementById("userPhoto").files[0];
                 if (typeof (fileObj) == "undefined" || fileObj.size <= 0) {
                     PopupDia("请选择文件", "error", "error");
                     return;
                 }
+                
                 var formFile = new FormData();
                 //添加token
                 formFile.append("__RequestVerificationToken", $("input[name='__RequestVerificationToken'] ").val());
+                formFile.append("dataX", $("input[name='dataX'] ").val());
+                formFile.append("dataY", $("input[name='dataY'] ").val());
+                formFile.append("dataWidth", $("input[name='dataWidth'] ").val());
+                formFile.append("dataHeight", $("input[name='dataHeight'] ").val());
                 //加入文件对象
-                formFile.append("userPhoto", fileObj); 
+                formFile.append("userPhoto", fileObj);
                 var data = formFile;
-                
                 $.ajax({
                     url: '/AdminUser/UserPhoto',
                     cache: false,//上传文件无需缓存
@@ -167,7 +289,7 @@
                     var type = data.type;
 
                     PopupDia(title, text, type);
-                }               
+                }
             }
         });
     </script>

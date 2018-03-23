@@ -69,10 +69,11 @@ namespace WindySong.NoteBook.Web.Controllers
 
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public IActionResult UserPhoto(IFormFile userPhoto)
+        public IActionResult UserPhoto(IFormFile userPhoto,int dataX,int dataY,int dataWidth,int dataHeight)
         {
             string originalPath = Directory.GetCurrentDirectory() + @"/Upload/UserPhoto/";
             string thumbnailPath = Directory.GetCurrentDirectory() + @"/Upload/UserPhotoThumbnail/";
+            string cutPath = Directory.GetCurrentDirectory() + @"/Upload/UserPhotoCut/";
             var jsonResults = new JsonResultsString();
             // 文件大小
             long size = 0;
@@ -151,22 +152,25 @@ namespace WindySong.NoteBook.Web.Controllers
             }
             try
             {
-                bool bl = false;
-                bl = Images.ThumbnailImage(filename, thumbnailPath+ shortfilename, 64, 64);
-                if(bl)
+                bool cut = false;
+                cut = Images.CutImage(dataX, dataY, dataWidth, dataHeight, filename, cutPath + shortfilename);
+
+                bool thumbnail = false;
+                thumbnail = Images.ThumbnailImage(cutPath + shortfilename, thumbnailPath+ shortfilename, 64, 64);
+                if(thumbnail)
                 {
                     _userApp.SetUserPhoto(int.Parse(User.FindFirstValue(ClaimTypes.Sid)), shortfilename);
                     jsonResults = this.GetSwalJson(1, "上传成功", "success", "success");
                 }
                 else
                 {
-                    jsonResults = this.GetSwalJson(0, "上传失败，服务器保存错误", "error", "error");
+                    jsonResults = this.GetSwalJson(0, "上传失败，缩图失败", "error", "error");
                 }
                 
             }
             catch (Exception e)
             {
-                jsonResults = this.GetSwalJson(0, "上传失败，服务器保存错误", "error", "error");
+                jsonResults = this.GetSwalJson(0, "上传失败，图片处理异常", "error", "error");
             }
 
             return Json(jsonResults);
