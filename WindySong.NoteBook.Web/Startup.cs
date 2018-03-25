@@ -49,6 +49,7 @@ namespace WindySong.NoteBook.Web
             services.AddScoped<ISysConfigAppService, SysConfigAppService>();
             services.AddScoped<IUserAppService, UserAppService>();
             services.AddScoped<INoteBookAppService, NoteBookAppService>();
+            services.AddScoped<IFrontIndex, FrontIndex>();
             //注入缓存接口和实现类
             //services.AddScoped<ICacheService, MemoryCacheService>();//第一种写法
             //第二种写法
@@ -69,7 +70,7 @@ namespace WindySong.NoteBook.Web
                 });
 
             //获取网站配置信息
-            this.GetSysConfig();
+            this.GetSysConfig(cacheService);
             //设置缓存
             this.SetMemoryCache(cacheService);
             //运行SQL拦截器
@@ -103,20 +104,21 @@ namespace WindySong.NoteBook.Web
             });
             //添加session中间件
             app.UseSession();
-
+            //自定义400页面
+            app.UseStatusCodePagesWithReExecute("/errors/{0}");
             //添加自定义路由
             app.UseMvc(routes =>
             {
                 //defatul路由名称 控制器名称Home  方法名称 Index
                 routes.MapRoute("defatul", "{controller=Home}/{action=Index}/{id?}");
             });
-
+            
         }
 
         /// <summary>
         /// 获取网站配置信息
         /// </summary>
-        private void GetSysConfig()
+        private void GetSysConfig(ICacheService cache)
         {
             //获取网站配置信息
             AppService app = new AppService();
@@ -131,10 +133,16 @@ namespace WindySong.NoteBook.Web
             List<string> list = new List<string>();
             AppService app = new AppService();
             list = app.GetUsersId();
+            //将用户id添加到缓存
             foreach(var v in list)
             {
                 cache.Add("userid:"+v, v);
             }
+            //将网站信息添加到缓存
+            SysConfig sysConfig = app.GetSysConfig();
+            cache.Add("sitename", sysConfig.siteName);
+            cache.Add("sitekey", sysConfig.siteKeyWords);
+            cache.Add("sitedes", sysConfig.siteDescription);
         }
 
     }

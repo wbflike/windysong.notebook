@@ -1,0 +1,85 @@
+﻿@using WindySong.NoteBook.Web.Common
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>@WebSiteSysConfig.siteName</title>
+    <meta name="keywords" content="@WebSiteSysConfig.siteKeyWords">
+    <meta name="description" content="@WebSiteSysConfig.siteDescription">
+    <link rel="shortcut icon" href="~/favicon.ico">
+    <link href="~/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="~/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="~/css/animate.css" rel="stylesheet">
+    <link href="~/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="~/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <!-- 全局js -->
+    <script src="~/js/jquery.min.js?v=2.1.4"></script>
+    <script src="~/js/bootstrap.min.js?v=3.3.6"></script>
+    <!-- 自定义js -->
+    <script src="~/js/content.js?v=1.0.0"></script>
+    <!-- jQuery Validation plugin javascript-->
+    <script src="~/js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="~/js/plugins/validate/messages_zh.min.js"></script>
+    <!-- layer -->
+    <script src="~/js/plugins/layer/layer.js"></script>
+
+</head>
+<body class="gray-bg">
+    <div class="row  border-bottom white-bg dashboard-header">
+
+        <form method="post" id="myform" class="form-horizontal">
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <div class="col-sm-4 col-sm-offset-2">
+                    <button id="submitForm" class="btn btn-success btn-lg" type="button">生成首页静态文件</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript">
+            function PopupDia(strTitle, strText, strType) {
+                var iconnumber;
+                if (strType == "success") {
+                    iconnumber = 1;
+                }
+                else if (strType == "error") {
+                    iconnumber = 2;
+                }
+                else {
+                    iconnumber = 1;
+                }
+                layer.msg(strTitle + ',' + strText, { icon: iconnumber, offset: 't' });
+            }
+            $(document).ready(function () {
+                //文档加载完成后添加保存按钮的单击事件
+                $("#submitForm").click(function () {
+                    $.ajax({
+                        url: '/Home/Default',
+                        type: 'get',
+                        dataType: 'json',
+                        data: $("#myform").serialize(),
+                        cache: false,
+                        error: erryFunction,  //错误执行方法
+                        success: succFunction//成功执行方法
+                    });
+                    function erryFunction() {
+                        PopupDia("请求失败", "error", "error");
+                    }
+                    function succFunction(data) {
+                        //获取返回的json数据
+                        //获取返回的json数据
+                        var state = data.state;
+                        var title = data.title;
+                        var text = data.text;
+                        var type = data.type;
+
+                        PopupDia(title, text, type);
+                    }
+                });
+
+            });
+    </script>
+</body>
+</html>

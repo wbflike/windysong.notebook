@@ -1,0 +1,1253 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>&#x5B64;&#x706F;&#x5BD2;&#x7167;&#x96E8;&#xFF0C;&#x6DF1;&#x7AF9;&#x6697;&#x6D6E;&#x70DF;&#x3002;</title>
+    <meta charset="utf-8">
+    <meta name="keywords" content="SQL,C#,.net core">
+    <meta name="description" content="bf.w &#x7684;&#x4E2A;&#x4EBA;&#x7B14;&#x8BB0;&#x672C;">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/Front/image/favicon.ico">
+    <script src="/Front/js/jquery-1-10-2.min.js"></script>
+    <script src="/Front/js/jquery-ui.js"></script>
+    <script src="/Front/js/plugin.min.js"></script>
+    <script src="/Front/js/index.js"></script>
+    <link rel="stylesheet" href="/Front/css/jquery-ui.css">
+    <link rel="stylesheet" href="/Front/css/prism.css">
+    <link rel="stylesheet" href="/Front/css/style.css">
+</head>
+
+
+<body>
+
+    <div class="c-header clearfix">
+        <a class="c-logo" href="http://notebook.airuxu.cn/">Notebook</a>
+        <div class="c-nav">
+            <ul class="clearfix">
+                <li class="on"><a href="http://notebook.airuxu.cn/">Notebook</a></li>
+                <li><a href="https://github.com/wbflike" target="_blank">Github</a></li>
+                <!-- <li><a href="http://blog.airuxu.cn/" target="_blank">Blog</a></li>
+                <li><a href="http://candy-lab.com/" target="_blank">CandyLab</a></li> -->
+            </ul>
+        </div>
+        <a class="c-fork" href="https://github.com/iRuxu/notebook" target="_blank">+ Fork</a>
+    </div>
+
+    <div class="c-sidebar">
+        <div class="c-sidebar-list">
+            <ul>
+                        <li><a href="" name="nt-cat-css">Linux</a></li><!--通过顺序控制 class="c-tab" -->
+                        <li><a href="">Git</a></li>
+            </ul>
+        </div>
+        <div class="c-sidebar-footer">
+            <p class="u-link">
+                <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=mq6jr6Ovqq6vrtrr67T59fc" target="_blank"><img src="/Front/image/common/email.png" width="12px" alt="bf.w的电子邮件" title="Email to me"></a>
+                <!--<a class="u-twitter" href="https://www.twitter.com/yuanzi0512" target="_blank"><img src="~/Front/image/common/twitter.png" width="12px" alt="iruxu's Twitter'" title="Twitter"></a> -->
+                <a href="https://weibo.com/wbflike" target="_blank"><img src="/Front/image/common/sina.png" width="12px" alt="bf.w的微博" title="Weibo"></a>
+            </p>
+            <p>
+                <span class="u-copyright">&copy;2018 <a href="http://www.airuxu.cn">airuxu.cn</a></span>
+            </p>
+            <p>
+                <span class="u-copyright">前端来源 <a href="http://www.iruxu.com">源子</a></span>
+            </p>
+            <span class="u-copyright">滇ICP备17003655号-1</span>
+        </div>
+        <i class="u-folder" id="c-sidebar-folder"></i>
+    </div>
+    <div id="main" class="c-main">
+            <div id="Linux" class="c-tab">
+                    <div class="u-col">
+                            <div class="u-block">
+                                <h3>&#x6587;&#x4EF6;&#x5939;/&#x6587;&#x4EF6;<span>-</span></h3>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x663E;&#x793A;/&#x5207;&#x6362;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">cd</a> path
+                                                    <span>
+                                                        <p>切换至文件夹 cd /web/www/&nbsp;</p>
+<p>切换至上级目录 cd ..</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">pwd</a> 
+                                                    <span>
+                                                        <p>显示当前路径</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x521B;&#x5EFA;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">mkdir</a> dirname
+                                                    <span>
+                                                        <p>创建文件夹 mkdir testdir</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">touch</a> file
+                                                    <span>
+                                                        <p>创建文件 touch file1 file2..</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x67E5;&#x770B;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">ls</a> 
+                                                    <span>
+                                                        <p>列出当前目录下文件&nbsp;</p>
+<p>ls -al 列出当前目录下文件（包含隐藏文件）</p>
+<p>-a ：全部的文件，连同隐藏档( 开头为 . 的文件) 一起列出来(常用)</p>
+<p>-d ：仅列出目录本身，而不是列出目录内的文件数据(常用)</p>
+<p>-l ：长数据串列出，包含文件的属性与权限等等数据；(常用)</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">cat</a> file
+                                                    <span>
+                                                        <p>查看文件内容 cat file.txt</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x7F16;&#x8F91;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">vim</a> file
+                                                    <span>
+                                                        <p>编辑文件内容 vim file.txt</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">echo</a>  "text" >>file
+                                                    <span>
+                                                        <p>对文件输出内容 echo "text" &gt;&gt; file.txt</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x79FB;&#x52A8;/&#x91CD;&#x547D;&#x540D;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">mv</a> $from &to
+                                                    <span>
+                                                        <p>mv 文件名 文件名 : 将源文件名改为目标文件名&nbsp;</p>
+<p>mv 文件名 目录名 : 将文件移动到目标目录&nbsp;</p>
+<p>mv 目录名 目录名 : 目标目录已存在，将源目录移动到目标目录；目标目录不存在则改名&nbsp;</p>
+<p>mv 目录名 文件名 : 出错</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x590D;&#x5236;/&#x7C98;&#x8D34;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">cp</a> dir/file
+                                                    <span>
+                                                        <p>复制文件或目录</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x5220;&#x9664;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">rm</a> dir/file
+                                                    <span>
+                                                        <p>删除文件夹 rm -r dir1&nbsp;</p>
+<p>删除文件 rm file1 file2..</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">rmdir</a> dir
+                                                    <span>
+                                                        <p>删除空文件夹</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">chmod</a> 777 $file
+                                                    <span>
+                                                        <p>更改文件权限</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                            </div>
+                    </div>
+                    <div class="u-col">
+                            <div class="u-block">
+                                <h3>&#x7528;&#x6237;<span>-</span></h3>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x5E10;&#x53F7;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">useradd</a> $user
+                                                    <span>
+                                                        <p>添加用户</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">passwd</a> $user
+                                                    <span>
+                                                        <p>给$user设置密码</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">userdel</a> $user
+                                                    <span>
+                                                        <p>删除用户</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">usermod</a> $user
+                                                    <span>
+                                                        <p>修改用户</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x6743;&#x9650;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">chown</a>  -R $user $dir
+                                                    <span>
+                                                        <p>将目录权限给指定用户</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x7528;&#x6237;&#x7EC4;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">groupadd</a> $group
+                                                    <span>
+                                                        <p>新增用户组</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">groupdel</a> $group
+                                                    <span>
+                                                        <p>删除用户组</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">groupmod</a> $group
+                                                    <span>
+                                                        <p>修改用户组</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">newgrp</a> $group
+                                                    <span>
+                                                        <p>切换用户组</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                            </div>
+                    </div>
+                    <div class="u-col">
+                            <div class="u-block">
+                                <h3>Shell<span>-</span></h3>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x57FA;&#x672C;&#x8BED;&#x6CD5;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">#!/bin/bash</a> 
+                                                    <span>
+                                                        <p>指定解释器。需设置为777有执行权限</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">$0 $1 ..</a> 
+                                                    <span>
+                                                        <p>传递参数。$0为执行的文件名。</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">`expr 2 &#x2B; 2</a> 
+                                                    <span>
+                                                        <p>条件表达式要放在方括号之间，并且要有空格，例如: [$a==$b] 是错误的，必须写成 [ $a == $b ]。&nbsp;</p>
+<p>val=`expr $a \* $b`,乘号(*)前边必须加反斜杠(\)才能实现乘法运算；</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x53D8;&#x91CF;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">${var}</a> 
+                                                    <span>
+                                                        <p>定义变量 var=xxx ; 变量定义时不能留空格</p>
+<p>使用变量 echo ${var}</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">readonly</a> var
+                                                    <span>
+                                                        <p>设置变量为只读</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">unset</a> var
+                                                    <span>
+                                                        <p>删除变量，不能删除只读变量</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x5B57;&#x7B26;&#x4E32;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">${#string}</a> 
+                                                    <span>
+                                                        <p>获取字符串长度</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">${string:1:4}</a> 
+                                                    <span>
+                                                        <p>提取子字符串，起始位置与字符个数</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x6570;&#x7EC4;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">arr=(val0 val1 ..)</a> 
+                                                    <span>
+                                                        <p>定义数组</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">&gt;${arr[0]}</a> 
+                                                    <span>
+                                                        <p>数组元素，可使用@读取全部元素</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                            </div>
+                    </div>
+                    <div class="u-col">
+                            <div class="u-block">
+                                <h3>vim<span>-</span></h3>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x6A21;&#x5F0F;&#x5207;&#x6362;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">i</a> 
+                                                    <span>
+                                                        <p>普通模式下，按i进入插入模式</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href=""> :</a> 
+                                                    <span>
+                                                        <p>普通模式下，按:进入命令行模式&nbsp;</p>
+<table style="border-collapse: collapse; width: 100%;" border="1">
+<tbody>
+<tr>
+<td style="width: 50%;">命令</td>
+<td style="width: 50%;">说明</td>
+</tr>
+<tr>
+<td style="width: 50%;">:w [$name/$path]</td>
+<td style="width: 50%;">保存</td>
+</tr>
+<tr>
+<td style="width: 50%;">:q</td>
+<td style="width: 50%;">退出</td>
+</tr>
+<tr>
+<td style="width: 50%;">:wq / :x</td>
+<td style="width: 50%;">保存并退出</td>
+</tr>
+<tr>
+<td style="width: 50%;">:q!</td>
+<td style="width: 50%;">强制退出不保存</td>
+</tr>
+<tr>
+<td style="width: 50%;">:wq!</td>
+<td style="width: 50%;">强制保存并退出</td>
+</tr>
+</tbody>
+</table>
+<p>普通模式下 shift+zz = 保存退出</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x6587;&#x672C;&#x7F16;&#x8F91;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">Delete</a> 
+                                                    <span>
+                                                        <p>删除文本（普通模式）&nbsp;</p>
+<p>x: 删除游标所在的字符&nbsp;</p>
+<p>dd: 删除整行&nbsp;</p>
+<p>d$: 删除至行尾&nbsp;</p>
+<p>d^: 删除至行首&nbsp;</p>
+<p>dG: 删除至文档结尾处</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">. / Ncmd</a> 
+                                                    <span>
+                                                        <p>重复操作（普通模式）&nbsp;</p>
+<p>.(小数点)表示重复上一次的命令操作&nbsp;</p>
+<p>Ncommand，N表示重复后面的次数</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">nG / gg / G</a> 
+                                                    <span>
+                                                        <p>行间跳转（普通模式）&nbsp;</p>
+<p>第N行 / gg第一行 / G最后一行</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">^ / $</a> 
+                                                    <span>
+                                                        <p>行内跳转（普通模式）</p>
+<p>行首 / 行尾&nbsp;</p>
+<p>Ctrl+o快速回到上一次(跳转前)光标所在位置</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">y</a> 
+                                                    <span>
+                                                        <p>复制（普通模式）&nbsp;</p>
+<p>普通模式中，yy复制游标所在的整行（3yy表示复制3行）</p>
+<p>普通模式中，y^ 复制至行首，或y0。不含光标所在处字符。</p>
+<p>普通模式中，y$ 复制至行尾。含光标所在处字符。</p>
+<p>普通模式中，yw 复制一个单词。</p>
+<p>普通模式中，y2w 复制两个单词。</p>
+<p>普通模式中，yG 复制至文本末。</p>
+<p>普通模式中，y1G 复制至文本开头。</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">p</a> 
+                                                    <span>
+                                                        <p>粘贴（普通模式）</p>
+<p>普通模式中，p(小写)代表粘贴至光标后（下）</p>
+<p>普通模式中，P(大写)代表粘贴至光标前（上）</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x5176;&#x4ED6;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">vim -x $file</a> 
+                                                    <span>
+                                                        <p>创建加密文档</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">:set nu</a> 
+                                                    <span>
+                                                        <p>显示行号</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                            </div>
+                    </div>
+            </div>
+            <div id="Git" class="c-tab">
+                    <div class="u-col">
+                            <div class="u-block">
+                                <h3>&#x914D;&#x7F6E;<span>-</span></h3>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x8D26;&#x6237;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">config</a> 
+                                                    <span>
+                                                        <p>/etc/gitconfig</p>
+<p>系统中对所有用户都普遍适用的配置。若使用 git config 时用 --system 选项，读写的就是这个文件。</p>
+<p>~/.gitconfig</p>
+<p>用户目录下的配置文件只适用于该用户。若使用 git config 时用 --global 选项，读写的就是这个文件。</p>
+<p>.git/config</p>
+<p>当前项目的 Git 目录中的配置文件（也就是工作目录中的）</p>
+<p>这里的配置仅仅针对当前项目有效。每一个级别的配置都会覆盖上层的相同配置，所以 .git/config 里的配置会覆盖 /etc/gitconfig 中的同名变量。</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git config</a> --global [key] [val]
+                                                    <span>
+                                                        <p>git config --global &lt;配置名称&gt; &lt;配置的值&gt;</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git config --list</a> 
+                                                    <span>
+                                                        <p>查看各项设置值。</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git config user.[option]</a> 
+                                                    <span>
+                                                        <p>$ git config --global user.name "username"&nbsp;</p>
+<p>$ git config --global user.email user@example.com&nbsp;</p>
+<p>使用了 --global 选项，那么该命令只需要运行一次，因为之后无论你在该系统上做任何事情， Git 都会使用那些信息。 当你想针对特定项目使用不同的用户名称与邮件地址时，可以在那个项目目录下运行没有 --global 选项的命令来配置。</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">ssh key</a> 
+                                                    <span>
+                                                        <p>1.查看是否已存在ssh密钥：cd ~/.ssh&nbsp;</p>
+<p>2.生成密钥： ssh-keygen -t rsa -C "username@mail.com" 按3个回车,密码为空&nbsp;</p>
+<p>3.得到文件：id_rsa私钥和id_rsa.pub公钥&nbsp;</p>
+<p>4.添加密钥到ssh：ssh-add $file.name</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x6587;&#x4EF6;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">GUI&#x4E71;&#x7801;</a> 
+                                                    <span>
+                                                        <p>gitconfig文件设置&nbsp;</p>
+<p>[gui]&nbsp;</p>
+<p>encoding = utf-8</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">.gitignore</a> 
+                                                    <span>
+                                                        <p>需要被忽略的文件</p>
+<p><a href="https://github.com/github/gitignore" target="_blank" rel="noopener">查看多语言范本</a></p>
+<p>.gitignore 的格式规范如下：</p>
+<p>所有空行或者以 ＃ 开头的行都会被 Git 忽略。</p>
+<p>可以使用标准的 glob 模式匹配。</p>
+<p>匹配模式可以以（/）开头防止递归。</p>
+<p>匹配模式可以以（/）结尾指定目录。</p>
+<p>要忽略指定模式以外的文件或目录，可以在模式前加上惊叹号（!）取反。</p>
+<p>所谓的 glob 模式是指 shell 所使用的简化了的正则表达式。&nbsp;</p>
+<p>星号（*）匹配零个或多个任意字符；</p>
+<p>[abc] 匹配任何一个列在方括号中的字符（这个例子要么匹配一个 a，要么匹配一个 b，要么匹配一个 c）；</p>
+<p>问号（?）只匹配一个任意字符；</p>
+<p>如果在方括号中使用短划线分隔两个字符，表示所有在这两个字符范围内的都可以匹配（比如 [0-9] 表示匹配所有 0 到 9 的数字）。&nbsp;</p>
+<p>使用两个星号（*) 表示匹配任意中间目录，比如`a/**/z` 可以匹配 a/z, a/b/z 或 `a/b/c/z`等。</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x522B;&#x540D;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git config --global alias.st status</a> 
+                                                    <span>
+                                                        <p>设置别名&nbsp;</p>
+<p>git config --global alias.$cmd "$cmd_old"&nbsp;</p>
+<p>如需删除在.git/config中修改</p>
+<p>git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit"&nbsp;</p>
+<p>git config --global alias.last 'log -1'&nbsp;</p>
+<p><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001375234012342f90be1fc4d81446c967bbdc19e7c03d3000" target="_blank" rel="noopener">参考资料</a></p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                            </div>
+                            <div class="u-block">
+                                <h3>&#x5176;&#x5B83;<span>-</span></h3>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x5176;&#x5B83;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git help </a> $cmd
+                                                    <span>
+                                                        
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git gc</a> 
+                                                    <span>
+                                                        <p>压缩仓库</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git fsck</a> 
+                                                    <span>
+                                                        <p>仓库一致性检测</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                            </div>
+                            <div class="u-block">
+                                <h3>&#x8D44;&#x6599;<span>-</span></h3>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x624B;&#x518C;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">&#x53C2;&#x8003;&#x624B;&#x518C;</a> 
+                                                    <span>
+                                                        <p><a href="https://git-scm.com/docs">参考手册</a></p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">&#x5B98;&#x65B9;&#x6559;&#x7A0B;</a> 
+                                                    <span>
+                                                        <p><a href="https://git-scm.com/book/zh/v2/" target="_blank" rel="noopener">官方教程</a></p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">&#x5ED6;&#x96EA;&#x5CF0;&#x6559;&#x7A0B;</a> 
+                                                    <span>
+                                                        <p><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">廖雪峰教程</a></p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                            </div>
+                    </div>
+                    <div class="u-col">
+                            <div class="u-block">
+                                <h3>&#x521B;&#x5EFA;<span>-</span></h3>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x521D;&#x59CB;&#x5316;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git init</a> 
+                                                    <span>
+                                                        <p>git init 使用当前目录初始化一个项目</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git init</a> [path]
+                                                    <span>
+                                                        <p>git init dirname 使用指定目录初始化一个项目</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">fork</a> 
+                                                    <span>
+                                                        <p>从别人的项目分支一个版本至你的git服务器仓库</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x514B;&#x9686;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git clone</a> [url]
+                                                    <span>
+                                                        <p>dir缺省时，会创建一个和项目同名的目录&nbsp;</p>
+<p>url支持多种数据传输协议，url可以为https:// 、git:// 、git@ 、user@server:path/to/repo.git等。</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git clone</a> [url] [path]
+                                                    <span>
+                                                        <p>指定dir时生成对应的文件夹名&nbsp;</p>
+<p>path为&ldquo;./&rdquo;时则在当前目录下克隆内容，不再生成项目名目录</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                            </div>
+                            <div class="u-block">
+                                <h3>&#x4FEE;&#x6539;<span>-</span></h3>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x6DFB;&#x52A0;/&#x63D0;&#x4EA4;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git add</a> [regexp]
+                                                    <span>
+                                                        <p>跟踪新文件，加入缓存区INDEX</p>
+<p>git add file1 file2 file3&nbsp;</p>
+<p>git add */.&nbsp;</p>
+<p>git add *.js</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git commit</a> -m "desc"
+                                                    <span>
+                                                        <p>提交修改，将缓存区内容添加到仓库中</p>
+<p>git commit -m "message"&nbsp;</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git commit</a> -a -m "desc"
+                                                    <span>
+                                                        <p>git commit -a -m "message" 跳过使用暂存区域直接提交（但不包含新建文件，仅修改与删除）</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git commit</a> 
+                                                    <span>
+                                                        <p>git commit 这种方式会启动文本编辑器以便输入本次提交的说明。</p>
+<p>默认会启用 shell 的环境变量 $EDITOR 所指定的软件，一般都是 vim 或 emacs。</p>
+<p>当然也可以按照 起步 介绍的方式，使用 git config --global core.editor 命令设定你喜欢的编辑软件。</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x79FB;&#x52A8;/&#x5220;&#x9664;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git rm</a> file [--cached][-f]
+                                                    <span>
+                                                        <p>git rm 将文件从缓存区和你的硬盘中(工作目录)删除</p>
+<p>git rm --cached 只从缓存区中移除，工作目录中保存</p>
+<p>git rm -f 强制删除，删除之前修改过并且已经放到暂存区域的&nbsp;</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git rm</a> -r dir
+                                                    <span>
+                                                        <p>git rm -r dirname 删除目录及目录内容&nbsp;</p>
+<p>当该目录没有stage时，无法进行该操作，直接执行shell命令rm操作即可。</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git mv</a> (from) (to) 
+                                                    <span>
+                                                        <p>同linux mv命令，自动判定执行&ldquo;移动&rdquo;或&ldquo;重命名&rdquo;操作。</p>
+<p>git mv 文件名 文件名 : 将源文件名改为目标文件名&nbsp;</p>
+<p>git mv 文件名 目录名 : 将文件移动到目标目录&nbsp;</p>
+<p>git mv 目录名 目录名 : 目标目录已存在，将源目录移动到目标目录；目标目录不存在则改名（当源文件为空时不可移动）&nbsp;</p>
+<p>git mv 目录名 文件名 : 出错</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x67E5;&#x770B;/&#x5BF9;&#x6BD4;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git status</a> [-s]
+                                                    <span>
+                                                        <p>检查状态</p>
+<p>git status -s 简易查看&nbsp;</p>
+<p>新添加的未跟踪文件前面有 ?? 标记&nbsp;</p>
+<p>新添加到暂存区中的文件前面有 A 标记</p>
+<p>修改过的文件前面有 M 标记。&nbsp;</p>
+<p>出现在右边的 M 表示该文件被修改了但是还没放入暂存区</p>
+<p>出现在靠左边的 M 表示该文件被修改了并放入了暂存区。</p>
+<p>AM状态的意思是，这个文件在我们将它添加到缓存之后又有改动</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git diff</a> [--cached]
+                                                    <span>
+                                                        <p>查看修改</p>
+<p>git diff : 尚未缓存的改动&nbsp;</p>
+<p>git diff --cached : 查看已缓存的改动 (同git diff --staged [1.6+])&nbsp;</p>
+<p>git diff HEAD : 查看已缓存的与未缓存的所有改动&nbsp;</p>
+<p>git diff --stat : 显示摘要而非整个 diff</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x5386;&#x53F2;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git log</a> [--pretty=oneline]
+                                                    <span>
+                                                        <p>git log 显示全部提交记录</p>
+<p>git log --pretty=oneline 美化显示</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git reflog</a> 
+                                                    <span>
+                                                        <p>查看每一次命令</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                            </div>
+                    </div>
+                    <div class="u-col">
+                            <div class="u-block">
+                                <h3>&#x5206;&#x652F;<span>-</span></h3>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x521B;&#x5EFA;/&#x5207;&#x6362;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git branch</a> 
+                                                    <span>
+                                                        <p>查看所有分支</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git branch</a> $dev
+                                                    <span>
+                                                        <p>创建分支</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git checkout</a> $dev
+                                                    <span>
+                                                        <p>切换分支</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git checkout</a> -b $dev
+                                                    <span>
+                                                        <p>创建并切换到该分支</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git checkout</a>  -b $name origin
+                                                    <span>
+                                                        <p>基于远程分支"origin"，创建一个分支</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git symbolic-ref</a> 
+                                                    <span>
+                                                        <p>创建新的空分支：&nbsp;</p>
+<p>git symbolic-ref HEAD refs/heads/$branchname&nbsp;</p>
+<p>rm .git/index&nbsp;</p>
+<p>git clean -fdx</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x5220;&#x9664;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git branch</a> -d $dev
+                                                    <span>
+                                                        <p>删除分支</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git branch</a> -D $dev
+                                                    <span>
+                                                        <p>强行删除分支</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x5BF9;&#x6BD4;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git diff</a> -D $dev
+                                                    <span>
+                                                        <p>对比两个分支</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                            </div>
+                            <div class="u-block">
+                                <h3>&#x5408;&#x5E76;<span>-</span></h3>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x5408;&#x5E76;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git merge</a> $dev
+                                                    <span>
+                                                        <p>合并指定分支到当前分支</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git merge</a> $origin/$dev
+                                                    <span>
+                                                        <p>合并指定远端分支到当前分支</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x5B58;&#x50A8;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git stash</a> 
+                                                    <span>
+                                                        <p>存储当前工作内容但不提交</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git stash</a> save "$temp"
+                                                    <span>
+                                                        <p>临时存储</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git stash</a> list
+                                                    <span>
+                                                        <p>查看</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git stash</a> pop
+                                                    <span>
+                                                        <p>恢复存储区内容并删除stash</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git stash</a> apply
+                                                    <span>
+                                                        <p>恢复</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git stash</a> drop
+                                                    <span>
+                                                        <p>删除</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                            </div>
+                            <div class="u-block">
+                                <h3>&#x6062;&#x590D;<span>-</span></h3>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x64A4;&#x9500;&#x4FEE;&#x6539;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git checkout</a> -- $file
+                                                    <span>
+                                                        <p>丢弃工作区的修改</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git reset</a> HEAD $file
+                                                    <span>
+                                                        <p>丢弃已经进入暂存区的修改</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x7248;&#x672C;&#x56DE;&#x9000;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git reset</a> --hard HEAD^
+                                                    <span>
+                                                        <p>HEAD表示当前版本,上个版本HEAD^,上上个版本HEAD^^,上100个版本HEAD~100。</p>
+<p>git reset HEAD 取消目前所有暂存的文件（仍在工作区）</p>
+<p>git reset HEAD filename 取消某个文件的暂存状态</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git reset</a> --hard HEAD^^
+                                                    <span>
+                                                        <p>回退到上上个版本</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git reset</a>  --hard $commit_id
+                                                    <span>
+                                                        <p>恢复到指定commit版本</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x627E;&#x56DE;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git fsck</a> --lost-found
+                                                    <span>
+                                                        <p>找出删除的提交对象</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git show</a> $commit_id
+                                                    <span>
+                                                        <p>查看某个提交对象的内容</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git rebase</a> $commit_id
+                                                    <span>
+                                                        <p>恢复指定commit</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                            </div>
+                    </div>
+                    <div class="u-col">
+                            <div class="u-block">
+                                <h3>&#x8FDC;&#x7AEF;<span>-</span></h3>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x8FDE;&#x63A5;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git remote</a>  -v
+                                                    <span>
+                                                        <p>查看全部远端</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git remote</a> add $origin $url
+                                                    <span>
+                                                        <p>添加一个远端地址。默认的为origin</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git remote</a> $url
+                                                    <span>
+                                                        <p>修改本地指向的远程仓库地址</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x83B7;&#x53D6;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git fetch</a> [$oigin $master]
+                                                    <span>
+                                                        <p>获取远端最新内容</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git pull</a>  $origin $master
+                                                    <span>
+                                                        <p>获取并合并远端最新内容</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x63D0;&#x4EA4;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git push</a> [-u] $origin $master
+                                                    <span>
+                                                        <p>发布本地$master分支到远端$origin&nbsp;</p>
+<p>第一次添加-u参数</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git push -f</a> 
+                                                    <span>
+                                                        <p>强制推送，适用于版本回退场景需覆盖远程</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git push</a> origin --delete $branch
+                                                    <span>
+                                                        <p>git push origin --delete $branch&nbsp;</p>
+<p>删除远端分支</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x8FFD;&#x8E2A;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git branch</a>  --track $name $origin/$name
+                                                    <span>
+                                                        <p>git branch --track $name $origin/$name&nbsp;</p>
+<p>创建一个本地与远端分支的追踪映射。当执行git pull $name时自动同步拉取</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                            </div>
+                            <div class="u-block">
+                                <h3>&#x6807;&#x7B7E;<span>-</span></h3>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x67E5;&#x770B;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git tag</a> 
+                                                    <span>
+                                                        <p>查看所有标签</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git show</a> $tag
+                                                    <span>
+                                                        <p>显示指定标签</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x521B;&#x5EFA;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git tag</a>  $name
+                                                    <span>
+                                                        <p>给当前commit打tag</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git tag</a> $name $commit_id
+                                                    <span>
+                                                        <p>给指定commit打tag</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git tag</a>  -a $name $commit_id -m "desc"
+                                                    <span>
+                                                        <p>指定标签同时添加描述</p>
+<p>git tag -a $name $commit_id -m "desc"</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x79FB;&#x9664;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git tag</a> -d $tag
+                                                    <span>
+                                                        <p>删除本地tag</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git push</a> $origin :refs/tags/$tag
+                                                    <span>
+                                                        <p>删除远端tag&nbsp;</p>
+<p>$ git push origin :refs/tags/$tag&nbsp;</p>
+<p>$ git push origin --delete $tag&nbsp;</p>
+<p>$ git push origin:$tags</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x63A8;&#x9001;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git push</a> $origin $ver
+                                                    <span>
+                                                        <p>推送tag</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git push</a>  $origin --tags
+                                                    <span>
+                                                        <p>推送全部tag</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                            </div>
+                    </div>
+                    <div class="u-col">
+                            <div class="u-block">
+                                <h3>&#x5B50;&#x5E93;<span>-</span></h3>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x6DFB;&#x52A0;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git submodule</a> add $url [path]
+                                                    <span>
+                                                        <p>添加子模块</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git submodule</a> status
+                                                    <span>
+                                                        <p>子模块状态</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git submodule</a> init
+                                                    <span>
+                                                        <p>子模块初始化</p>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <a href="">git submodule</a> update
+                                                    <span>
+                                                        <p>更新子模块</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x66F4;&#x65B0;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git submodule</a> sync
+                                                    <span>
+                                                        <p>1.更新 .gitsubmodule中对应submodule的条目URL&nbsp;</p>
+<p>2.更新 .git/config 中对应submodule的条目的URL&nbsp;</p>
+<p>3.执行 git submodule sync</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] &#x5220;&#x9664;</h4>
+                                        <ul>
+                                                <li>
+                                                    <a href="">git rm</a> --cached $subpath
+                                                    <span>
+                                                        <p>1.删除 .gitsubmodule中对应submodule的条目&nbsp;</p>
+<p>2.删除 .git/config 中对应submodule的条目&nbsp;</p>
+<p>3.执行 git rm --cached {submodule_path}</p>
+                                                    </span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                            </div>
+                    </div>
+                    <div class="u-col">
+                            <div class="u-block">
+                                <h3>&#x81EA;&#x52A8;&#x90E8;&#x7F72;<span>-</span></h3>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] Hooks</h4>
+                                        <ul>
+                                        </ul>
+                                    </div>
+                            </div>
+                    </div>
+                    <div class="u-col">
+                            <div class="u-block">
+                                <h3>&#x670D;&#x52A1;&#x5668;<span>-</span></h3>
+                                    <div class="u-list">
+                                        <h4>[<span>-</span>] Gitlab</h4>
+                                        <ul>
+                                        </ul>
+                                    </div>
+                            </div>
+                    </div>
+            </div>
+    </div>
+    <div class="c-snippet" id="snippet">
+        <h6 class="u-title" id="box-title">bf.w's Snippet Box</h6>
+        <span class="u-close" id="closebox">×</span>
+        <div class="m-box" id="box">
+            <!-- some snippet will be show-->
+        </div>
+    </div>
+
+</body>
+</html>

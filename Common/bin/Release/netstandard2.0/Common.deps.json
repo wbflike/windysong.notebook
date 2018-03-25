@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v2.0/",
-    "signature": "d5ef1509ab9594c5ee7350d5e7860d93d6b54c43"
+    "signature": "062c3f686945be3be606d6ce8e291411ae1cde32"
   },
   "compilationOptions": {},
   "targets": {
@@ -9,7 +9,10 @@
     ".NETStandard,Version=v2.0/": {
       "Common/1.0.0": {
         "dependencies": {
-          "NETStandard.Library": "2.0.0"
+          "NETStandard.Library": "2.0.0",
+          "SixLabors.ImageSharp": "1.0.0-beta0002",
+          "SixLabors.ImageSharp.Drawing": "1.0.0-beta0002",
+          "Microsoft.Extensions.Configuration.Abstractions": "2.0.0.0"
         },
         "runtime": {
           "Common.dll": {}
@@ -19,6 +22,98 @@
       "NETStandard.Library/2.0.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0"
+        }
+      },
+      "SixLabors.Core/1.0.0-beta0004": {
+        "dependencies": {
+          "NETStandard.Library": "2.0.0",
+          "System.Numerics.Vectors": "4.4.0"
+        },
+        "runtime": {
+          "lib/netstandard1.1/SixLabors.Core.dll": {}
+        }
+      },
+      "SixLabors.Fonts/1.0.0-beta0003": {
+        "dependencies": {
+          "SixLabors.Core": "1.0.0-beta0004",
+          "System.Collections.Immutable": "1.4.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/SixLabors.Fonts.dll": {}
+        }
+      },
+      "SixLabors.ImageSharp/1.0.0-beta0002": {
+        "dependencies": {
+          "SixLabors.Core": "1.0.0-beta0004",
+          "System.Buffers": "4.4.0",
+          "System.Memory": "4.4.0-preview2-25405-01",
+          "System.Runtime.CompilerServices.Unsafe": "4.4.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/SixLabors.ImageSharp.dll": {}
+        }
+      },
+      "SixLabors.ImageSharp.Drawing/1.0.0-beta0002": {
+        "dependencies": {
+          "SixLabors.Core": "1.0.0-beta0004",
+          "SixLabors.ImageSharp": "1.0.0-beta0002",
+          "SixLabors.Shapes": "1.0.0-beta0003",
+          "SixLabors.Shapes.Text": "1.0.0-beta0003"
+        },
+        "runtime": {
+          "lib/netstandard2.0/SixLabors.ImageSharp.Drawing.dll": {}
+        }
+      },
+      "SixLabors.Shapes/1.0.0-beta0003": {
+        "dependencies": {
+          "SixLabors.Core": "1.0.0-beta0004",
+          "System.Buffers": "4.4.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/SixLabors.Shapes.dll": {}
+        }
+      },
+      "SixLabors.Shapes.Text/1.0.0-beta0003": {
+        "dependencies": {
+          "SixLabors.Fonts": "1.0.0-beta0003",
+          "SixLabors.Shapes": "1.0.0-beta0003"
+        },
+        "runtime": {
+          "lib/netstandard2.0/SixLabors.Shapes.Text.dll": {}
+        }
+      },
+      "System.Buffers/4.4.0": {
+        "runtime": {
+          "lib/netstandard2.0/System.Buffers.dll": {}
+        }
+      },
+      "System.Collections.Immutable/1.4.0": {
+        "runtime": {
+          "lib/netstandard2.0/System.Collections.Immutable.dll": {}
+        }
+      },
+      "System.Memory/4.4.0-preview2-25405-01": {
+        "dependencies": {
+          "System.Numerics.Vectors": "4.4.0",
+          "System.Runtime.CompilerServices.Unsafe": "4.4.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Memory.dll": {}
+        }
+      },
+      "System.Numerics.Vectors/4.4.0": {
+        "runtime": {
+          "lib/netstandard2.0/System.Numerics.Vectors.dll": {}
+        }
+      },
+      "System.Runtime.CompilerServices.Unsafe/4.4.0": {
+        "runtime": {
+          "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll": {}
+        }
+      },
+      "Microsoft.Extensions.Configuration.Abstractions/2.0.0.0": {
+        "runtime": {
+          "Microsoft.Extensions.Configuration.Abstractions.dll": {}
         }
       }
     }
@@ -42,6 +137,88 @@
       "sha512": "sha512-7jnbRU+L08FXKMxqUflxEXtVymWvNOrS8yHgu9s6EM8Anr6T/wIX4nZ08j/u3Asz+tCufp3YVwFSEvFTPYmBPA==",
       "path": "netstandard.library/2.0.0",
       "hashPath": "netstandard.library.2.0.0.nupkg.sha512"
+    },
+    "SixLabors.Core/1.0.0-beta0004": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cvARRKizglXytmRuVfDA/qCsHzahFApCkzdwtHi07Im0xKL36tPf16gWnPWyEGQJXBd3NzkmXFKPSv1gRSd4zQ==",
+      "path": "sixlabors.core/1.0.0-beta0004",
+      "hashPath": "sixlabors.core.1.0.0-beta0004.nupkg.sha512"
+    },
+    "SixLabors.Fonts/1.0.0-beta0003": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Cpq+1P2koooh+eHyVmKn+MqvbhgVf1uF3+BtXDtobvM1fTctyplXBg30RGvmG4TAaxYt/VFfpggvHTDl+Dyxvw==",
+      "path": "sixlabors.fonts/1.0.0-beta0003",
+      "hashPath": "sixlabors.fonts.1.0.0-beta0003.nupkg.sha512"
+    },
+    "SixLabors.ImageSharp/1.0.0-beta0002": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-sTOUx0gIDkIcedB/bcWNJIaeVEHV5UTEYxW0haMjV8fNO+ah2OyaH4Uxoago0OLYpM3RlSRCXZn5D8beyo2Sxw==",
+      "path": "sixlabors.imagesharp/1.0.0-beta0002",
+      "hashPath": "sixlabors.imagesharp.1.0.0-beta0002.nupkg.sha512"
+    },
+    "SixLabors.ImageSharp.Drawing/1.0.0-beta0002": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ZbBgbsf338N7Zk57iUQshUAaVzXNleZmXf/NQfhOPUkQxdcw5dm8k0bMIywHXWcI4OTGMwsABoYfQ94w3vg4Bw==",
+      "path": "sixlabors.imagesharp.drawing/1.0.0-beta0002",
+      "hashPath": "sixlabors.imagesharp.drawing.1.0.0-beta0002.nupkg.sha512"
+    },
+    "SixLabors.Shapes/1.0.0-beta0003": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-fwKhkZ3PLZ9cWebaZPvMsVAE1mfAYra6DH+J7EhPIbXjx+QGEVkI1irpWmOJ71k5qhd+d6DkYWe6P3ofNcwEOA==",
+      "path": "sixlabors.shapes/1.0.0-beta0003",
+      "hashPath": "sixlabors.shapes.1.0.0-beta0003.nupkg.sha512"
+    },
+    "SixLabors.Shapes.Text/1.0.0-beta0003": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-zzDMRJpcSe0xDu8eaOU4uiN2JBJvt4ibBevDFcTjy6L2fEoIgDaly2SHMMr/Wkpnt4WoKK4DPhmxng4SpRWRhQ==",
+      "path": "sixlabors.shapes.text/1.0.0-beta0003",
+      "hashPath": "sixlabors.shapes.text.1.0.0-beta0003.nupkg.sha512"
+    },
+    "System.Buffers/4.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AwarXzzoDwX6BgrhjoJsk6tUezZEozOT5Y9QKF94Gl4JK91I4PIIBkBco9068Y9/Dra8Dkbie99kXB8+1BaYKw==",
+      "path": "system.buffers/4.4.0",
+      "hashPath": "system.buffers.4.4.0.nupkg.sha512"
+    },
+    "System.Collections.Immutable/1.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-71hw5RUJRu5+q/geUY69gpXD8Upd12cH+F3MwpXV2zle7Bqqkrmc1JblOTuvUcgmdnUtQvBlV5e1d6RH+H2lvA==",
+      "path": "system.collections.immutable/1.4.0",
+      "hashPath": "system.collections.immutable.1.4.0.nupkg.sha512"
+    },
+    "System.Memory/4.4.0-preview2-25405-01": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9YCuIA7uv/aEGbwUGQ4QhlrxFgPW/CPwz32xoxSwnv2SIDqmeDDtO4RF+tN+LUzVLBa/vm24xc5rxzSNo1VBdw==",
+      "path": "system.memory/4.4.0-preview2-25405-01",
+      "hashPath": "system.memory.4.4.0-preview2-25405-01.nupkg.sha512"
+    },
+    "System.Numerics.Vectors/4.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UiLzLW+Lw6HLed1Hcg+8jSRttrbuXv7DANVj0DkL9g6EnnzbL75EB7EWsw5uRbhxd/4YdG8li5XizGWepmG3PQ==",
+      "path": "system.numerics.vectors/4.4.0",
+      "hashPath": "system.numerics.vectors.4.4.0.nupkg.sha512"
+    },
+    "System.Runtime.CompilerServices.Unsafe/4.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9dLLuBxr5GNmOfl2jSMcsHuteEg32BEfUotmmUkmZjpR3RpVHE8YQwt0ow3p6prwA1ME8WqDVZqrr8z6H8G+Kw==",
+      "path": "system.runtime.compilerservices.unsafe/4.4.0",
+      "hashPath": "system.runtime.compilerservices.unsafe.4.4.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Configuration.Abstractions/2.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

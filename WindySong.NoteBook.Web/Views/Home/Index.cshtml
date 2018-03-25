@@ -1,34 +1,35 @@
-﻿<!DOCTYPE html>
+﻿@model WindySong.NoteBook.App.ViewModels.Front.IndexModel
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title>iRuxu NoteBook</title>
+    <title>@ViewData["SiteName"]</title>
     <meta charset="utf-8">
-    <meta name="keywords" content="javascript,css,html,nodejs,python,go,c,git,linux,mongoDB,MySQL,regexp">
-    <meta name="description" content="iruxu's Notebook for web develope">
+    <meta name="keywords" content="@ViewData["SiteKey"]">
+    <meta name="description" content="@ViewData["SiteDes"]">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-transform">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="/Front/image/favicon.ico">
-    <script src="/Front/js/jquery-1-10-2.min.js"></script>
-    <script src="/Front/js/jquery-ui.js"></script>
-    <script src="/Front/js/rainbow.min.js"></script>
-    <script src="/Front/js/index.js"></script>
-    <link rel="stylesheet" href="/Front/css/jquery-ui.css">
-    <link rel="stylesheet" href="/Front/css/monokai.css">
-    <link rel="stylesheet" href="/Front/css/style.css">
+    <link rel="icon" type="image/x-icon" href="~/Front/image/favicon.ico">
+    <script src="~/Front/js/jquery-1-10-2.min.js"></script>
+    <script src="~/Front/js/jquery-ui.js"></script>
+    <script src="~/Front/js/plugin.min.js"></script>
+    <script src="~/Front/js/index.js"></script>
+    <link rel="stylesheet" href="~/Front/css/jquery-ui.css">
+    <link rel="stylesheet" href="~/Front/css/prism.css">
+    <link rel="stylesheet" href="~/Front/css/style.css">
 </head>
 
 
 <body>
 
     <div class="c-header clearfix">
-        <a class="c-logo" href="http://iruxu.com/notebook">Notebook</a>
+        <a class="c-logo" href="http://notebook.airuxu.cn/">Notebook</a>
         <div class="c-nav">
             <ul class="clearfix">
-                <li class="on"><a href="http://iruxu.com/notebook/">Notebook</a></li>
-                <li><a href="https://github.com/iRuxu" target="_blank">Github</a></li>
-                <!-- <li><a href="https://zhuanlan.zhihu.com/csslab" target="_blank">Blog</a></li>
+                <li class="on"><a href="http://notebook.airuxu.cn/">Notebook</a></li>
+                <li><a href="https://github.com/wbflike" target="_blank">Github</a></li>
+                <!-- <li><a href="http://blog.airuxu.cn/" target="_blank">Blog</a></li>
                 <li><a href="http://candy-lab.com/" target="_blank">CandyLab</a></li> -->
             </ul>
         </div>
@@ -38,147 +39,75 @@
     <div class="c-sidebar">
         <div class="c-sidebar-list">
             <ul>
-                <li><a href="" name="nt-cat-css">CSharp</a></li><!--通过顺序控制 class="c-tab" -->
-                <li><a href="">.NetCore</a></li>
-                <!--
-                <li><a href="">HTML</a></li>
-                <li><a href="">HTML5</a></li>
-                <li><a href="">jQuery</a></li>
-                <li><a href="">Node</a></li>
-                <li><a href="">SQL</a></li>
-                
-                <li><a href="">Python</a></li>
-                <li><a href="">Lua</a></li>
-                <li><a href="">Go</a></li>
-                <li><a href="">C</a></li>
-                <li><a href="">C++</a></li>
-                <li><a href="">C#</a></li>
-                <li><a href="">PHP</a></li>
-                
-                <li><a href="">Git</a></li>
-                <li><a href="">Linux</a></li>
-                <li><a href="">RegEXP</a></li>
-                -->
+                @for (int i = 0; i < Model.Tab.Count; i++)
+                {
+                    if (i == 0)
+                    {
+
+                        <li><a href="" name="nt-cat-css">@Html.Raw(Model.Tab[i].TabName)</a></li><!--通过顺序控制 class="c-tab" -->
+                    }
+                    else
+                    {
+
+                        <li><a href="">@Html.Raw(Model.Tab[i].TabName)</a></li>
+                    }
+                }
             </ul>
         </div>
         <div class="c-sidebar-footer">
             <p class="u-link">
-                <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=5pSe0KaXl8iFiYs" target="_blank"><img src="/Front/image/common/email.png" width="12px" alt="iruxu的电子邮件" title="Email to me"></a>
-                <a class="u-twitter" href="https://www.twitter.com/yuanzi0512" target="_blank"><img src="/Front/image/common/twitter.png" width="12px" alt="iruxu's Twitter'" title="Twitter"></a>
-                <a href="http://weibo.com/yuanzi0512" target="_blank"><img src="/Front/image/common/sina.png" width="12px" alt="iruxu的微博" title="Weibo"></a>
+                <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=mq6jr6Ovqq6vrtrr67T59fc" target="_blank"><img src="~/Front/image/common/email.png" width="12px" alt="bf.w的电子邮件" title="Email to me"></a>
+                <!--<a class="u-twitter" href="https://www.twitter.com/yuanzi0512" target="_blank"><img src="~/Front/image/common/twitter.png" width="12px" alt="iruxu's Twitter'" title="Twitter"></a> -->
+                <a href="https://weibo.com/wbflike" target="_blank"><img src="~/Front/image/common/sina.png" width="12px" alt="bf.w的微博" title="Weibo"></a>
             </p>
-            <span class="u-copyright">&copy;2016 <a href="">iRuxu.com</a></span>
+            <span class="u-copyright">&copy;@System.DateTime.Now.Year <a href="http://www.airuxu.cn">airuxu.cn</a></span>
         </div>
         <i class="u-folder" id="c-sidebar-folder"></i>
     </div>
     <div id="main" class="c-main">
-
-        <!-- 一个页卡 -->
-        <div id="CSharp" class="c-tab">
-            <!-- 一竖列 -->
-            <!-- 一竖列里可能有多个分类 -->
-            <div class="u-col">
-                <!-- 一级分类 -->
-                <div class="u-block">
-                    <!-- H3是黑色的标题头 -->
-                    <h3>一级分类<span>-</span></h3>
-                    <div class="u-list">
-                        <!-- H4+UL是二级分类 -->
-                        <!-- H4是浅色的标题头 -->
-                        <h4>[<span>-</span>] 二级分类</h4>
-                        <ul>
-                            <li>
-                                <a href="">单项名字</a> 参数
-                                <span>
-                                    我在开发模式下配置了反向请求豆瓣的数据,npm run dev是可以请求到数据的,
-                                    但是把配置反向代理的代码粘贴到build的配置里面,打包后,访问不到数据了,404,感觉像是打包后反向代理就不起作用了.
-                                    config文件夹下,index.js配置反向代理的代码:
-                                </span>
-                            </li>
-                            <li>
-                                <a href="">单项名字</a> 参数
-                                <span>
-                                    描述234
-                                </span>
-                            </li>
-                        </ul>
+        @foreach (var t in Model.ListTab)
+        {
+            <!-- 一个页卡 -->
+            <div id="@t.TabName" class="c-tab">
+                @foreach (var c in t.ListCol)
+                {
+                    <!-- 一竖列 -->
+                    <!-- 一竖列里可能有多个分类 -->
+                    <div class="u-col">
+                        @foreach (var b in c.ListBlock)
+                        {
+                            <!-- 一级分类 -->
+                            <div class="u-block">
+                                <!-- H3是黑色的标题头 -->
+                                <h3>@b.BlockName<span>-</span></h3>
+                                @foreach (var l in b.ListList)
+                                {
+                                    <div class="u-list">
+                                        <!-- H4+UL是二级分类 -->
+                                        <!-- H4是浅色的标题头 -->
+                                        <h4>[<span>-</span>] @l.ListName</h4>
+                                        <ul>
+                                            @foreach (var api in l.ApiList)
+                                            {
+                                                <li>
+                                                    <a href="">@api.ApiName</a> @Html.Raw(api.ApiParameter)
+                                                    <span>
+                                                        @Html.Raw(api.ApiDescription)
+                                                    </span>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                }
+                            </div>
+                        }
                     </div>
-                </div>
-
-                <!-- 一级分类 -->
-                <div class="u-block">
-                    <!-- H3是黑色的标题头 -->
-                    <h3>一级分类<span>-</span></h3>
-                    <div class="u-list">
-                        <!-- H4+UL是二级分类 -->
-                        <!-- H4是浅色的标题头 -->
-                        <h4>[<span>-</span>] 二级分类</h4>
-                        <ul>
-                            <li>
-                                <a href="">单项名字</a> 参数
-                                <span>
-                                    描述
-                                </span>
-                            </li>
-                            <li>
-                                <a href="">单项名字</a> 参数
-                                <span>
-                                    描述
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                }
             </div>
-
-            <!-- 一竖列 -->
-            <!-- 一竖列里可能有多个分类 -->
-            <div class="u-col">
-                <!-- 一级分类 -->
-                <div class="u-block">
-                    <!-- H3是黑色的标题头 -->
-                    <h3>一级分类<span>-</span></h3>
-                    <div class="u-list">
-                        <!-- H4+UL是二级分类 -->
-                        <!-- H4是浅色的标题头 -->
-                        <h4>[<span>-</span>] 二级分类</h4>
-                        <ul>
-                            <li>
-                                <a href="">单项名字</a> 参数
-                                <span>
-                                    描述
-                                </span>
-                            </li>
-                            <li>
-                                <a href="">单项名字</a> 参数
-                                <span>
-                                    描述
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-
-        <!-- 一个页卡 -->
-        <div id="NET" class="c-tab">
-            <div class="u-col">
-                <div class="u-block">
-                    <h3>文件系统<span>-</span></h3>
-                    <div class="u-list">
-                        <h4>[<span>-</span>] fs</h4>
-                        <ul></ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+        }
     </div>
-
     <div class="c-snippet" id="snippet">
-        <h6 class="u-title" id="box-title">iRuxu's Snippet Box</h6>
+        <h6 class="u-title" id="box-title">bf.w's Snippet Box</h6>
         <span class="u-close" id="closebox">×</span>
         <div class="m-box" id="box">
             <!-- some snippet will be show-->

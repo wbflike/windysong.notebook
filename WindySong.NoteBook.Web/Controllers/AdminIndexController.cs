@@ -12,7 +12,7 @@ namespace WindySong.NoteBook.Web.Controllers
 {
     //权限验证
     [Authorize]
-    public class AdminIndexController : AdminController
+    public class AdminController : ManageController
     {
 
         public IActionResult Index()

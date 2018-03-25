@@ -46,7 +46,7 @@ namespace WindySong.NoteBook.Web.Controllers
                 }
                 else
                 {
-                    return RedirectToRoute(new { controller = "AdminIndex", action = "Index" });
+                    return RedirectToRoute(new { controller = "Admin", action = "Index" });
                 }
                 
             }
@@ -106,7 +106,7 @@ namespace WindySong.NoteBook.Web.Controllers
                 }
                 else
                 {
-                    return RedirectToRoute(new { controller = "AdminIndex", action = "Index" });//跳转到其他controller RedirectToAction("AdminIndex/Index");//调整到其他Action
+                    return RedirectToRoute(new { controller = "Admin", action = "Index" });//跳转到其他controller RedirectToAction("Admin/Index");//调整到其他Action
                 }
                 
             }

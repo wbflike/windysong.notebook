@@ -24,7 +24,7 @@ namespace WindySong.NoteBook.App.ViewModels.Admin
         /// 名称
         /// </summary>
         [Required(ErrorMessage = "名称必填!")]
-        [RegularExpression(@"^.{2,200}$", ErrorMessage = "名称必须为2到200位字符!")]
+        [RegularExpression(@"^.{1,200}$", ErrorMessage = "名称必须为1到200位字符!")]
         public string Name { get; set; }
 
         /// <summary>

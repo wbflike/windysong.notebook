@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>iRuxu NoteBook</title>
+    <meta charset="utf-8">
+    <meta name="keywords" content="javascript,css,html,nodejs,python,go,c,git,linux,mongoDB,MySQL,regexp">
+    <meta name="description" content="iruxu's Notebook for web develope">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/Front/image/favicon.ico">
+    <script src="/Front/js/jquery-1-10-2.min.js"></script>
+    <script src="/Front/js/jquery-ui.js"></script>
+    <script src="/Front/js/rainbow.min.js"></script>
+    <script src="/Front/js/index.js"></script>
+    <link rel="stylesheet" href="/Front/css/jquery-ui.css">
+    <link rel="stylesheet" href="/Front/css/monokai.css">
+    <link rel="stylesheet" href="/Front/css/style.css">
+</head>
+
+
+<body>
+
+    <div class="c-header clearfix">
+        <a class="c-logo" href="http://iruxu.com/notebook">Notebook</a>
+        <div class="c-nav">
+            <ul class="clearfix">
+                <li class="on"><a href="http://iruxu.com/notebook/">Notebook</a></li>
+                <li><a href="https://github.com/iRuxu" target="_blank">Github</a></li>
+                <!-- <li><a href="https://zhuanlan.zhihu.com/csslab" target="_blank">Blog</a></li>
+                <li><a href="http://candy-lab.com/" target="_blank">CandyLab</a></li> -->
+            </ul>
+        </div>
+        <a class="c-fork" href="https://github.com/iRuxu/notebook" target="_blank">+ Fork</a>
+    </div>
+
+    <div class="c-sidebar">
+        <div class="c-sidebar-list">
+            <ul>
+                <li><a href="" name="nt-cat-css">CSharp</a></li><!--通过顺序控制 class="c-tab" -->
+                <li><a href="">.NetCore</a></li>
+                <!--
+                <li><a href="">HTML</a></li>
+                <li><a href="">HTML5</a></li>
+                <li><a href="">jQuery</a></li>
+                <li><a href="">Node</a></li>
+                <li><a href="">SQL</a></li>
+
+                <li><a href="">Python</a></li>
+                <li><a href="">Lua</a></li>
+                <li><a href="">Go</a></li>
+                <li><a href="">C</a></li>
+                <li><a href="">C++</a></li>
+                <li><a href="">C#</a></li>
+                <li><a href="">PHP</a></li>
+
+                <li><a href="">Git</a></li>
+                <li><a href="">Linux</a></li>
+                <li><a href="">RegEXP</a></li>
+                -->
+            </ul>
+        </div>
+        <div class="c-sidebar-footer">
+            <p class="u-link">
+                <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=5pSe0KaXl8iFiYs" target="_blank"><img src="/Front/image/common/email.png" width="12px" alt="iruxu的电子邮件" title="Email to me"></a>
+                <a class="u-twitter" href="https://www.twitter.com/yuanzi0512" target="_blank"><img src="/Front/image/common/twitter.png" width="12px" alt="iruxu's Twitter'" title="Twitter"></a>
+                <a href="http://weibo.com/yuanzi0512" target="_blank"><img src="/Front/image/common/sina.png" width="12px" alt="iruxu的微博" title="Weibo"></a>
+            </p>
+            <span class="u-copyright">&copy;2016 <a href="">iRuxu.com</a></span>
+        </div>
+        <i class="u-folder" id="c-sidebar-folder"></i>
+    </div>
+    <div id="main" class="c-main">
+
+        <!-- 一个页卡 -->
+        <div id="CSharp" class="c-tab">
+            <!-- 一竖列 -->
+            <!-- 一竖列里可能有多个分类 -->
+            <div class="u-col">
+                <!-- 一级分类 -->
+                <div class="u-block">
+                    <!-- H3是黑色的标题头 -->
+                    <h3>一级分类<span>-</span></h3>
+                    <div class="u-list">
+                        <!-- H4+UL是二级分类 -->
+                        <!-- H4是浅色的标题头 -->
+                        <h4>[<span>-</span>] 二级分类</h4>
+                        <ul>
+                            <li>
+                                <a href="">单项名字</a> 参数
+                                <span>
+                                    我在开发模式下配置了反向请求豆瓣的数据,npm run dev是可以请求到数据的,
+                                    但是把配置反向代理的代码粘贴到build的配置里面,打包后,访问不到数据了,404,感觉像是打包后反向代理就不起作用了.
+                                    config文件夹下,index.js配置反向代理的代码:
+                                </span>
+                            </li>
+                            <li>
+                                <a href="">单项名字</a> 参数
+                                <span>
+                                    描述234
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 一级分类 -->
+                <div class="u-block">
+                    <!-- H3是黑色的标题头 -->
+                    <h3>一级分类<span>-</span></h3>
+                    <div class="u-list">
+                        <!-- H4+UL是二级分类 -->
+                        <!-- H4是浅色的标题头 -->
+                        <h4>[<span>-</span>] 二级分类</h4>
+                        <ul>
+                            <li>
+                                <a href="">单项名字</a> 参数
+                                <span>
+                                    描述
+                                </span>
+                            </li>
+                            <li>
+                                <a href="">单项名字</a> 参数
+                                <span>
+                                    描述
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 一竖列 -->
+            <!-- 一竖列里可能有多个分类 -->
+            <div class="u-col">
+                <!-- 一级分类 -->
+                <div class="u-block">
+                    <!-- H3是黑色的标题头 -->
+                    <h3>一级分类<span>-</span></h3>
+                    <div class="u-list">
+                        <!-- H4+UL是二级分类 -->
+                        <!-- H4是浅色的标题头 -->
+                        <h4>[<span>-</span>] 二级分类</h4>
+                        <ul>
+                            <li>
+                                <a href="">单项名字</a> 参数
+                                <span>
+                                    描述
+                                </span>
+                            </li>
+                            <li>
+                                <a href="">单项名字</a> 参数
+                                <span>
+                                    描述
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- 一个页卡 -->
+        <div id="NET" class="c-tab">
+            <div class="u-col">
+                <div class="u-block">
+                    <h3>文件系统<span>-</span></h3>
+                    <div class="u-list">
+                        <h4>[<span>-</span>] fs</h4>
+                        <ul></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="c-snippet" id="snippet">
+        <h6 class="u-title" id="box-title">iRuxu's Snippet Box</h6>
+        <span class="u-close" id="closebox">×</span>
+        <div class="m-box" id="box">
+            <!-- some snippet will be show-->
+        </div>
+    </div>
+
+</body>
+</html>

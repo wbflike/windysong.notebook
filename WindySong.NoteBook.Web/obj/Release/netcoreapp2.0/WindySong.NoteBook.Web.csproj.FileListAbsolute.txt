@@ -13,4 +13,7 @@ E:\git\windysong.notebook\WindySong.NoteBook.Web\obj\Release\netcoreapp2.0\Windy
 E:\git\windysong.notebook\WindySong.NoteBook.Web\obj\Release\netcoreapp2.0\WindySong.NoteBook.Web.AssemblyInfo.cs
 E:\git\windysong.notebook\WindySong.NoteBook.Web\obj\Release\netcoreapp2.0\WindySong.NoteBook.Web.dll
 E:\git\windysong.notebook\WindySong.NoteBook.Web\obj\Release\netcoreapp2.0\WindySong.NoteBook.Web.pdb
-E:\git\windysong.notebook\WindySong.NoteBook.Web\bin\Release\netcoreapp2.0\db\data.db
+E:\Git\windysong.notebook\WindySong.NoteBook.Web\bin\Release\netcoreapp2.0\Resources\Font\WRYH.ttf
+E:\Git\windysong.notebook\WindySong.NoteBook.Web\bin\Release\netcoreapp2.0\WindySong.NoteBook.Data.dll
+E:\Git\windysong.notebook\WindySong.NoteBook.Web\bin\Release\netcoreapp2.0\WindySong.NoteBook.Data.pdb
+E:\Git\windysong.notebook\WindySong.NoteBook.Web\bin\Release\netcoreapp2.0\db\notebook.db

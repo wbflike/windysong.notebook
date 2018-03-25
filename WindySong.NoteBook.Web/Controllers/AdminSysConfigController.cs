@@ -13,13 +13,15 @@ namespace WindySong.NoteBook.Web.Controllers
 {
     //权限验证
     [Authorize]
-    public class AdminSysConfigController : AdminController
+    public class AdminSysConfigController : ManageController
     {
         //用户登录业务接口
         private ISysConfigAppService _sysConfig;
-        public AdminSysConfigController(ISysConfigAppService loginApp)
+        private ICacheService _cache;
+        public AdminSysConfigController(ISysConfigAppService loginApp, ICacheService cashe)
         {
             this._sysConfig = loginApp;
+            this._cache = cashe;
         }
         public IActionResult Index()
         {
@@ -43,6 +45,10 @@ namespace WindySong.NoteBook.Web.Controllers
                 WebSiteSysConfig.siteName = model.siteName;
                 WebSiteSysConfig.siteKeyWords = model.siteKeyWords;
                 WebSiteSysConfig.siteDescription = model.siteDescription;
+                _cache.ReplaceAsync("sitename", model.siteName);
+                _cache.ReplaceAsync("sitekey", model.siteKeyWords);
+                _cache.ReplaceAsync("sitedes", model.siteDescription);
+
                 return Json(this.GetSwalJson(1, "保存成功", "success", "success"));
             }
             else
@@ -50,5 +56,10 @@ namespace WindySong.NoteBook.Web.Controllers
                 return Json(this.GetSwalJson(0, "保存失败", "error", "error"));
             }
         }
+        public IActionResult StaticIndex()
+        {
+            return View();
+        }
+
     }
 }

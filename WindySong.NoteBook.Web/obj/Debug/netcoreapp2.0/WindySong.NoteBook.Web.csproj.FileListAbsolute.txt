@@ -31,3 +31,4 @@ E:\git\windysong.notebook\WindySong.NoteBook.Web\obj\Debug\netcoreapp2.0\WindySo
 E:\Git\windysong.notebook\WindySong.NoteBook.Web\bin\Debug\netcoreapp2.0\WindySong.NoteBook.Data.dll
 E:\Git\windysong.notebook\WindySong.NoteBook.Web\bin\Debug\netcoreapp2.0\WindySong.NoteBook.Data.pdb
 E:\Git\windysong.notebook\WindySong.NoteBook.Web\bin\Debug\netcoreapp2.0\Resources\Font\WRYH.ttf
+E:\Git\windysong.notebook\WindySong.NoteBook.Web\bin\Debug\netcoreapp2.0\db\notebook.db

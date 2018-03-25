@@ -76,8 +76,15 @@ namespace WindySong.NoteBook.App.Implements
             if(model.Rank == 0 || model.Rank == null)
             {
                 IQuery<CTab> q = this.DbContext.Query<CTab>();
-                var max = q.Max(a => a.rank);
-                tab.rank = max + 1;
+                try
+                {
+                    var max = q.Max(a => a.rank);
+                    tab.rank = max + 1;
+                }
+                catch (Exception ex)
+                {
+                    tab.rank = 1;
+                }
             }
             else
             {

@@ -13,7 +13,7 @@ namespace WindySong.NoteBook.Web.Controllers
 {
     //权限验证
     [Authorize]
-    public class NoteBookController : AdminController
+    public class NoteBookController : ManageController
     {
         //笔记操作接口
         private INoteBookAppService _noteBookApp;

@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <Content Include="db\notebook.db">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Font\WRYH.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -342,9 +342,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Upload\UserPhoto\" />
-    <Folder Include="Upload\UserPhotoThumbnail\" />
-    <Folder Include="Upload\UserPhotoCut\" />
+    <Folder Include="Upload\UserPhoto\">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Folder>
+    <Folder Include="Upload\UserPhotoThumbnail\">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Folder>
+    <Folder Include="Upload\UserPhotoCut\">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Folder>
     <Folder Include="wwwroot\plugins\" />
   </ItemGroup>
 
