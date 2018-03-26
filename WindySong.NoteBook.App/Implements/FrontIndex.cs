@@ -19,15 +19,7 @@ namespace WindySong.NoteBook.App.Implements
             IQuery<Api> qApi = this.DbContext.Query<Api>();
 
             IndexModel indexModel = new IndexModel();
-            List<Tab> tab = new List<Tab>();
-            
-            var listTabOne = qTab.Where(a => 1 == 1).OrderBy(a => a.rank).ToList();
-            foreach(var a in listTabOne)
-            {
-                Tab model = new Tab();
-                model.TabName = a.name;
-                tab.Add(model);
-            }
+
             List<ListTab> ListTab = new List<ListTab>();
             var listTabTwo = qTab.Where(a => 1 == 1).OrderBy(a => a.rank).ToList();
             foreach (var a in listTabTwo)
@@ -74,7 +66,6 @@ namespace WindySong.NoteBook.App.Implements
                 modelTab.ListCol = listCol;
                 ListTab.Add(modelTab);
             }
-            indexModel.Tab = tab;
             indexModel.ListTab = ListTab;
             return indexModel;
         }

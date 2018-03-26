@@ -6,14 +6,9 @@ namespace WindySong.NoteBook.App.ViewModels.Front
 {
     public class IndexModel
     {
-        public List<Tab> Tab { get; set; }
         public List<ListTab> ListTab { get; set; }
     }
 
-    public class Tab
-    {
-        public string TabName { get; set; }
-    }
     public class ListTab
     {
         public string TabName { get; set; }

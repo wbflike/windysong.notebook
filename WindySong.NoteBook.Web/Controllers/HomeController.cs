@@ -22,7 +22,8 @@ namespace WindySong.NoteBook.Web.Controllers
         public IActionResult Index()
         {
             //直接返回静态页
-            return new RedirectResult("/index.html");
+            //return new RedirectResult("/index.html");
+            return View();
         }
         //权限验证
         [Authorize]

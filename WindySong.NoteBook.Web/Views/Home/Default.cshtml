@@ -33,23 +33,23 @@
                 <li><a href="http://candy-lab.com/" target="_blank">CandyLab</a></li> -->
             </ul>
         </div>
-        <a class="c-fork" href="https://github.com/iRuxu/notebook" target="_blank">+ Fork</a>
+        <a class="c-fork" href="https://github.com/wbflike/windysong.notebook" target="_blank">+ Fork</a>
     </div>
 
     <div class="c-sidebar">
         <div class="c-sidebar-list">
             <ul>
-                @for (int i = 0; i < Model.Tab.Count; i++)
+                @for (int i = 0; i < Model.ListTab.Count; i++)
                 {
                     if (i == 0)
                     {
 
-                        <li><a href="" name="nt-cat-css">@Html.Raw(Model.Tab[i].TabName)</a></li><!--通过顺序控制 class="c-tab" -->
+                        <li><a href="" name="nt-cat-css">@Html.Raw(Model.ListTab[i].TabName)</a></li><!--通过顺序控制 class="c-tab" -->
                     }
                     else
                     {
 
-                        <li><a href="">@Html.Raw(Model.Tab[i].TabName)</a></li>
+                        <li><a href="">@Html.Raw(Model.ListTab[i].TabName)</a></li>
                     }
                 }
             </ul>
