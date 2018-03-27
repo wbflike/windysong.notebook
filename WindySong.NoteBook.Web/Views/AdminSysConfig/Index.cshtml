@@ -1,33 +1,11 @@
 ﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
 @using WindySong.NoteBook.Web.Common
 @model WindySong.NoteBook.App.ViewModels.Admin.SysConfigModel
-@using WindySong.NoteBook.Web.Common
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>@WebSiteSysConfig.siteName</title>
-    <meta name="keywords" content="@WebSiteSysConfig.siteKeyWords">
-    <meta name="description" content="@WebSiteSysConfig.siteDescription">
-    <link rel="shortcut icon" href="~/favicon.ico">
-    <link href="~/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="~/css/font-awesome.css?v=4.4.0" rel="stylesheet">
-    <link href="~/css/animate.css" rel="stylesheet">
-    <link href="~/css/style.css?v=4.1.0" rel="stylesheet">
-    <link href="~/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-    <!-- 全局js -->
-    <script src="~/js/jquery.min.js?v=2.1.4"></script>
-    <script src="~/js/bootstrap.min.js?v=3.3.6"></script>
-    <!-- 自定义js -->
-    <script src="~/js/content.js?v=1.0.0"></script>
-    <!-- jQuery Validation plugin javascript-->
-    <script src="~/js/plugins/validate/jquery.validate.min.js"></script>
-    <script src="~/js/plugins/validate/messages_zh.min.js"></script>
-    <!-- layer -->
-    <script src="~/js/plugins/layer/layer.js"></script>
-
+    @await Component.InvokeAsync("Head")
+    @await Component.InvokeAsync("Style")
 </head>
 <body class="gray-bg">
     <div class="wrapper wrapper-content animated fadeInRight">
@@ -46,7 +24,7 @@
                         <form method="post" id="myform" class="form-horizontal" asp-controller="AdminSysConfig" asp-action="Index">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">网站名称</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-6">
                                     <div class="form-group">
                                         <!--使用form-group包裹表单，才能正确的显示前端验证提示信息-->
                                         <input type="text" class="form-control" asp-for="siteName">
@@ -56,7 +34,7 @@
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Keywords</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-6">
                                     <div class="form-group">
                                         <input type="text" class="form-control" asp-for="siteKeyWords">
                                     </div>                                    
@@ -65,10 +43,20 @@
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Description</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-6">
                                     <div class="form-group">
                                         <input type="text" class="form-control" asp-for="siteDescription">
                                     </div>  
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">CDN信息</label>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" asp-for="cdn">
+                                        <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 如果没有CDN则留空，如果使用cdn，请在服务器对子目录wwwroot绑定回源域名，然后cdn指定此域名，这里就填写cdn域名，如http://cdn.airuxu.cn</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>

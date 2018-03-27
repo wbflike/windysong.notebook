@@ -21,6 +21,10 @@ namespace WindySong.NoteBook.Web.Controllers
         }
         public IActionResult Index()
         {
+            ViewData["sitename"] = _cache.Get("sitename").ToString();
+            ViewData["sitekey"] = _cache.Get("sitekey").ToString();
+            ViewData["sitedes"] = _cache.Get("sitedes").ToString();
+            ViewData["cdn"] = _cache.Get("cdn").ToString();
             //直接返回静态页
             //return new RedirectResult("/index.html");
             return View();
@@ -30,9 +34,10 @@ namespace WindySong.NoteBook.Web.Controllers
         [StaticPageActionFilter]
         public IActionResult Default()
         {
-            ViewData["SiteName"] = _cache.Get("sitename").ToString();
-            ViewData["SiteKey"] = _cache.Get("sitekey").ToString();
-            ViewData["SiteDes"] = _cache.Get("sitedes").ToString();
+            ViewData["sitename"] = _cache.Get("sitename").ToString();
+            ViewData["sitekey"] = _cache.Get("sitekey").ToString();
+            ViewData["sitedes"] = _cache.Get("sitedes").ToString();
+            ViewData["cdn"] = _cache.Get("cdn").ToString();
             return View(_frontIndex.GetIndex());
         }
     }

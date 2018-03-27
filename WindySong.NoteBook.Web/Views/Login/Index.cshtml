@@ -4,28 +4,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>@WebSiteSysConfig.siteName - 后台登录</title>
-    <meta name="keywords" content="@WebSiteSysConfig.siteKeyWords">
-    <meta name="description" content="@WebSiteSysConfig.siteDescription">
-    <link href="~/css/bootstrap.min.css" rel="stylesheet">
-    <link href="~/css/font-awesome.css?v=4.4.0" rel="stylesheet">
-    <link href="~/css/animate.css" rel="stylesheet">
-    <link href="~/css/style.css" rel="stylesheet">
-    <link href="~/css/login.css" rel="stylesheet">
-    <link href="~/css/font.css" rel="stylesheet">
-
-    <!-- 全局js -->
-    <script src="~/js/jquery.min.js?v=2.1.4"></script>
-    <script src="~/js/bootstrap.min.js?v=3.3.6"></script>
-
-    <!-- jQuery Validation plugin javascript-->
-    <script src="~/js/plugins/validate/jquery.validate.min.js"></script>
-    <script src="~/js/plugins/validate/messages_zh.min.js"></script>
-    <!--[if lt IE 9]>
-    <meta http-equiv="refresh" content="0;ie.html" />
-    <![endif]-->
+    @await Component.InvokeAsync("Head")
+    @await Component.InvokeAsync("Login")    
     <script>
         if (window.top !== window.self) {
             window.top.location = window.location;

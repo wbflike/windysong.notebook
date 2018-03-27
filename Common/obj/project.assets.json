@@ -521,7 +521,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\WBF\\.nuget\\packages\\": {},
+    "C:\\Users\\WBF-Home\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -530,17 +530,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "E:\\git\\windysong.notebook\\Common\\Common.csproj",
+      "projectUniqueName": "E:\\Git\\windysong.notebook\\Common\\Common.csproj",
       "projectName": "Common",
-      "projectPath": "E:\\git\\windysong.notebook\\Common\\Common.csproj",
-      "packagesPath": "C:\\Users\\WBF\\.nuget\\packages\\",
-      "outputPath": "E:\\git\\windysong.notebook\\Common\\obj\\",
+      "projectPath": "E:\\Git\\windysong.notebook\\Common\\Common.csproj",
+      "packagesPath": "C:\\Users\\WBF-Home\\.nuget\\packages\\",
+      "outputPath": "E:\\Git\\windysong.notebook\\Common\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\WBF\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\WBF-Home\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

@@ -55,7 +55,7 @@ namespace WindySong.NoteBook.App
         /// 获取系统配置信息
         /// </summary>
         /// <returns>SysConfig</returns>
-        public SysConfig GetSysConfig()
+        public SysConfig GetSiteSysConfig()
         {
             IQuery<SysConfig> q = this.DbContext.Query<SysConfig>();
             SysConfig sysConfig = q.Where(a => 1 == 1).FirstOrDefault();

@@ -69,8 +69,6 @@ namespace WindySong.NoteBook.Web
                     o.Events = new MyCookieEvents(cacheService);//注册自己的cookie事件
                 });
 
-            //获取网站配置信息
-            this.GetSysConfig(cacheService);
             //设置缓存
             this.SetMemoryCache(cacheService);
             //运行SQL拦截器
@@ -115,18 +113,6 @@ namespace WindySong.NoteBook.Web
             
         }
 
-        /// <summary>
-        /// 获取网站配置信息
-        /// </summary>
-        private void GetSysConfig(ICacheService cache)
-        {
-            //获取网站配置信息
-            AppService app = new AppService();
-            SysConfig sysConfig = app.GetSysConfig();
-            WebSiteSysConfig.siteName = sysConfig.siteName;
-            WebSiteSysConfig.siteKeyWords = sysConfig.siteKeyWords;
-            WebSiteSysConfig.siteDescription = sysConfig.siteDescription;
-        }
 
         private void SetMemoryCache(ICacheService cache)
         {
@@ -139,10 +125,11 @@ namespace WindySong.NoteBook.Web
                 cache.Add("userid:"+v, v);
             }
             //将网站信息添加到缓存
-            SysConfig sysConfig = app.GetSysConfig();
-            cache.Add("sitename", sysConfig.siteName);
-            cache.Add("sitekey", sysConfig.siteKeyWords);
-            cache.Add("sitedes", sysConfig.siteDescription);
+            SysConfig sysConfig = app.GetSiteSysConfig();
+            cache.Add("sitename", sysConfig.siteName != null ? sysConfig.siteName:"");
+            cache.Add("sitekey", sysConfig.siteKeyWords != null ? sysConfig.siteKeyWords : "");
+            cache.Add("sitedes", sysConfig.siteDescription != null ? sysConfig.siteDescription : "");
+            cache.Add("cdn", sysConfig.cdn != null ? sysConfig.cdn : "");
         }
 
     }

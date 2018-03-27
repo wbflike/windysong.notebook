@@ -7,25 +7,7 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="~/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="~/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
-    <link href="~/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-    <!-- 全局js -->
-    <script src="~/js/jquery.min.js?v=2.1.4"></script>
-    <script src="~/js/bootstrap.min.js?v=3.3.6"></script>
-    <!-- bootstrap-table-->
-    <script src="~/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-    <script src="~/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
-    <script src="~/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-    <!-- jQuery Validation plugin javascript-->
-    <script src="~/js/plugins/validate/jquery.validate.min.js"></script>
-    <script src="~/js/plugins/validate/messages_zh.min.js"></script>
-    <!-- layer -->
-    <script src="~/js/plugins/layer/layer.js"></script>
-    <!-- tinymce -->
-    <script src="~/tinymce_4.7.9/tinymce.min.js"></script>
-    <script src="~/tinymce_4.7.9/jquery.tinymce.min.js"></script>
+    @await Component.InvokeAsync("Head")
     <script type="text/javascript">
         tinymce.init({
             selector: 'textarea',
@@ -58,7 +40,6 @@
             language: 'zh_CN'
         });
     </script>
-    <title>API</title>
 </head>
 <body>
     <div class="panel-body" style="padding-bottom:0px;">

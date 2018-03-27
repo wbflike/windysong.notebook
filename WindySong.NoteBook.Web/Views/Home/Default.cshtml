@@ -2,22 +2,22 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title>@ViewData["SiteName"]</title>
+    <title>@ViewData["sitename"]</title>
     <meta charset="utf-8">
-    <meta name="keywords" content="@ViewData["SiteKey"]">
-    <meta name="description" content="@ViewData["SiteDes"]">
+    <meta name="keywords" content="@ViewData["sitekey"]">
+    <meta name="description" content="@ViewData["sitedes"]">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-transform">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="~/Front/image/favicon.ico">
-    <script src="~/Front/js/jquery-1-10-2.min.js"></script>
-    <script src="~/Front/js/jquery-ui.js"></script>
-    <script src="~/Front/js/plugin.min.js"></script>
-    <script src="~/Front/js/index.js"></script>
-    <link rel="stylesheet" href="~/Front/css/jquery-ui.css">
-    <link rel="stylesheet" href="~/Front/css/prism.css">
-    <link rel="stylesheet" href="~/Front/css/style.css">
+    <link rel="icon" type="image/x-icon" href="@ViewData["cdn"]/Front/image/favicon.ico">
+    <script src="@ViewData["cdn"]/Front/js/jquery-1-10-2.min.js"></script>
+    <script src="@ViewData["cdn"]/Front/js/jquery-ui.js"></script>
+    <script src="@ViewData["cdn"]/Front/js/plugin.min.js"></script>
+    <script src="@ViewData["cdn"]/Front/js/index.js"></script>
+    <link rel="stylesheet" href="@ViewData["cdn"]/Front/css/jquery-ui.css">
+    <link rel="stylesheet" href="@ViewData["cdn"]/Front/css/prism.css">
+    <link rel="stylesheet" href="@ViewData["cdn"]/Front/css/style.css">
 </head>
 
 
@@ -56,9 +56,9 @@
         </div>
         <div class="c-sidebar-footer">
             <p class="u-link">
-                <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=mq6jr6Ovqq6vrtrr67T59fc" target="_blank"><img src="~/Front/image/common/email.png" width="12px" alt="bf.w的电子邮件" title="Email to me"></a>
+                <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=mq6jr6Ovqq6vrtrr67T59fc" target="_blank"><img src="@ViewData["cdn"]/Front/image/common/email.png" width="12px" alt="bf.w的电子邮件" title="Email to me"></a>
                 <!--<a class="u-twitter" href="https://www.twitter.com/yuanzi0512" target="_blank"><img src="~/Front/image/common/twitter.png" width="12px" alt="iruxu's Twitter'" title="Twitter"></a> -->
-                <a href="https://weibo.com/wbflike" target="_blank"><img src="~/Front/image/common/sina.png" width="12px" alt="bf.w的微博" title="Weibo"></a>
+                <a href="https://weibo.com/wbflike" target="_blank"><img src="@ViewData["cdn"]/Front/image/common/sina.png" width="12px" alt="bf.w的微博" title="Weibo"></a>
             </p>
             <p>
                 <span class="u-copyright">&copy;@System.DateTime.Now.Year <a href="http://www.airuxu.cn">airuxu.cn</a></span>

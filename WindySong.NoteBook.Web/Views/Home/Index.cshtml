@@ -1,10 +1,17 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <title>@ViewData["SiteName"]</title>
+    <meta charset="utf-8">
+    <meta name="keywords" content="@ViewData["SiteKey"]">
+    <meta name="description" content="@ViewData["SiteDes"]">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="@ViewData["cdn"]/Front/image/favicon.ico">
 </head>
 <body>
-    <iframe src="/index.html" frameborder="0" style="position:fixed; left:0; top:0; bottom:0; right:0; width:100%; height:100%; "></iframe>
+    <iframe src="@ViewData["cdn"]/index.html" frameborder="0" style="position:fixed; left:0; top:0; bottom:0; right:0; width:100%; height:100%; "></iframe>
 </body>
 </html>

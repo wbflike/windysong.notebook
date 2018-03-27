@@ -29,6 +29,10 @@ namespace WindySong.NoteBook.App.Entity
         /// 站点描述
         /// </summary>
         public string siteDescription { get; set; }
+        /// <summary>
+        /// cdn地址
+        /// </summary>
+        public string cdn { get; set; }
 
     }
 }

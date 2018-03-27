@@ -26,7 +26,8 @@ namespace WindySong.NoteBook.App.Implements
             {
                 siteName = model.siteName,
                 siteKeyWords = model.siteKeyWords,
-                siteDescription = model.siteDescription
+                siteDescription = model.siteDescription,
+                cdn = model.cdn
             });
             if (i>=1)
             {
@@ -42,7 +43,7 @@ namespace WindySong.NoteBook.App.Implements
         /// 获取站点配置信息
         /// </summary>
         /// <returns></returns>
-        SysConfigModel ISysConfigAppService.GetSysConfig()
+        public SysConfigModel GetSysConfig()
         {
             SysConfigModel model = new SysConfigModel();
             SysConfig config;
@@ -51,6 +52,7 @@ namespace WindySong.NoteBook.App.Implements
             model.siteName = config.siteName;
             model.siteKeyWords = config.siteKeyWords;
             model.siteDescription = config.siteDescription;
+            model.cdn = config.cdn;
             return model;
         }
     }

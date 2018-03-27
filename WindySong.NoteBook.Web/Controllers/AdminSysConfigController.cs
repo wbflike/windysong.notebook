@@ -39,15 +39,17 @@ namespace WindySong.NoteBook.Web.Controllers
                 
                 return Json(this.GetSwalJson(0, "非法数据", this.IfModelStateString(), "error"));
             }
+            if(string.IsNullOrEmpty(model.cdn))
+            {
+                model.cdn = "";
+            }
             if(_sysConfig.SetSysConfig(model))
             {
                 //更新静态类数据
-                WebSiteSysConfig.siteName = model.siteName;
-                WebSiteSysConfig.siteKeyWords = model.siteKeyWords;
-                WebSiteSysConfig.siteDescription = model.siteDescription;
                 _cache.ReplaceAsync("sitename", model.siteName);
                 _cache.ReplaceAsync("sitekey", model.siteKeyWords);
                 _cache.ReplaceAsync("sitedes", model.siteDescription);
+                _cache.ReplaceAsync("cdn", model.cdn);
 
                 return Json(this.GetSwalJson(1, "保存成功", "success", "success"));
             }

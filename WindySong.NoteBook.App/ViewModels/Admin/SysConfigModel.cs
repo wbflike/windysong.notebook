@@ -30,5 +30,7 @@ namespace WindySong.NoteBook.App.ViewModels.Admin
         [Required(ErrorMessage = "站点描述字为必填项!")]
         [RegularExpression(@"^.{3,50}$", ErrorMessage = "站点描述必须为3到50位字符!")]       
         public string siteDescription { get; set; }
+
+        public string cdn { get; set; }
     }
 }
