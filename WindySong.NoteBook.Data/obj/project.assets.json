@@ -4800,7 +4800,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\WBF-Home\\.nuget\\packages\\": {},
+    "C:\\Users\\WBF\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -4809,17 +4809,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "E:\\Git\\windysong.notebook\\WindySong.NoteBook.Data\\WindySong.NoteBook.Data.csproj",
+      "projectUniqueName": "E:\\git\\windysong.notebook\\WindySong.NoteBook.Data\\WindySong.NoteBook.Data.csproj",
       "projectName": "WindySong.NoteBook.Data",
-      "projectPath": "E:\\Git\\windysong.notebook\\WindySong.NoteBook.Data\\WindySong.NoteBook.Data.csproj",
-      "packagesPath": "C:\\Users\\WBF-Home\\.nuget\\packages\\",
-      "outputPath": "E:\\Git\\windysong.notebook\\WindySong.NoteBook.Data\\obj\\",
+      "projectPath": "E:\\git\\windysong.notebook\\WindySong.NoteBook.Data\\WindySong.NoteBook.Data.csproj",
+      "packagesPath": "C:\\Users\\WBF\\.nuget\\packages\\",
+      "outputPath": "E:\\git\\windysong.notebook\\WindySong.NoteBook.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\WBF-Home\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\WBF\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4832,8 +4832,8 @@
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "E:\\Git\\windysong.notebook\\Common\\Common.csproj": {
-              "projectPath": "E:\\Git\\windysong.notebook\\Common\\Common.csproj"
+            "E:\\git\\windysong.notebook\\Common\\Common.csproj": {
+              "projectPath": "E:\\git\\windysong.notebook\\Common\\Common.csproj"
             }
           }
         }
