@@ -5,11 +5,11 @@
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/x-icon" href="@ViewData["cdn"]/Front/image/favicon.ico">
-<link href="@ViewData["cdn"]/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
 <link href="@ViewData["cdn"]/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
 <link href="@ViewData["cdn"]/css/plugins/cropper/cropper.min.css" rel="stylesheet">
 <!-- 因为字体文件会涉及跨越的问题，所以不才用cdn -->
 <link href="~/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<link href="~/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
 <link href="@ViewData["cdn"]/css/animate.css" rel="stylesheet">
 <link href="@ViewData["cdn"]/css/font.css" rel="stylesheet">
 <!-- 全局js -->
@@ -27,7 +27,8 @@
 <!-- layer -->
 <script src="@ViewData["cdn"]/js/plugins/layer/layer.js" type="text/javascript"></script>
 <!-- tinymce -->
-<script src="@ViewData["cdn"]/tinymce_4.7.9/tinymce.min.js" type="text/javascript"></script>
+<!-- 因为字体文件会涉及跨越的问题，所以不才用cdn -->
+<script src="~/tinymce_4.7.9/tinymce.min.js" type="text/javascript"></script>
 <script src="@ViewData["cdn"]/tinymce_4.7.9/jquery.tinymce.min.js" type="text/javascript"></script>
 <!--文件选择框美化-->
 <script src="@ViewData["cdn"]/js/plugins/filestyle/bootstrap-filestyle.js"></script>
