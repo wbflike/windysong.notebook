@@ -18,19 +18,22 @@ namespace WindySong.NoteBook.Web.Controllers
 {
     public class LoginController : BaseController
     {
+        private ICacheService _cache;
         //用户登录业务接口
         private ILoginAppService _loginApp;
-        public LoginController(ILoginAppService loginApp)
+        public LoginController(ILoginAppService loginApp, ICacheService cashe)
         {
-            this._loginApp = loginApp;           
+            this._loginApp = loginApp;
+            this._cache = cashe;
         }
 
         //[Route("Login")] /*路由特性定义 这个路由特性表示 URL/Login 将访问到这个Action*/
         [HttpGet]
         public IActionResult Index(String ReturnUrl)
         {
+            ViewData["cdn"] = _cache.Get("cdn").ToString();
             //如果用户没有登录
-            if(!User.Identity.IsAuthenticated)
+            if (!User.Identity.IsAuthenticated)
             {
                 //URL不为空
                 if (!string.IsNullOrEmpty(ReturnUrl))
@@ -59,7 +62,7 @@ namespace WindySong.NoteBook.Web.Controllers
         [HttpPost]
         public IActionResult Index(LoginModel loginModel)
         {
-           
+            ViewData["cdn"] = _cache.Get("cdn").ToString();
             //验证模型的数据验证是否通过
             if (!ModelState.IsValid)
             {

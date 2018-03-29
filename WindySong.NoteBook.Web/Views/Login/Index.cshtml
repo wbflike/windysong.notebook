@@ -6,6 +6,27 @@
 <head>
     @await Component.InvokeAsync("Head")
     @await Component.InvokeAsync("Login")    
+    <style type="text/css">
+        body.signin {
+            background: #18c8f6;
+            height: auto;
+            background: url("@ViewData["cdn"]/img/login-background.jpg") no-repeat center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            color: rgba(255,255,255,.95);
+        }
+        .signinpanel .uname {
+            background: #fff url(@ViewData["cdn"]/img/user.png) no-repeat 95% center;
+            color: #333;
+        }
+
+        .signinpanel .pword {
+            background: #fff url(@ViewData["cdn"]/img/locked.png) no-repeat 95% center;
+            color: #333;
+        }
+    </style>
     <script>
         if (window.top !== window.self) {
             window.top.location = window.location;
