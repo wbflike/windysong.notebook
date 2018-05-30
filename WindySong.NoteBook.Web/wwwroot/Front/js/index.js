@@ -80,15 +80,33 @@ $(function(){
 		screenW = $(window).width()
 
 		//h3 & 4 Toggle
-			$btg.on('click',function(){
-				$(this).next('div,ul').slideToggle('slow')
-				var status = $(this).children('span').html()
-				if(status=='-'){
-					$(this).children('span').html('+')}
-				else if(status=='+'){
-					$(this).children('span').html('-');
-				}
-			})
+        $btg.on('click', function () {
+            if ($(this).is("h4"))
+            {
+                $(this).next('div,ul').slideToggle('slow')
+            }
+            else
+            {
+                $(this).closest("u-block").find(".u-list").slideToggle('slow');
+            }
+            
+            var status = $(this).children('span').html()
+            if (status == '-') {
+                $(this).children('span').html('+')
+            }
+            else if (status == '+') {
+                $(this).children('span').html('-');
+            }
+        })
+			//$btg.on('click',function(){
+			//	$(this).next('div,ul').slideToggle('slow')
+			//	var status = $(this).children('span').html()
+			//	if(status=='-'){
+			//		$(this).children('span').html('+')}
+			//	else if(status=='+'){
+			//		$(this).children('span').html('-');
+			//	}
+			//})
 
 		//Tips Layout
 			$main.on('mouseover','h4+ul>li',function(e){
