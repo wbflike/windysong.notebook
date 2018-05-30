@@ -87,7 +87,7 @@ $(function(){
             }
             else
             {
-                $(this).closest("u-block").find(".u-list").slideToggle('slow');
+                $(this).closest(".u-block").find(".u-list").slideToggle('slow');
             }
             
             var status = $(this).children('span').html()
