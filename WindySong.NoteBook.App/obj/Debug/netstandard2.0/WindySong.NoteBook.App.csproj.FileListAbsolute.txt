@@ -14,7 +14,6 @@ E:\git\windysong.notebook\WindySong.NoteBook.App\bin\Debug\netstandard2.0\WindyS
 E:\git\windysong.notebook\WindySong.NoteBook.App\bin\Debug\netstandard2.0\WindySong.NoteBook.App.pdb
 E:\git\windysong.notebook\WindySong.NoteBook.App\bin\Debug\netstandard2.0\Common.dll
 E:\git\windysong.notebook\WindySong.NoteBook.App\bin\Debug\netstandard2.0\Common.pdb
-E:\git\windysong.notebook\WindySong.NoteBook.App\obj\Debug\netstandard2.0\WindySong.NoteBook.App.csprojResolveAssemblyReference.cache
 E:\git\windysong.notebook\WindySong.NoteBook.App\obj\Debug\netstandard2.0\WindySong.NoteBook.App.csproj.CoreCompileInputs.cache
 E:\git\windysong.notebook\WindySong.NoteBook.App\obj\Debug\netstandard2.0\WindySong.NoteBook.App.AssemblyInfoInputs.cache
 E:\git\windysong.notebook\WindySong.NoteBook.App\obj\Debug\netstandard2.0\WindySong.NoteBook.App.AssemblyInfo.cs
@@ -26,3 +25,5 @@ E:\Git\windysong.notebook\WindySong.NoteBook.App\bin\Debug\netstandard2.0\WindyS
 E:\Git\windysong.notebook\WindySong.NoteBook.App\bin\Debug\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll
 E:\Git\windysong.notebook\WindySong.NoteBook.App\bin\Debug\netstandard2.0\WindySong.NoteBook.Data.pdb
 E:\Git\windysong.notebook\WindySong.NoteBook.App\bin\Debug\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.xml
+E:\git\windysong.notebook\WindySong.NoteBook.App\obj\Debug\netstandard2.0\WindySong.NoteBook.App.csprojAssemblyReference.cache
+E:\git\windysong.notebook\WindySong.NoteBook.App\obj\Debug\netstandard2.0\WindySong.NoteBook.App.csproj.CopyComplete

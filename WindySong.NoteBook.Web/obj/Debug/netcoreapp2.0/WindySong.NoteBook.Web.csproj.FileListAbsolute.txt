@@ -22,7 +22,6 @@ E:\git\windysong.notebook\WindySong.NoteBook.Web\bin\Debug\netcoreapp2.0\Common.
 E:\git\windysong.notebook\WindySong.NoteBook.Web\bin\Debug\netcoreapp2.0\WindySong.NoteBook.App.dll
 E:\git\windysong.notebook\WindySong.NoteBook.Web\bin\Debug\netcoreapp2.0\WindySong.NoteBook.App.pdb
 E:\git\windysong.notebook\WindySong.NoteBook.Web\bin\Debug\netcoreapp2.0\Common.pdb
-E:\git\windysong.notebook\WindySong.NoteBook.Web\obj\Debug\netcoreapp2.0\WindySong.NoteBook.Web.csprojResolveAssemblyReference.cache
 E:\git\windysong.notebook\WindySong.NoteBook.Web\obj\Debug\netcoreapp2.0\WindySong.NoteBook.Web.csproj.CoreCompileInputs.cache
 E:\git\windysong.notebook\WindySong.NoteBook.Web\obj\Debug\netcoreapp2.0\WindySong.NoteBook.Web.AssemblyInfoInputs.cache
 E:\git\windysong.notebook\WindySong.NoteBook.Web\obj\Debug\netcoreapp2.0\WindySong.NoteBook.Web.AssemblyInfo.cs
@@ -32,3 +31,5 @@ E:\Git\windysong.notebook\WindySong.NoteBook.Web\bin\Debug\netcoreapp2.0\WindySo
 E:\Git\windysong.notebook\WindySong.NoteBook.Web\bin\Debug\netcoreapp2.0\WindySong.NoteBook.Data.pdb
 E:\Git\windysong.notebook\WindySong.NoteBook.Web\bin\Debug\netcoreapp2.0\Resources\Font\WRYH.ttf
 E:\Git\windysong.notebook\WindySong.NoteBook.Web\bin\Debug\netcoreapp2.0\db\notebook.db
+E:\git\windysong.notebook\WindySong.NoteBook.Web\obj\Debug\netcoreapp2.0\WindySong.NoteBook.Web.csprojAssemblyReference.cache
+E:\git\windysong.notebook\WindySong.NoteBook.Web\obj\Debug\netcoreapp2.0\WindySong.NoteBook.Web.csproj.CopyComplete

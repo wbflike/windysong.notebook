@@ -539,7 +539,7 @@ namespace WindySong.NoteBook.Web.Controllers
         }
 
         /// <summary>
-        /// 添加List
+        /// 添加Api
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -547,6 +547,9 @@ namespace WindySong.NoteBook.Web.Controllers
         [HttpPost]
         public IActionResult AddApi(ApiModel model)
         {
+            string strName = System.Web.HttpUtility.HtmlEncode(model.Name);
+            string strPar = System.Web.HttpUtility.HtmlEncode(model.Parameter);
+            string strDec = System.Web.HttpUtility.HtmlEncode(model.Description);
             //判断数据是否合法
             if (!ModelState.IsValid)
             {
@@ -588,7 +591,7 @@ namespace WindySong.NoteBook.Web.Controllers
         }
 
         /// <summary>
-        /// 获取一级分类
+        /// 获取api
         /// </summary>
         /// <param name="id">TabID</param>
         /// <returns></returns>
