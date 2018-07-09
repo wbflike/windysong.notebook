@@ -13,6 +13,8 @@ namespace WindySong.NoteBook.Web.Controllers
 {
     //权限验证
     [Authorize]
+    //字段过滤器
+    [FieldFilter]
     public class NoteBookController : ManageController
     {
         //笔记操作接口
