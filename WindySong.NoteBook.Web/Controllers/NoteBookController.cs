@@ -549,9 +549,6 @@ namespace WindySong.NoteBook.Web.Controllers
         [HttpPost]
         public IActionResult AddApi(ApiModel model)
         {
-            string strName = System.Web.HttpUtility.HtmlEncode(model.Name);
-            string strPar = System.Web.HttpUtility.HtmlEncode(model.Parameter);
-            string strDec = System.Web.HttpUtility.HtmlEncode(model.Description);
             //判断数据是否合法
             if (!ModelState.IsValid)
             {
