@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WindySong.NoteBook.Web.Common
 {
-    public class FieldFilterAttribute : Attribute,IActionFilter
+    public class FieldFilterAttribute : Attribute, IActionFilter
     {
         private XSS xss;
         public FieldFilterAttribute()
@@ -40,7 +40,7 @@ namespace WindySong.NoteBook.Web.Common
                     {
                         ModelFieldFilter(p.Name, p.ParameterType, context.ActionArguments[p.Name]);
                     }
-                }                   
+                }
 
             }
         }
@@ -55,7 +55,7 @@ namespace WindySong.NoteBook.Web.Common
         private object ModelFieldFilter(string key, Type t, object obj)
         {
             //获取类的属性集合
-            var ats = t.GetCustomAttributes(typeof(FieldFilterAttribute), false);
+            //var ats = t.GetCustomAttributes(typeof(FieldFilterAttribute), false);
 
 
             if (obj != null)
@@ -65,7 +65,7 @@ namespace WindySong.NoteBook.Web.Common
 
                 foreach (var pp in pps)
                 {
-                    if(pp.GetValue(obj) != null)
+                    if (pp.GetValue(obj) != null)
                     {
                         //当属性等于字符串
                         if (pp.PropertyType.Equals(typeof(string)))
@@ -78,7 +78,7 @@ namespace WindySong.NoteBook.Web.Common
                             pp.SetValue(obj, ModelFieldFilter(pp.Name, pp.PropertyType, pp.GetValue(obj)));
                         }
                     }
-                    
+
                 }
             }
 
