@@ -5,9 +5,10 @@ E:\Git\windysong.notebook\WindySong.NoteBook.Data\bin\Release\netstandard2.0\Com
 E:\Git\windysong.notebook\WindySong.NoteBook.Data\bin\Release\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll
 E:\Git\windysong.notebook\WindySong.NoteBook.Data\bin\Release\netstandard2.0\Common.pdb
 E:\Git\windysong.notebook\WindySong.NoteBook.Data\bin\Release\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.xml
-E:\Git\windysong.notebook\WindySong.NoteBook.Data\obj\Release\netstandard2.0\WindySong.NoteBook.Data.csprojResolveAssemblyReference.cache
 E:\Git\windysong.notebook\WindySong.NoteBook.Data\obj\Release\netstandard2.0\WindySong.NoteBook.Data.csproj.CoreCompileInputs.cache
 E:\Git\windysong.notebook\WindySong.NoteBook.Data\obj\Release\netstandard2.0\WindySong.NoteBook.Data.AssemblyInfoInputs.cache
 E:\Git\windysong.notebook\WindySong.NoteBook.Data\obj\Release\netstandard2.0\WindySong.NoteBook.Data.AssemblyInfo.cs
 E:\Git\windysong.notebook\WindySong.NoteBook.Data\obj\Release\netstandard2.0\WindySong.NoteBook.Data.dll
 E:\Git\windysong.notebook\WindySong.NoteBook.Data\obj\Release\netstandard2.0\WindySong.NoteBook.Data.pdb
+E:\git\windysong.notebook\WindySong.NoteBook.Data\obj\Release\netstandard2.0\WindySong.NoteBook.Data.csprojAssemblyReference.cache
+E:\git\windysong.notebook\WindySong.NoteBook.Data\obj\Release\netstandard2.0\WindySong.NoteBook.Data.csproj.CopyComplete

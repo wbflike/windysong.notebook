@@ -26,7 +26,7 @@ namespace WindySong.NoteBook.Web.Common
         {           
         }
         /// <summary>
-        /// 变量model错误信息
+        /// 遍历model错误信息
         /// </summary>
         public void IfModelStateViewData()
         {
@@ -47,7 +47,7 @@ namespace WindySong.NoteBook.Web.Common
         }
 
         /// <summary>
-        /// 变量model错误信息
+        /// 遍历model错误信息
         /// </summary>
         public string IfModelStateString()
         {

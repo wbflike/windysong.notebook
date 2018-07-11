@@ -13,6 +13,8 @@ namespace WindySong.NoteBook.Web.Controllers
 {
     //权限验证
     [Authorize]
+    //属性过滤器
+    [FieldFilter]
     public class AdminSysConfigController : ManageController
     {
         //用户登录业务接口

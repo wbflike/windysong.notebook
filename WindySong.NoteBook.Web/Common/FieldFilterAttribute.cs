@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Common;
+using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,63 +9,11 @@ namespace WindySong.NoteBook.Web.Common
 {
     public class FieldFilterAttribute : Attribute,IActionFilter
     {
-
-        //public  void OnActionExecuted(ActionExecutingContext filterContext)
-        //{
-        //    //var ps = filterContext.ActionDescriptor.GetParameters();
-        //    //获取Action参数
-        //    var ps = filterContext.ActionDescriptor.Parameters;
-        //    //遍历Action参数
-        //    foreach (var p in ps)
-        //    {
-        //        //当参数类型为string
-        //        //if (p.ParameterType.Equals(typeof(string)))
-        //        //{
-        //        //    filterContext.ActionDescriptor.Parameters[p.Name] = "xxx";
-
-        //        //}
-        //        //else if (p.ParameterType.IsClass)
-        //        //{
-        //        //    ModelFieldFilter(p.Name, p.ParameterType, filterContext.ActionParameters[p.ParameterName]);
-        //        }
-        //    }
-
-
-        //    base.OnActionExecuted(filterContext);
-        //}
-
-        //private object ModelFieldFilter(string key, Type t, object obj)
-        //{
-        //    var ats = t.GetCustomAttributes(typeof(FieldFilterAttribute), false);
-
-        //    if (true) //(ats.Length > 0)
-        //    {
-        //        if (obj != null)
-        //        {
-        //            var pps = t.GetProperties();
-
-        //            foreach (var pp in pps)
-        //            {
-        //                if (pp.PropertyType.Equals(typeof(string)))
-        //                {
-        //                    string value = pp.GetValue(obj).ToString();
-        //                    pp.SetValue(obj, value + value);
-        //                }
-        //                else if (pp.PropertyType.IsClass)
-        //                {
-        //                    pp.SetValue(obj, ModelFieldFilter(pp.Name, pp.PropertyType, pp.GetValue(obj)));
-        //                }
-        //            }
-        //        }
-        //    }
-
-        //    return obj;
-        //}
-
-        //public void OnActionExecuting(ActionExecutingContext context)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        private XSS xss;
+        public FieldFilterAttribute()
+        {
+            xss = new XSS();
+        }
 
         //在Action方法之回之后调用
         public void OnActionExecuted(ActionExecutedContext context)
@@ -80,18 +29,18 @@ namespace WindySong.NoteBook.Web.Common
             //遍历参数集合
             foreach (var p in ps)
             {
-                //当参数等于字符串
-                if (p.ParameterType.Equals(typeof(string)))
+                if (context.ActionArguments[p.Name] != null)
                 {
-                    if (context.ActionArguments[p.Name] != null)
+                    //当参数等于字符串
+                    if (p.ParameterType.Equals(typeof(string)))
                     {
-                        context.ActionArguments[p.Name] = context.ActionArguments[p.Name] + "测试";
-                    }                        
-                }
-                else if (p.ParameterType.IsClass)//当参数等于类
-                {
-                    ModelFieldFilter(p.Name, p.ParameterType, context.ActionArguments[p.Name]);
-                }
+                        context.ActionArguments[p.Name] = xss.Filter(context.ActionArguments[p.Name].ToString());
+                    }
+                    else if (p.ParameterType.IsClass)//当参数等于类
+                    {
+                        ModelFieldFilter(p.Name, p.ParameterType, context.ActionArguments[p.Name]);
+                    }
+                }                   
 
             }
         }
@@ -122,7 +71,7 @@ namespace WindySong.NoteBook.Web.Common
                         if (pp.PropertyType.Equals(typeof(string)))
                         {
                             string value = pp.GetValue(obj).ToString();
-                            pp.SetValue(obj, value + "测试");
+                            pp.SetValue(obj, xss.Filter(value));
                         }
                         else if (pp.PropertyType.IsClass)//当属性等于类进行递归
                         {

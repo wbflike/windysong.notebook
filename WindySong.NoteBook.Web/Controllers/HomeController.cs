@@ -31,6 +31,7 @@ namespace WindySong.NoteBook.Web.Controllers
         }
         //权限验证
         [Authorize]
+        //静态文件生成过滤器
         [StaticPageActionFilter]
         public IActionResult Default()
         {

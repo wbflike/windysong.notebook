@@ -16,6 +16,8 @@ using Common;
 
 namespace WindySong.NoteBook.Web.Controllers
 {
+    //属性过滤器
+    [FieldFilter]
     public class LoginController : BaseController
     {
         private ICacheService _cache;
